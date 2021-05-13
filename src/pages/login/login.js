@@ -31,10 +31,6 @@ const Login = ({ submitLogin }) => {
 
 	const { t } = useTranslation();
 
-	const handleSocialLogin = (user) => {
-		console.log(user);
-	};
-
 	return (
 		<S.Container>
 			<Form>
