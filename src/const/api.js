@@ -1,4 +1,4 @@
-export const REACT_APP_MAIN_API_URL = `http://localhost:5000/api/`;
+export const REACT_APP_MAIN_API_URL = `https://webapp-210513212326.azurewebsites.net/api/`;
 export const CHANGE_LANGUAGE = `../i18n`
 export const LOGIN = `auth/login`;
 export const LOGIN_GOOGLE = `auth/google`;

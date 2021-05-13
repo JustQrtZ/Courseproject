@@ -19,12 +19,12 @@ const Topbar = () => {
 	const LogOut = () => {
 		localStorage.clear();
 		window.location.reload();
-	}
+	};
 
 	const isLogin = useSelector((state) => state.account.isLogIn);
-	useEffect(()=>{
-		console.log(isLogin)
-	})
+	useEffect(() => {
+		console.log(isLogin);
+	});
 
 	return (
 		<Navbar bg="dark" variant="dark" expand="lg">
@@ -46,14 +46,18 @@ const Topbar = () => {
 						<Nav.Link eventKey="link-1" href={path.admin}>
 							Adminka
 						</Nav.Link>
-						<Button variant="outline-secondary" onClick={LogOut} >Logout</Button>					
+						<Button variant="outline-secondary" onClick={LogOut}>
+							Logout
+						</Button>
 					</Nav>
 				)}
-				<Nav>
-				<Button variant="outline-secondary" onClick={handleSwitchLanguage} className="switchLangBtn">
+				<Button
+					variant="outline-secondary"
+					onClick={handleSwitchLanguage}
+					className="switchLangBtn"
+				>
 					{i18n.language}
 				</Button>
-				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
 	);
