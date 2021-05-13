@@ -16,6 +16,9 @@ export const login = (email, password) => {
 				url: LOGIN,
 				method: "POST",
 				data: { email, password },
+				xhrFields: {
+					withCredentials: true
+			}
 			},
 			false
 		)
@@ -108,6 +111,9 @@ export const refreshToken = () => {
 				url: REFRESHTOKEN,
 				method: "POST",
 				data: { accessToken, refreshToken },
+				xhrFields: {
+					withCredentials: true
+			}
 			},
 			false
 		)
@@ -128,6 +134,9 @@ export const getLogInUserFromAccessToken = () => {
 			{
 				url: GETLOGENINUSER,
 				method: "POST",
+				xhrFields: {
+					withCredentials: false
+			}
 			},
 			false
 		)
