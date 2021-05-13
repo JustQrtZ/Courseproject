@@ -1,0 +1,16 @@
+export const REACT_APP_MAIN_API_URL = `http://localhost:5000/api/`;
+export const CHANGE_LANGUAGE = `../i18n`
+export const LOGIN = `auth/login`;
+export const LOGIN_GOOGLE = `auth/google`;
+export const REGISTER = `auth/register`;
+export const REFRESHTOKEN = "token/refresh";
+export const GETLOGENINUSER = `admin/getLogenInUser`;
+export const GETALLUSERS = `admin/getAllUsers`;
+export const BLOCKUSERSLIST = `admin/blockUsers`;
+export const UNBLOCKUSERSLIST = `admin/unBlockUsers`;
+export const DELETEUSERSLIST = `admin/deleteUsers`;
+export const GETALLCOMPANIES = `company/getAllCompanies`
+export const GETSINGLECOMPANY = `company/getSingleCompany`
+export const CREATECOMPANY = `company/createCompany`
+export const EDITCOMPANY = `company/createCompany`
+export const GETALLCOMPANYNEWS = `company/getAllCompanyNews`

@@ -1,0 +1,16 @@
+{
+  "Login": "Войти",
+  "Signup": "Регистрация",
+  "Email": "Email",
+  "Password": "Пароль",
+  "Don't have an account?": "Нет учетной записи?",
+  "Submit": "Отправить",
+  "U have an account?": "У вас есть аккаунт?",
+  "Enter password": "Введите пароль",
+  "Enter email": "Введите email",
+  "Enter username": "Введите имя пользователя",
+  "Education": "Образование",
+  "End date":"Дата окончания:",
+  "USD raised": "USD собрано",
+  "Username":"Имя пользователя"
+}
