@@ -16,9 +16,6 @@ export const login = (email, password) => {
 				url: LOGIN,
 				method: "POST",
 				data: { email, password },
-				xhrFields: {
-					withCredentials: true
-			}
 			},
 			false
 		)
@@ -111,16 +108,12 @@ export const refreshToken = () => {
 				url: REFRESHTOKEN,
 				method: "POST",
 				data: { accessToken, refreshToken },
-				xhrFields: {
-					withCredentials: true
-			}
 			},
 			false
 		)
 			.then(({ data }) => {
 				localStorage.setItem("accessToken", data.accessToken);
 				localStorage.setItem("refreshToken", data.refreshToken);
-				localStorage.setItem("lng", data.language);
 			})
 			.catch(() => {
 				localStorage.clear();
@@ -134,9 +127,6 @@ export const getLogInUserFromAccessToken = () => {
 			{
 				url: GETLOGENINUSER,
 				method: "POST",
-				xhrFields: {
-					withCredentials: false
-			}
 			},
 			false
 		)
