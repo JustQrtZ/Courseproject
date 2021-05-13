@@ -19,7 +19,7 @@ const Login = ({ submitLogin }) => {
 
 	const submitGoogleLogin = useCallback(
 		(responce) => {
-			console.log(responce);
+			console.log(responce);	
 			dispatch(loginGoogle(responce.token.idToken));
 		},
 		[dispatch]
@@ -75,6 +75,7 @@ const Login = ({ submitLogin }) => {
 				<SocialLogin
 						provider="google"
 						appId="991314430680-h8ith0uiifrvjo82is04p3u1seurvld2.apps.googleusercontent.com"
+						key="google"
 						callback={submitGoogleLogin}
 					>
 						<Button variant="outline-danger" className="mr-2">Login Google</Button>
