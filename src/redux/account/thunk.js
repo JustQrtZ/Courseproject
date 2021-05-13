@@ -5,6 +5,7 @@ import {
 	GETLOGENINUSER,
 	REGISTER,
 	LOGIN_GOOGLE,
+	LOGIN_FACEBOOK,
 } from "../../const/api";
 import { request } from "../../services/requests";
 
@@ -45,6 +46,36 @@ export const loginGoogle = (tokenId) => {
 				url: LOGIN_GOOGLE,
 				method: "POST",
 				data: { tokenId },
+			},
+			false
+		)
+			.then(({ data }) => {
+				dispach({
+					type: actions.login,
+					payload: {
+						id: data.id,
+						username: data.username,
+						role: data.role,
+						designTheme: data.designTheme,
+					},
+				});
+				localStorage.setItem("accessToken", data.accessToken);
+				localStorage.setItem("refreshToken", data.refreshToken);
+				localStorage.setItem("lng", data.language);
+			})
+			.catch(({ ex }) => {
+				console.log(ex);
+			});
+	};
+};
+
+export const loginFacebook = (token) => {
+	return (dispach) => {
+		request(
+			{
+				url: LOGIN_FACEBOOK,
+				method: "POST",
+				data: { token },
 			},
 			false
 		)
@@ -115,7 +146,7 @@ export const getLogInUserFromAccessToken = () => {
 	};
 };
 
-export const register = (Email, Username, password) => {
+export const registration = (Email, Username, password) => {
 	return (dispach) => {
 		request(
 			{

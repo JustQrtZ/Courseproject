@@ -5,7 +5,7 @@ import { path } from "../../routers/path";
 import { Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect, useDispatch } from "react-redux";
-import { login, loginGoogle } from "../../redux/account/thunk";
+import { login, loginGoogle,loginFacebook } from "../../redux/account/thunk";
 import { useTranslation } from "react-i18next";
 import { OldSocialLogin as SocialLogin } from "react-social-login";
 
@@ -25,9 +25,13 @@ const Login = ({ submitLogin }) => {
 		[dispatch]
 	);
 
-	const responseFacebook = (responseF) => {
-		console.log(responseF);
-	};
+	const submitFacebookLogin = useCallback(
+		(responce) => {
+			console.log(responce.token.accessToken);
+			dispatch(loginFacebook(responce.token.accessToken));
+		},
+		[dispatch]
+	);
 
 	const { t } = useTranslation();
 
@@ -67,20 +71,20 @@ const Login = ({ submitLogin }) => {
 						{t("Signup")}
 					</Nav.Link>
 				</Nav>
-				<Container className="d-flex p-2">
+				<Container className="d-flex justify-content-around">
 				<SocialLogin
 						provider="google"
 						appId="991314430680-h8ith0uiifrvjo82is04p3u1seurvld2.apps.googleusercontent.com"
 						callback={submitGoogleLogin}
 					>
-						<Button>Login Google</Button>
+						<Button variant="outline-danger" className="mr-2">Login Google</Button>
 					</SocialLogin>
 					<SocialLogin
 						provider="facebook"
 						appId="496659901364938"
-						callback={responseFacebook}
+						callback={submitFacebookLogin}
 					>
-						<Button>Login Facebook </Button>
+						<Button variant="outline-primary" className="ml-2">Login Facebook </Button>
 					</SocialLogin>
 				</Container>
 			</Form>

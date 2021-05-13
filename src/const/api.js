@@ -2,6 +2,7 @@ export const REACT_APP_MAIN_API_URL = `http://localhost:5000/api/`;
 export const CHANGE_LANGUAGE = `../i18n`
 export const LOGIN = `auth/login`;
 export const LOGIN_GOOGLE = `auth/google`;
+export const LOGIN_FACEBOOK = `auth/facebook`;
 export const REGISTER = `auth/register`;
 export const REFRESHTOKEN = "token/refresh";
 export const GETLOGENINUSER = `admin/getLogenInUser`;
