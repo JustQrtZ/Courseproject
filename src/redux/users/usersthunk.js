@@ -33,36 +33,78 @@ export const getAllUsers = () => {
 
 export const blockUsersList = (userList) => {
 	return (dispach) => {
-		console.log("tuk")
 		dispach({
-			type: actions.blockUsers,
+			type: actions.blockUsersRequest,
 		});
 		request(
 			{
 				url: BLOCKUSERSLIST,
 				method: "POST",
-				data: userList
+				data: userList,
 			},
 			false
 		)
-		.then(({data}) =>
-		{
-			console.log(data)
-		})
-		.catch(({data}) =>
-		{
-			console.log(data)
-		})
-	}
-}
+			.then(({ data }) => {
+				dispach({
+					type: actions.blockUsersSuccess,
+				});
+			})
+			.catch(({ data }) => {
+				dispach({
+					type: actions.blockUsersFail,
+				});
+			});
+	};
+};
 
-// export const changeLanguage = (langFunction) => {
-//   return dispatch => {
-//     dispatch({
-//       type: con.CHANGE_LANGUAGE,
-//       payload: {
-//         language: langFunction
-//       }
-//     });
-//   }
-// }
+export const unBlockUsersList = (userList) => {
+	return (dispach) => {
+		dispach({
+			type: actions.unblockUsersRequest,
+		});
+		request(
+			{
+				url: UNBLOCKUSERSLIST,
+				method: "POST",
+				data: userList,
+			},
+			false
+		)
+			.then(({ data }) => {
+				dispach({
+					type: actions.unblockUsersSuccess,
+				});
+			})
+			.catch(({ data }) => {
+				dispach({
+					type: actions.unblockUsersFail,
+				});
+			});
+	};
+};
+
+export const deleteUsersList = (userList) => {
+	return (dispach) => {
+		dispach({
+			type: actions.deleteUsersRequest,
+		});
+		request(
+			{
+				url: DELETEUSERSLIST,
+				method: "POST",
+				data: userList,
+			},
+			false
+		)
+			.then(({ data }) => {
+				dispach({
+					type: actions.deleteUsersSuccess,
+				});
+			})
+			.catch(({ data }) => {
+				dispach({
+					type: actions.deleteUsersFail,
+				});
+			});
+	};
+};

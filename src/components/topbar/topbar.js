@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import { path } from "../../routers/path";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -16,10 +16,16 @@ const Topbar = () => {
 		}
 	};
 
+	const LogOut = () => {
+		localStorage.clear();
+		window.location.reload();
+	}
+
 	const isLogin = useSelector((state) => state.account.isLogIn);
 	useEffect(()=>{
 		console.log(isLogin)
 	})
+
 	return (
 		<Navbar bg="dark" variant="dark" expand="lg">
 			<Navbar.Brand href={path.main}>Crowdfunding</Navbar.Brand>
@@ -35,9 +41,19 @@ const Topbar = () => {
 						</Nav.Link>
 					</Nav>
 				)}
-				<button onClick={handleSwitchLanguage} className="switchLangBtn">
+				{isLogin && (
+					<Nav>
+						<Nav.Link eventKey="link-1" href={path.admin}>
+							Adminka
+						</Nav.Link>
+						<Button variant="outline-secondary" onClick={LogOut} >Logout</Button>					
+					</Nav>
+				)}
+				<Nav>
+				<Button variant="outline-secondary" onClick={handleSwitchLanguage} className="switchLangBtn">
 					{i18n.language}
-				</button>
+				</Button>
+				</Nav>
 			</Navbar.Collapse>
 		</Navbar>
 	);

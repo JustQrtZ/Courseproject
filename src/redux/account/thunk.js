@@ -137,8 +137,11 @@ export const getLogInUserFromAccessToken = () => {
 					payload: {
 						id: data.id,
 						username: data.username,
+						role: data.role,
+						designTheme: data.designTheme,
 					},
 				});
+				localStorage.setItem("lng", data.language);
 			})
 			.catch(() => {
 				localStorage.clear();
