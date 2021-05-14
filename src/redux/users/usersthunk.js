@@ -4,6 +4,8 @@ import {
 	BLOCKUSERSLIST,
 	UNBLOCKUSERSLIST,
 	DELETEUSERSLIST,
+	MAKE_ADMIN_LIST,
+	MAKE_USER_LIST
 } from "../../const/api";
 import { request } from "../../services/requests";
 
@@ -104,6 +106,59 @@ export const deleteUsersList = (userList) => {
 			.catch(({ data }) => {
 				dispach({
 					type: actions.deleteUsersFail,
+				});
+			});
+	};
+};
+
+export const makeadmin = (userList) => {
+	return (dispach) => {
+		dispach({
+			type: actions.makeAdminRequest,
+		});
+		request(
+			{
+				url: MAKE_ADMIN_LIST,
+				method: "PATCH",
+				data: userList,
+			},
+			false
+		)
+			.then(({ data }) => {
+				dispach({
+					type: actions.makeAdminSuccess,
+				});
+			})
+			.catch(({ data }) => {
+				dispach({
+					type: actions.makeAdminFail,
+				});
+			});
+	};
+};
+
+
+export const makeuser = (userList) => {
+	return (dispach) => {
+		dispach({
+			type: actions.makeUserRequest,
+		});
+		request(
+			{
+				url: MAKE_USER_LIST,
+				method: "PATCH",
+				data: userList,
+			},
+			false
+		)
+			.then(({ data }) => {
+				dispach({
+					type: actions.makeAdminSuccess,
+				});
+			})
+			.catch(({ data }) => {
+				dispach({
+					type: actions.makeAdminFail,
 				});
 			});
 	};

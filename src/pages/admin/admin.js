@@ -8,16 +8,19 @@ import {
 	getAllUsers,
 	blockUsersList,
 	unBlockUsersList,
-	deleteUsersList
+	deleteUsersList,
+	makeadmin,
+	makeuser
 } from "../../redux/users/usersthunk";
 
 const columns = [
 	{ field: "id", headerName: "ID", width: 150 },
-	{ field: "username", headerName: "Username", width: 250 },
-	{ field: "email", headerName: "Email", width: 250 },
-	{ field: "registrationDate", headerName: "registrationDate", width: 350 },
-	{ field: "lastLoginDate", headerName: "Last login", width: 350 },
+	{ field: "username", headerName: "Username", width: 200 },
+	{ field: "email", headerName: "Email", width: 200 },
+	{ field: "registrationDate", headerName: "registrationDate", width: 250 },
+	{ field: "lastLoginDate", headerName: "Last login", width: 250 },
 	{ field: "isActive", headerName: "isActive", width: 125 },
+	{ field: "role", headerName: "Role", width: 125 },
 ];
 
 export default function Admin() {
@@ -27,12 +30,13 @@ export default function Admin() {
 		dispatch(getAllUsers());
 	}, [dispatch]);
 
+	console.log(data);
 	useEffect(() => {
-		if(data===null || data === undefined)
-		{
-			window.location.href = '../'
+		if (data === null || data === undefined) {
+			window.location.href = "../";
 		}
-	})
+	});
+
 	const [selectionModel, setSelectionModel] = useState([]);
 
 	const blockClick = useCallback(() => {
@@ -50,15 +54,33 @@ export default function Admin() {
 		dispatch(deleteUsersList(selectionModel));
 	}, [selectionModel, dispatch]);
 
+	const makeAdminClick = useCallback(() => {
+		console.log(selectionModel);
+		dispatch(makeadmin(selectionModel));
+	}, [selectionModel, dispatch]);
+
+	const makeUserClick = useCallback(() => {
+		console.log(selectionModel);
+		dispatch(makeuser(selectionModel));
+	}, [selectionModel, dispatch]);
+
 	return (
 		<S.Container>
 			<ButtonGroup aria-label="Basic example">
-				<Button variant="secondary" onClick={deleteClick}>Delete</Button>
+				<Button variant="secondary" onClick={deleteClick}>
+					Delete
+				</Button>
 				<Button variant="secondary" onClick={blockClick}>
 					<Lock />
 				</Button>
 				<Button variant="secondary" onClick={unblockClick}>
 					<Unlock />
+				</Button>
+				<Button variant="secondary" onClick={makeAdminClick}>
+					Make Admin
+				</Button>
+				<Button variant="secondary" onClick={makeUserClick}>
+					Make User
 				</Button>
 			</ButtonGroup>
 

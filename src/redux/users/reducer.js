@@ -74,6 +74,42 @@ export default (state = initialstate, action) => {
 				isLogIn: false,
 			};
 
+		case actions.makeAdminRequest:
+			return {
+				...state,
+				isLogIn: true,
+			};
+
+		case actions.makeAdminSuccess:
+			return {
+				...state,
+				isLogIn: false,
+			};
+
+		case actions.makeAdminFail:
+			return {
+				...state,
+				isLogIn: false,
+			};
+
+		case actions.makeUserRequest:
+			return {
+				...state,
+				isLogIn: true,
+			};
+
+		case actions.makeUserSuccess:
+			return {
+				...state,
+				isLogIn: false,
+			};
+
+		case actions.makeUserFail:
+			return {
+				...state,
+				isLogIn: false,
+			};
+
 		default:
 			return state;
 	}

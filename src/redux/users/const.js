@@ -11,4 +11,10 @@ export const actions = {
 	deleteUsersRequest: "deleteSelecetedUsers",
 	deleteUsersSuccess: "deleteSelecetedUsers",
 	deleteUsersFail: "deleteSelecetedUsers",
+	makeAdminRequest: "makeAdminSelecetedUsers",
+	makeAdminSuccess: "makeAdminSelecetedUsers",
+	makeAdminFail: "makeAdminSelecetedUsers",
+	makeUserRequest: "makeUserSelecetedUsers",
+	makeUserSuccess: "makeUserSelecetedUsers",
+	makeUserFail: "makeUserSelecetedUsers",
 };
