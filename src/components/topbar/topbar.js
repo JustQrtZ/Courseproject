@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { path } from "../../routers/path";
 import { useTranslation } from "react-i18next";
@@ -23,11 +23,6 @@ const Topbar = () => {
 
 	const isLogin = useSelector((state) => state.account.isLogIn);
 	const Role = useSelector((state) => state.account.role);
-
-	useEffect(() => {
-		console.log(isLogin);
-		console.log(Role);
-	});
 
 	return (
 		<Navbar bg="dark" variant="dark" expand="lg">

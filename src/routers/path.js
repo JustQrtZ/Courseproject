@@ -3,5 +3,6 @@ export const path = {
 	signup: "/signup",
 	main: "/",
 	admin: "/admin",
-	profile: "/profile"
+	profile: "/profile",
+	company: "/company/:id"
 };

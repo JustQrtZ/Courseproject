@@ -15,5 +15,17 @@
   "Username":"Username",
   "Profile": "Profile",
   "Adminka": "Adminka",
-  "Logout": "Logout"
+  "Logout": "Logout",
+  "User id": "User id",
+  "Language": "Language",
+  "Design theme": "Design theme",
+  "Lasttimelogin": "Last time login",
+  "Benefit name": "Benefit name",
+  "Benefit id": "Benefit id",
+  "Cost": "Cost",
+  "Company name": "Company name",
+  "Company theme": "Company theme",
+  "Need tocollect": "Need to collect",
+  "Company endDate": "End of company",
+  "Collected": "Collected"
 }

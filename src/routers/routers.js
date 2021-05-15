@@ -10,10 +10,14 @@ import Admin from "../pages/admin/admin"
 import { NotFound } from "../pages/notFaund/notFound";
 import Topbar from "../components/topbar/topbar";
 import Profile from "../pages/profile/profile"
+import Company from "../pages/company/company"
+
 
 const Router = () => {
-	const isLogin = useSelector((state) => state.account.isLogIn);
-	console.log({ isLogin });
+	const {isLogIn, role}  = useSelector((state) => state.account);
+	console.log({ isLogIn });
+	console.log({ role });
+
 	return (
 		<BrowserRouter>
 			<Topbar />
@@ -27,11 +31,14 @@ const Router = () => {
 				<Route exact path={path.signup}>
 					<Signup />
 				</Route>
-				<Route path={path.admin}>
+				<Route exact path={path.admin}>
 					<Admin />
 				</Route>
-				<Route path={path.profile}>
+				<Route exact path={path.profile}>
 					<Profile/>
+				</Route>
+				<Route exact path={path.company}>
+					<Company/>
 				</Route>
 				<Route path="*">
 					<NotFound />

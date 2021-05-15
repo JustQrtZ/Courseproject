@@ -1,7 +1,7 @@
 import { actions } from "./const";
 
 const initialstate = {
-	profileInfo: [],
+	profileInfo: {},
 	userBenefits: [],
 	userCompanies: [],
 	isLogIn: false,
@@ -61,6 +61,24 @@ export default (state = initialstate, action) => {
 
 		case actions.getUserBenefitsFail:
 			return {
+				isLogIn: false,
+			};
+
+			case actions.changeLanguageRequest:
+			return {
+				...state,
+				isLogIn: true,
+			};
+
+		case actions.changeLanguageSuccess:
+			return {
+				...state,
+				isLogIn: false,
+			};
+
+		case actions.changeLanguageFail:
+			return {
+				...state,
 				isLogIn: false,
 			};
 

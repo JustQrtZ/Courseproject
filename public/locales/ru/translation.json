@@ -15,5 +15,17 @@
   "Username":"Имя пользователя",
   "Profile":"Профиль",
   "Adminka": "Админка",
-  "Logout": "Выйти"
+  "Logout": "Выйти",
+  "User id": "Id пользователя",
+  "Language": "Язык",
+  "Design theme": "Тема оформления",
+  "Lasttimelogin": "Последний раз заходил",
+  "Benefit name": "Название бенефита",
+  "Benefit id": "Бенефит id",
+  "Cost": "Стоимость",
+  "Company name": "Название компании",
+  "Company theme": "Тема компании",
+  "Need tocollect": "Нужно собрать",
+  "Company endDate": "Окончание компании",
+  "Collected": "Собрано"
 }

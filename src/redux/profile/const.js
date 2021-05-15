@@ -8,4 +8,7 @@ export const actions = {
 	getUserBenefitsRequest: "getUserBenefitsRequest",
 	getUserBenefitsSuccess: "getUserBenefitsSuccess",
 	getUserBenefitsFail: "getUserBenefitsFail",
+	changeLanguageRequest: "changeLanguageRequest",
+	changeLanguageSuccess: "changeLanguageSuccess",
+	changeLanguageFail: "changeLanguageFail"
 };

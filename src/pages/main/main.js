@@ -5,6 +5,7 @@ import { getAllCompanies } from "../../redux/company/companythunks";
 import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
+import {Link} from "react-router-dom"
 
 export default function Main() {
 	const { data } = useSelector((state) => state.companies);
@@ -15,11 +16,6 @@ export default function Main() {
 
 	const { t } = useTranslation();
 
-	function siteSelectedCallback() {
-		console.log("tuk");
-	}
-
-
 	return (
 		<Container>
 			<Row className="mx-5 my-5 d-flex">
@@ -28,12 +24,6 @@ export default function Main() {
 						key={item.id}
 						className="col-lg-3 d-flex align-items-stretch my-3"
 					>
-						<a
-							style={{ cursor: "pointer" }}
-							key={item.id}
-							onClick={siteSelectedCallback}
-							href="www.google.com"
-						>
 							<Card>
 								<Card.Img
 									variant="top"
@@ -42,7 +32,7 @@ export default function Main() {
 								/>
 								<Card.Header>{t(item.theme)}</Card.Header>
 								<Card.Body className="mb-0 px-1">
-									<Card.Title>{item.title}</Card.Title>
+									<Link to={{pathname: "/company/"+item.id}}><Card.Title>{item.title}</Card.Title></Link>
 									{item.description}
 									<br />
 									{item.tags.map((i) => (
@@ -71,7 +61,6 @@ export default function Main() {
 									{Dayjs(item.endCompanyDate).format("DD/MM/YYYY")}
 								</Card.Footer>
 							</Card>
-						</a>
 					</Col>
 				))}
 			</Row>
