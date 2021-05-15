@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import gfm from "remark-gfm";
+
 import {
 	Container,
 	Row,
@@ -33,9 +36,9 @@ export default function Company() {
 	}
 
 	return (
-		<Container>
+		<Container className="mt-5 mb-5">
 			<Row>
-				<Col className="col-12 col-md-6">
+				<Col className="col-md-6 col-lg-6 col-12">
 					<Image
 						src={singleCompany.mainPhotoUrl}
 						className="mh-50"
@@ -75,16 +78,23 @@ export default function Company() {
 							size={25}
 						/>
 					</Container>
-					<Container className="d-flex">
-						<p>Tags: </p>
-						{singleCompany.tags.map((i) => (
-							<Badge key={i} variant="secondary" className="mr-1 mx-2">
-								{i}
-							</Badge>
-						))}
+					<Container className="d-flex justify-content-start bd-highlight mb-3">
+						<Row>
+							<Col>Tags: </Col>
+							{singleCompany.tags.map((i) => (
+								<Col className="pl-0 pr-0 ml-1">
+									<Badge
+										key={i}
+										variant="secondary"
+									>
+										{i}
+									</Badge>
+								</Col>
+							))}
+						</Row>
 					</Container>
 				</Col>
-				<Col className="col-12 col-md-6">
+				<Col className="col-md-6 col-lg-6 col-12">
 					<Container>
 						<hi>Prewiew video</hi>
 						<YoutubeEmbed embedId="rokGy0huYEA" />
@@ -95,17 +105,29 @@ export default function Company() {
 					</Container>
 				</Col>
 			</Row>
-			<Tabs>
-				<Tab eventKey="description" title="Description">
-				description
-				</Tab>
-				<Tab eventKey="benefits" title="Benefits">
-				benefits
-				</Tab>
-				<Tab eventKey="news" title="News">
-				news
-				</Tab>
-			</Tabs>
+			<Row className="flex-column mt-lg-4 mt-2 mt-md-3">
+				<Tabs className="justify-content-center">
+					<Tab
+						eventKey="description"
+						title="Description"
+						className="text-center"
+					>
+						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
+							# Hello, *world*!
+						</ReactMarkdown>
+					</Tab>
+					<Tab
+						eventKey="benefits"
+						title="Benefits"
+						className="justify-content-center"
+					>
+						benefits
+					</Tab>
+					<Tab eventKey="news" title="News">
+						news
+					</Tab>
+				</Tabs>
+			</Row>
 		</Container>
 	);
 }
