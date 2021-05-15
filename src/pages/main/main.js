@@ -17,12 +17,12 @@ export default function Main() {
 	const { t } = useTranslation();
 
 	return (
-		<Container>
-			<Row className="mx-5 my-5 d-flex">
+		<Container className="container-fluid">
+			<Row className="d-flex flex-wrap">
 				{data.map((item) => (
 					<Col
 						key={item.id}
-						className="col-lg-3 d-flex align-items-stretch my-3"
+						className="col-lg-3 col-md-4 col-sm-6 col-12 d-flex align-items-stretch my-3"
 					>
 							<Card>
 								<Card.Img
