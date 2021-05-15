@@ -22,8 +22,11 @@ const Topbar = () => {
 	};
 
 	const isLogin = useSelector((state) => state.account.isLogIn);
+	const Role = useSelector((state) => state.account.role);
+
 	useEffect(() => {
 		console.log(isLogin);
+		console.log(Role);
 	});
 
 	return (
@@ -41,13 +44,20 @@ const Topbar = () => {
 						</Nav.Link>
 					</Nav>
 				)}
-				{isLogin && (
+				{isLogin && Role === "Admin" && (
 					<Nav>
 						<Nav.Link eventKey="link-1" href={path.admin}>
-							Adminka
+							{t("Adminka")}
+						</Nav.Link>
+					</Nav>
+				)}
+				{isLogin && (
+					<Nav>
+						<Nav.Link eventKey="link-1" href={path.profile}>
+							{t("Profile")}
 						</Nav.Link>
 						<Button variant="outline-secondary" onClick={LogOut}>
-							Logout
+							{t("Logout")}
 						</Button>
 					</Nav>
 				)}

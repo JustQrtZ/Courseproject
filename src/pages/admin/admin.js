@@ -30,7 +30,6 @@ export default function Admin() {
 		dispatch(getAllUsers());
 	}, [dispatch]);
 
-	console.log(data);
 	useEffect(() => {
 		if (data === null || data === undefined) {
 			window.location.href = "../";
@@ -40,27 +39,22 @@ export default function Admin() {
 	const [selectionModel, setSelectionModel] = useState([]);
 
 	const blockClick = useCallback(() => {
-		console.log(selectionModel);
 		dispatch(blockUsersList(selectionModel));
 	}, [selectionModel, dispatch]);
 
 	const unblockClick = useCallback(() => {
-		console.log(selectionModel);
 		dispatch(unBlockUsersList(selectionModel));
 	}, [selectionModel, dispatch]);
 
 	const deleteClick = useCallback(() => {
-		console.log(selectionModel);
 		dispatch(deleteUsersList(selectionModel));
 	}, [selectionModel, dispatch]);
 
 	const makeAdminClick = useCallback(() => {
-		console.log(selectionModel);
 		dispatch(makeadmin(selectionModel));
 	}, [selectionModel, dispatch]);
 
 	const makeUserClick = useCallback(() => {
-		console.log(selectionModel);
 		dispatch(makeuser(selectionModel));
 	}, [selectionModel, dispatch]);
 

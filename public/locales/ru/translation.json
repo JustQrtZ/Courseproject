@@ -12,5 +12,8 @@
   "Education": "Образование",
   "End date":"Дата окончания:",
   "USD raised": "USD собрано",
-  "Username":"Имя пользователя"
+  "Username":"Имя пользователя",
+  "Profile":"Профиль",
+  "Adminka": "Админка",
+  "Logout": "Выйти"
 }

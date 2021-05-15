@@ -38,8 +38,18 @@ export default (state = initialstate, action) => {
 		case actions.blockUsersSuccess:
 			return {
 				...state,
+				data: state.data.map((i) => {
+					if (action.payload.includes(i.id)) {
+						console.log(i);
+						i.isActive = false;
+						return i;
+					} else {
+						return i;
+					}
+				}),
 				isLogIn: false,
 			};
+
 		case actions.blockUsersFail:
 			return {
 				...state,
@@ -53,6 +63,15 @@ export default (state = initialstate, action) => {
 		case actions.unblockUsersSuccess:
 			return {
 				...state,
+				data: state.data.map((i) => {
+					if (action.payload.includes(i.id)) {
+						console.log(i);
+						i.isActive = true;
+						return i;
+					} else {
+						return i;
+					}
+				}),
 				isLogIn: false,
 			};
 
@@ -65,6 +84,7 @@ export default (state = initialstate, action) => {
 		case actions.deleteUsersSuccess:
 			return {
 				...state,
+				data: state.data.filter(i => !action.payload.includes(i.id)),
 				isLogIn: false,
 			};
 
@@ -83,6 +103,15 @@ export default (state = initialstate, action) => {
 		case actions.makeAdminSuccess:
 			return {
 				...state,
+				data: state.data.map((i) => {
+					if (action.payload.includes(i.id)) {
+						console.log(i);
+						i.role = "Admin";
+						return i;
+					} else {
+						return i;
+					}
+				}),
 				isLogIn: false,
 			};
 
@@ -101,6 +130,15 @@ export default (state = initialstate, action) => {
 		case actions.makeUserSuccess:
 			return {
 				...state,
+				data: state.data.map((i) => {
+					if (action.payload.includes(i.id)) {
+						console.log(i);
+						i.role = "User";
+						return i;
+					} else {
+						return i;
+					}
+				}),
 				isLogIn: false,
 			};
 

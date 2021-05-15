@@ -49,6 +49,7 @@ export const blockUsersList = (userList) => {
 			.then(({ data }) => {
 				dispach({
 					type: actions.blockUsersSuccess,
+					payload: userList
 				});
 			})
 			.catch(({ data }) => {
@@ -75,6 +76,7 @@ export const unBlockUsersList = (userList) => {
 			.then(({ data }) => {
 				dispach({
 					type: actions.unblockUsersSuccess,
+					payload: userList
 				});
 			})
 			.catch(({ data }) => {
@@ -101,6 +103,7 @@ export const deleteUsersList = (userList) => {
 			.then(({ data }) => {
 				dispach({
 					type: actions.deleteUsersSuccess,
+					payload: userList
 				});
 			})
 			.catch(({ data }) => {
@@ -127,6 +130,7 @@ export const makeadmin = (userList) => {
 			.then(({ data }) => {
 				dispach({
 					type: actions.makeAdminSuccess,
+					payload: userList
 				});
 			})
 			.catch(({ data }) => {
@@ -153,12 +157,13 @@ export const makeuser = (userList) => {
 		)
 			.then(({ data }) => {
 				dispach({
-					type: actions.makeAdminSuccess,
+					type: actions.makeUserSuccess,
+					payload: userList
 				});
 			})
 			.catch(({ data }) => {
 				dispach({
-					type: actions.makeAdminFail,
+					type: actions.makeUserFail,
 				});
 			});
 	};

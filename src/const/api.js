@@ -12,8 +12,13 @@ export const UNBLOCKUSERSLIST = `admin/unBlockUsers`;
 export const MAKE_ADMIN_LIST = `admin/makeAdmin`;
 export const MAKE_USER_LIST = `admin/makeUser`;
 export const DELETEUSERSLIST = `admin/deleteUsers`;
-export const GETALLCOMPANIES = `company/getAllCompanies`
-export const GETSINGLECOMPANY = `company/getSingleCompany`
-export const CREATECOMPANY = `company/createCompany`
-export const EDITCOMPANY = `company/createCompany`
-export const GETALLCOMPANYNEWS = `company/getAllCompanyNews`
+export const GETALLCOMPANIES = `company/getAllCompanies`;
+export const GETSINGLECOMPANY = `company/getSingleCompany`;
+export const CREATECOMPANY = `company/createCompany`;
+export const EDITCOMPANY = `company/createCompany`;
+export const GETALLCOMPANYNEWS = `company/getAllCompanyNews`;
+export const GET_USER_PROFILE = `profile/getUserProfile`;
+export const GET_USER_COMPANIES = `profile/getUserCompanies`;
+export const GET_USER_BENEFITS = `profile/getUserBenefits`;
+
+
