@@ -15,12 +15,12 @@ import {
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleCompany } from "../../redux/company/companythunks";
-import "react-image-gallery/styles/css/image-gallery.css";
 import { useTranslation } from "react-i18next";
 import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
 import CompanyPhotos from "../../components/companyimagegalery/companyimagegalery";
 import YoutubeEmbed from "../../components/youtubevideoforcompany/YoutubeEmbed";
+import EditCompany from "../../components/editcompany/editcompany"
 
 export default function Company() {
 	let { id } = useParams();
@@ -92,6 +92,9 @@ export default function Company() {
 								</Col>
 							))}
 						</Row>
+					</Container>
+					<Container>
+						<EditCompany/>
 					</Container>
 				</Col>
 				<Col className="col-md-6 col-lg-6 col-12">
