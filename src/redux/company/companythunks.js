@@ -32,8 +32,9 @@ export const getSingleCompany = (companyId) => {
     })
     request(
       {
-        url: GET_SINGLE_COMPANY +`/${companyId}`,
+        url: GET_SINGLE_COMPANY,
         method: "GET",
+        params: {companyId: companyId}
       },false
     ).then(({data}) => {
       dispach({
@@ -53,8 +54,9 @@ export const getPhotosForCompany = (companyId) => {
     })
     request(
       {
-        url: GET_IMAGES_FOR_COMPANY+`/${companyId}`,
+        url: GET_IMAGES_FOR_COMPANY,
         method: "GET",
+        params: {companyId: companyId}
       },false
     ).then(({data}) => {
       dispach({
