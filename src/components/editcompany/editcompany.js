@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { getPhotosForCompany } from "../../redux/company/companythunks";
 import { Modal, Button } from "react-bootstrap";
