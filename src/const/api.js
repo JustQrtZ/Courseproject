@@ -23,3 +23,6 @@ export const CHANGE_LANGUAGE = `profile/changeUserLanguage`;
 export const GET_IMAGES_FOR_COMPANY = `companyphotos/getAllPhotos`;
 export const GET_COMPANY_VIDEO = `company/getVideoForCompany`;
 export const GET_ALL_TAGS = `company/getAllTags`;
+export const EDIT_COMPANY_MAIN_IMAGE = `company/editCompanyMainImage`;
+export const GET_ALL_COMPANY_BENEFITS = `CompanyBenefits/getBenefits`;
+export const CREATE_PAYMENT = `company/createPayment`;

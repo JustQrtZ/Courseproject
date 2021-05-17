@@ -22,4 +22,7 @@ export const actions = {
   editCompanyVideoRequest: "editCompanyVideoRequest",  
   editCompanyVideoSuccess: "editCompanyVideoSuccess",
   editCompanyVideoFail: "editCompanyVideoFail",
+  addCompanyImageRequst: "addCompanyImageRequest",
+  addCompanyImageSuccess: "addCompanyImageSuccess",
+  addCompanyImageFail: "addCompanyImageFail"
 };

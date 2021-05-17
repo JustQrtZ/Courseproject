@@ -21,6 +21,9 @@ import Dayjs from "dayjs";
 import CompanyPhotos from "../../components/companyimagegalery/companyimagegalery";
 import YoutubeEmbed from "../../components/youtubevideoforcompany/YoutubeEmbed";
 import EditCompany from "../../components/editcompany/editcompany";
+import CompanyImages from "../../components/editCompanyImages/editCompanyImages";
+import Benefits from "../../components/Benefits/benefits"
+
 
 export default function Company() {
 	const user = useSelector((state) => state.account);
@@ -86,18 +89,20 @@ export default function Company() {
 					<Container className="d-flex justify-content-start bd-highlight mb-3">
 						<Row>
 							<Col>Tags: </Col>
-							{singleCompany.tags.map((i) => (
-								<Col className="pl-0 pr-0 ml-1" ket={i}>
-									<Badge key={i} variant="secondary">
-										{i}
-									</Badge>
-								</Col>
-							))}
+							{singleCompany.tags.length !== 0 &&
+								singleCompany.tags.map((i) => (
+									<Col className="pl-0 pr-0 ml-1" ket={i}>
+										<Badge key={i} variant="secondary">
+											{i}
+										</Badge>
+									</Col>
+								))}
 						</Row>
 					</Container>
 					{(user.role === "Admin" || user.id === singleCompany.owner) && (
 						<Container>
-							<EditCompany company={singleCompany}/>
+							<EditCompany company={singleCompany} />
+							<CompanyImages />
 						</Container>
 					)}
 				</Col>
@@ -108,7 +113,7 @@ export default function Company() {
 					</Container>
 					<Container>
 						<h1>Image galery</h1>
-						<CompanyPhotos companyId={id}/>
+						<CompanyPhotos companyId={id} />
 					</Container>
 				</Col>
 			</Row>
@@ -128,7 +133,7 @@ export default function Company() {
 						title="Benefits"
 						className="justify-content-center"
 					>
-						benefits
+						<Benefits/>
 					</Tab>
 					<Tab eventKey="news" title="News">
 						news

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { uloadPhoto, editCompany } from "../../redux/company/companythunks";
+import { editCompany } from "../../redux/company/companythunks";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import Dropzone from "react-dropzone-uploader";
@@ -15,7 +15,10 @@ export default function EditCompany(company) {
 	const dispatch = useDispatch();
 	const handleShow = () => setShow(true);
 	const { t } = useTranslation();
-  const getUploadParams = ({ meta }) => { return { url: 'https://httpbin.org/post' } }
+
+	const getUploadParams = ({ meta }) => {
+		return { url: "https://httpbin.org/post" };
+	};
 
 	const [state, setState] = useState({
 		id: company.company.id,
@@ -39,31 +42,21 @@ export default function EditCompany(company) {
 
 	const editedCompany = useSelector((state) => state.companies.editedCompany);
 
-	const handleSubmit = useCallback(
-		(files, allFiles) => {
-			const photo = files[0].meta.previewUrl;
-			imageToBase64(photo)
-				.then((response) => {
-					dispatch(uloadPhoto(response));
-				})
-					console.log(editedCompany.mainPhotoUrl);
-					setState((state) => ({
-						...state,
-						mainPhotoUrl: editedCompany.mainPhotoUrl}))
-			allFiles.forEach((f) => f.remove());
-		},
-		[dispatch, editedCompany.mainPhotoUrl]
-	);
+	const handleSubmit = useCallback((files,allFiles) => {
+		const photo = files[0].meta.previewUrl;
+		imageToBase64(photo)
+			.then((response) => {
+				console.log(response);
+				setState((state)=>({...state, mainPhotoUrl: response}))
+			})
+		allFiles.forEach((f) => f.remove());
+	}, []);
 
 	const editCompanyClick = useCallback(() => {
-		setState((state) => ({
-			...state,
-			mainPhotoUrl: editedCompany.mainPhotoUrl,
-		}));
-		console.log(state);
+		console.log(state)
 		dispatch(editCompany(state, editedCompany.tags));
 		setShow(false);
-	}, [dispatch, state, editedCompany.tags, editedCompany.mainPhotoUrl]);
+	}, [dispatch, state, editedCompany.tags]);
 
 	return (
 		<>
@@ -76,8 +69,8 @@ export default function EditCompany(company) {
 					<Modal.Title>Edit company</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form>
-						<Form.Group>
+				<Form>
+						 <Form.Group>
 							<Form.Label>Company Title</Form.Label>
 							<Form.Control
 								type="text"

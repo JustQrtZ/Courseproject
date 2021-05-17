@@ -77,8 +77,8 @@ const Company = (state = initialstate, action) => {
 		case actions.uploadImageSuccess:
 			return {
 				...state,
-				editedCompany: {
-					...state.editedCompany,
+				singleCompany: {
+					...state.singleCompany,
 					mainPhotoUrl: action.payload,
 				},
 			};
@@ -102,7 +102,6 @@ const Company = (state = initialstate, action) => {
 					theme: action.payload.company.theme,
 					requiredAmount: action.payload.company.requiredAmount,
 					EndCompanyDate: action.payload.company.endCompanyDate,
-					mainPhotoUrl: action.payload.company.mainPhotoUrl,
 					description: action.payload.company.description,
 					tags: action.payload.tags,
 					сollectedNow: action.payload.company.сollectedNow,
@@ -176,6 +175,22 @@ const Company = (state = initialstate, action) => {
 				error: action.payload,
 			};
 
+		case actions.addCompanyImageRequst:
+			return {
+				...state
+			}
+		case actions.addCompanyImageSuccess:
+			return {
+				...state,
+				companyPhotos:{
+					companyPhotos:[...state.companyPhotos,action.payload]
+				}
+			}
+		case actions.addCompanyImageFail:
+			return {
+				...state,
+				error: action.payload
+			}
 		default:
 			return state;
 	}

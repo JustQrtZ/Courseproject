@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserBenefits } from "../../redux/profile/profilethunks";
-import { Row, Container, Col } from "react-bootstrap";
+import { Container, Col } from "react-bootstrap";
 
 export default function UserBenefits() {
 	const dispatch = useDispatch();
@@ -19,21 +19,21 @@ export default function UserBenefits() {
 				? userBenefits.benefits.map((item) => {
 						return (
 							<Col key={item.id}>
-								<Row>
+								<Container>
 									{t("Benefit id")}
 									{" : "}
 									{item.id}
-								</Row>
-								<Row>
+								</Container>
+								<Container>
 									{t("Benefit name")}
 									{" : "}
 									{item.name}
-								</Row>
-								<Row>
+								</Container>
+								<Container>
 									{t("Cost")}
 									{" : "}
 									{item.cost}
-								</Row>
+								</Container>
 							</Col>
 						);
 				  })

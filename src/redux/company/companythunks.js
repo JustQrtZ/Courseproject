@@ -6,7 +6,8 @@ import {
 	GET_IMAGES_FOR_COMPANY,
 	GET_SINGLE_COMPANY,
 	EDIT_COMPANY,
-  GET_COMPANY_VIDEO
+	GET_COMPANY_VIDEO,
+	EDIT_COMPANY_MAIN_IMAGE,
 } from "../../const/api";
 import { request } from "../../services/requests";
 
@@ -52,8 +53,9 @@ export const getSingleCompany = (companyId) => {
 					type: actions.getSingleCompanySuccess,
 					payload: data,
 				});
-			}).catch((data) => {
-        console.log(data)
+			})
+			.catch((data) => {
+				console.log(data);
 				dispach({ type: actions.getSingleCompanyFail });
 			});
 	};
@@ -84,7 +86,7 @@ export const getPhotosForCompany = (companyId) => {
 	};
 };
 
-export const uloadPhoto = (photo) => {
+export const uloadPhoto = (photo, companyId) => {
 	return (dispach) => {
 		dispach({
 			type: actions.uploadImageRequest,
@@ -99,9 +101,21 @@ export const uloadPhoto = (photo) => {
 		})
 			.then(({ data }) => {
 				console.log(data.image.url);
-				dispach({
-					type: actions.uploadImageSuccess,
-					payload: data.image.url,
+				request(
+					{
+						url: EDIT_COMPANY_MAIN_IMAGE,
+						method: "PATCH",
+						data: {
+							companyid: companyId,
+							image: data.image.url,
+						},
+					},
+					false
+				).then(() => {
+					dispach({
+						type: actions.uploadImageSuccess,
+						payload: data.image.url,
+					});
 				});
 			})
 			.catch(({ data }) => {
@@ -116,33 +130,47 @@ export const editCompany = (company, tags) => {
 		dispach({
 			type: actions.editCompanyRequest,
 		});
-		request(
-			{
-				url: EDIT_COMPANY,
-				method: "PATCH",
-				data: {
-					CompanyId: company.id,
-					title: company.title,
-					theme: company.theme,
-					Tags: tags,
-					description: company.description,
-					requiredAmount: company.requiredAmount,
-					mainPhotoUrl: company.mainPhotoUrl,
-					EndCompanyDate: company.endCompanyDate,
-          videoUrl: company.videoUrl
-				},
+		ajax({
+			type: "POST",
+			url: "https://api.imgbb.com/1/upload",
+			data: {
+				key: "1a9908a71a7b2fd666e90eaf49a403e5",
+				image: company.mainPhotoUrl,
 			},
-			false
-		)
-			.then(() => {
-				dispach({
-					type: actions.editCompanySuccess,
-					payload: {company,tags}
-				});
-			})
-			.catch(() => {
-				dispach({ type: actions.editCompanyFail });
+		}).then(({ data }) => {
+			console.log(company.mainPhotoUrl);
+			dispach({
+				type: actions.uploadImageSuccess,
+				payload: data.image.url,
 			});
+			request(
+				{
+					url: EDIT_COMPANY,
+					method: "PATCH",
+					data: {
+						CompanyId: company.id,
+						title: company.title,
+						theme: company.theme,
+						Tags: tags,
+						description: company.description,
+						requiredAmount: company.requiredAmount,
+						mainPhotoUrl: data.image.url,
+						EndCompanyDate: company.endCompanyDate,
+						videoUrl: company.videoUrl,
+					},
+				},
+				false
+			)
+				.then(() => {
+					dispach({
+						type: actions.editCompanySuccess,
+						payload: { company, tags },
+					});
+				})
+				.catch(() => {
+					dispach({ type: actions.editCompanyFail });
+				});
+		});
 	};
 };
 
@@ -171,7 +199,7 @@ export const getCompanyVideo = (companyId) => {
 	};
 };
 
-export const editCompanyVideo = (companyId,videoUrl) => {
+export const editCompanyVideo = (companyId, videoUrl) => {
 	return (dispach) => {
 		dispach({
 			type: actions.editCompanyVideoRequest,
@@ -189,11 +217,10 @@ export const editCompanyVideo = (companyId,videoUrl) => {
 					type: actions.getSingleCompanySuccess,
 					payload: data,
 				});
-			}).catch((data) => {
-        console.log(data)
+			})
+			.catch((data) => {
+				console.log(data);
 				dispach({ type: actions.getSingleCompanyFail });
 			});
 	};
 };
-
-
