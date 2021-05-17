@@ -5,4 +5,7 @@ export const actions = {
 	createPaymentRequest: "createPaymentRequest",
 	createPaymentSuccess: "createPaymentSuccess",
 	createPaymentFail: "createPaymentFail",
+	createBenefitRequest: "createBenefitRequest",
+	createBenefitSuccess: "createBenefitSuccess",
+	createBenefitFail: "createBenefitFail",
 };

@@ -6,7 +6,7 @@ import { Row, Container, Col, Button } from "react-bootstrap";
 import { createPayment } from "../../redux/benefits/benefitsthunks";
 
 export default function CompanyBenefits() {
-  const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const { singleCompany } = useSelector((state) => state.companies);
 	const { benefits } = useSelector((state) => state.benefits);
 	const { t } = useTranslation();
@@ -14,48 +14,48 @@ export default function CompanyBenefits() {
 		dispatch(getCompanyBenefits(singleCompany.id));
 	}, [dispatch, singleCompany.id]);
 
-  const CompanyBenefitsClick = useCallback(
+	const CompanyBenefitsClick = useCallback(
 		(benefitId) => {
 			dispatch(createPayment(benefitId, singleCompany.id));
-      alert("Payment success");
+			alert("Payment success");
 		},
 		[dispatch, singleCompany.id]
 	);
 
 	return (
-			<Container>
-				<Row>
-					{benefits !== undefined
-						? benefits.map((item) => {
-								return (
-									<Row key={item.id}>
-										<Col key={item.id}>
-											<Container key={item.id}>
-												{t("Benefit id")}
-												{" : "}
-												{item.id}
-											</Container>
-											<Container key={item.name}>
-												{t("Benefit name")}
-												{" : "}
-												{item.name}
-											</Container>
-											<Container key={item.cost}>
-												{t("Cost")}
-												{" : "}
-												{item.cost}
-											</Container>
-											<Button
-												onClick={() => CompanyBenefitsClick(item.id)}
-											>
-												Support
-											</Button>
-										</Col>
-									</Row>
-								);
-						  })
-						: "Doesn't have benefits"}
-				</Row>
-			</Container>
+		<Container>
+			<Row>
+				{benefits !== undefined
+					? benefits.map((item) => {
+							return (
+								<Row key={item.id}>
+									<Col key={item.id}>
+										<Container key={item.id}>
+											{t("Benefit id")}
+											{" : "}
+											{item.id}
+										</Container>
+										<Container key={item.name}>
+											{t("Benefit name")}
+											{" : "}
+											{item.name}
+										</Container>
+										<Container key={item.cost}>
+											{t("Cost")}
+											{" : "}
+											{item.cost}
+										</Container>
+										{localStorage.getItem("accessToken") !== null && 
+												<Button onClick={() => CompanyBenefitsClick(item.id)}>
+													{t("Support")}
+												</Button>
+											}
+									</Col>
+								</Row>
+							);
+					  })
+					: "Doesn't have benefits"}
+			</Row>
+		</Container>
 	);
 }

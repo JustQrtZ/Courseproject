@@ -191,6 +191,19 @@ const Company = (state = initialstate, action) => {
 				...state,
 				error: action.payload
 			}
+		
+		case actions.createRatingCompanyRequest:
+			return {
+				...state
+			}
+		case actions.createRatingCompanySuccess:
+			return {
+				...state,
+				singleCompany:{
+					...state.singleCompany,
+					rating: action.payload
+				}
+			}
 		default:
 			return state;
 	}

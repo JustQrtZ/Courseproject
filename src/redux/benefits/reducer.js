@@ -34,7 +34,15 @@ export default (state = initialstate, action) => {
 
 		case actions.createPaymentFail:
 			return {
-				state
+				state,
+			};
+		case actions.createBenefitRequest:
+			return {
+				...state,
+			};
+		case actions.createBenefitSuccess:
+			return {
+				benefits: [...state.benefits, action.payload],
 			};
 
 		default:

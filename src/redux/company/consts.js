@@ -24,5 +24,8 @@ export const actions = {
   editCompanyVideoFail: "editCompanyVideoFail",
   addCompanyImageRequst: "addCompanyImageRequest",
   addCompanyImageSuccess: "addCompanyImageSuccess",
-  addCompanyImageFail: "addCompanyImageFail"
+  addCompanyImageFail: "addCompanyImageFail",
+  createRatingCompanyRequest: "createRatingCompanyRequest",
+  createRatingCompanySuccess: "createRatingCompanySuccess",
+  createRatingCompanyFail: "createRatingCompanyFail",
 };

@@ -8,6 +8,7 @@ import {
 	EDIT_COMPANY,
 	GET_COMPANY_VIDEO,
 	EDIT_COMPANY_MAIN_IMAGE,
+	SET_COMPANY_RATING,
 } from "../../const/api";
 import { request } from "../../services/requests";
 
@@ -221,6 +222,33 @@ export const editCompanyVideo = (companyId, videoUrl) => {
 			.catch((data) => {
 				console.log(data);
 				dispach({ type: actions.getSingleCompanyFail });
+			});
+	};
+};
+
+export const createCompanyRating = (rating, company) => {
+	return (dispach) => {
+		dispach({
+			type: actions.createRatingCompanyRequest,
+		});
+		request(
+			{
+				url: SET_COMPANY_RATING,
+				method: "POST",
+				data: { CrowdfundingCompany: company, Rating: rating },
+			},
+			false
+		)
+			.then(() => {
+				dispach({
+					type: actions.createRatingCompanySuccess,
+					payload: rating,
+				});
+			})
+			.catch(() => {
+				dispach({
+					type: actions.createRatingCompanyFail,
+				});
 			});
 	};
 };

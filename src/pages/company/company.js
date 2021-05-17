@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
-
 import {
 	Container,
 	Row,
@@ -14,15 +13,19 @@ import {
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleCompany } from "../../redux/company/companythunks";
+import {
+	getSingleCompany,
+	createCompanyRating,
+} from "../../redux/company/companythunks";
 import { useTranslation } from "react-i18next";
 import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
 import CompanyPhotos from "../../components/companyimagegalery/companyimagegalery";
 import YoutubeEmbed from "../../components/youtubevideoforcompany/YoutubeEmbed";
 import EditCompany from "../../components/editcompany/editcompany";
-import CompanyImages from "../../components/editCompanyImages/editCompanyImages";
+// import CompanyImages from "../../components/editCompanyImages/editCompanyImages";
 import Benefits from "../../components/Benefits/benefits";
+import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
 
 export default function Company() {
 	const user = useSelector((state) => state.account);
@@ -33,6 +36,13 @@ export default function Company() {
 	useEffect(() => {
 		dispatch(getSingleCompany(id));
 	}, [dispatch, id]);
+
+	const RatingStartClick = useCallback(
+		(item) => {
+			dispatch(createCompanyRating(item, singleCompany.id));
+		},
+		[dispatch, singleCompany.id]
+	);
 
 	if (loading) {
 		return null;
@@ -55,7 +65,7 @@ export default function Company() {
 					<Container>
 						{t("Company theme")}
 						{" : "}
-						{singleCompany.theme}
+						{t(singleCompany.theme)}
 					</Container>
 					<Container>
 						{t("Need tocollect")}
@@ -104,7 +114,10 @@ export default function Company() {
 								<EditCompany company={singleCompany} />
 							</Row>
 							<Row>
-							<CompanyImages />
+								{/* <CompanyImages /> */}
+							</Row>
+							<Row>
+								<CreateCompanyBenefit />
 							</Row>
 						</Container>
 					)}
@@ -130,6 +143,16 @@ export default function Company() {
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
 							{singleCompany.description}
 						</ReactMarkdown>
+						{localStorage.getItem("accessToken") !== null && (
+							<ReactStars
+								size={60}
+								isHalf={false}
+								activeColor={"red"}
+								value={0}
+								onChange={RatingStartClick}
+								classNames="d-flex justify-content-center w-100"
+							/>
+						)}
 					</Tab>
 					<Tab
 						eventKey="benefits"

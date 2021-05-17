@@ -53,5 +53,15 @@
 	"Description": "Description",
   "Make User": "Make User",
   "Make Admin": "Make Admin",
-  "Delete": "Delete"
+  "Delete": "Delete",
+  "Support": "Support",
+  "Технологии": "Technology",
+  "Образование": "Education",
+  "Электроника": "Electronics",
+  "Addcompanybenefit": "Add company benefit",
+  "Company benefit": "Company benefit",
+  "Companybenefitname": "Company benefit name",
+  "Entercompanybenefitname": "Enter company benefit name",
+  "Companybenefitcost": "Company benefit cost",
+  "Entercompanybenefitcost": "Enter company benefit cost"
 }
