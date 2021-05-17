@@ -14,12 +14,12 @@ export const DELETEUSERSLIST = `admin/deleteUsers`;
 export const GETALLCOMPANIES = `company/getAllCompanies`;
 export const GET_SINGLE_COMPANY = `company/getSingleCompany`;
 export const CREATECOMPANY = `company/createCompany`;
-export const EDITCOMPANY = `company/createCompany`;
+export const EDIT_COMPANY = `company/editCompany`;
 export const GETALLCOMPANYNEWS = `company/getAllCompanyNews`;
 export const GET_USER_PROFILE = `profile/getUserProfile`;
 export const GET_USER_COMPANIES = `profile/getUserCompanies`;
 export const GET_USER_BENEFITS = `profile/getUserBenefits`;
 export const CHANGE_LANGUAGE = `profile/changeUserLanguage`;
 export const GET_IMAGES_FOR_COMPANY = `companyphotos/getAllPhotos`;
-
-
+export const GET_COMPANY_VIDEO = `company/getVideoForCompany`;
+export const GET_ALL_TAGS = `company/getAllTags`;

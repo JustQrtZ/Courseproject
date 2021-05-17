@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import gfm from "remark-gfm";
+import Tags from "../../components/tags/tags"
 
 export default function Main() {
 	const { data } = useSelector((state) => state.companies);
@@ -28,6 +29,7 @@ export default function Main() {
 
 	return (
 		<Container className="container-fluid">
+			<Tags target="main"/>
 			<Row className="d-flex flex-wrap">
 				{data.map((item) => (
 					<Col
@@ -64,7 +66,7 @@ export default function Main() {
 										edit={false}
 										value={item.rating}
 										size={25}
-										classNames="align-self-center"
+										classNames="d-flex justify-content-center w-100"
 									/>
 								</Card.Body>
 								<Container className="d-flex mb-0 justify-content-between px-1">

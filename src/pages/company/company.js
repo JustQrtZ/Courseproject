@@ -20,9 +20,10 @@ import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
 import CompanyPhotos from "../../components/companyimagegalery/companyimagegalery";
 import YoutubeEmbed from "../../components/youtubevideoforcompany/YoutubeEmbed";
-import EditCompany from "../../components/editcompany/editcompany"
+import EditCompany from "../../components/editcompany/editcompany";
 
 export default function Company() {
+	const user = useSelector((state) => state.account);
 	let { id } = useParams();
 	const dispatch = useDispatch();
 	const { singleCompany, loading } = useSelector((state) => state.companies);
@@ -69,7 +70,11 @@ export default function Company() {
 						{" : "}
 						{singleCompany.сollectedNow}$
 					</Container>
-					<ProgressBar animated now={singleCompany.сompletionPercentage} />
+					<ProgressBar
+						animated
+						now={singleCompany.сompletionPercentage}
+						className="w-50"
+					/>
 					<Container>
 						<ReactStars
 							count={5}
@@ -82,29 +87,28 @@ export default function Company() {
 						<Row>
 							<Col>Tags: </Col>
 							{singleCompany.tags.map((i) => (
-								<Col className="pl-0 pr-0 ml-1">
-									<Badge
-										key={i}
-										variant="secondary"
-									>
+								<Col className="pl-0 pr-0 ml-1" ket={i}>
+									<Badge key={i} variant="secondary">
 										{i}
 									</Badge>
 								</Col>
 							))}
 						</Row>
 					</Container>
-					<Container>
-						<EditCompany/>
-					</Container>
+					{(user.role === "Admin" || user.id === singleCompany.owner) && (
+						<Container>
+							<EditCompany company={singleCompany}/>
+						</Container>
+					)}
 				</Col>
 				<Col className="col-md-6 col-lg-6 col-12">
 					<Container>
-						<hi>Prewiew video</hi>
-						<YoutubeEmbed embedId="rokGy0huYEA" />
+						<h1>Prewiew video</h1>
+						<YoutubeEmbed videoUrl={singleCompany.videoUrl} />
 					</Container>
 					<Container>
-						<hi>Image galery</hi>
-						<CompanyPhotos companyId={singleCompany.id} />
+						<h1>Image galery</h1>
+						<CompanyPhotos companyId={id}/>
 					</Container>
 				</Col>
 			</Row>
@@ -116,7 +120,7 @@ export default function Company() {
 						className="text-center"
 					>
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
-							# Hello, *world*!
+							{singleCompany.description}
 						</ReactMarkdown>
 					</Tab>
 					<Tab
