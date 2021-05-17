@@ -22,8 +22,7 @@ import CompanyPhotos from "../../components/companyimagegalery/companyimagegaler
 import YoutubeEmbed from "../../components/youtubevideoforcompany/YoutubeEmbed";
 import EditCompany from "../../components/editcompany/editcompany";
 import CompanyImages from "../../components/editCompanyImages/editCompanyImages";
-import Benefits from "../../components/Benefits/benefits"
-
+import Benefits from "../../components/Benefits/benefits";
 
 export default function Company() {
 	const user = useSelector((state) => state.account);
@@ -101,18 +100,22 @@ export default function Company() {
 					</Container>
 					{(user.role === "Admin" || user.id === singleCompany.owner) && (
 						<Container>
-							<EditCompany company={singleCompany} />
+							<Row>
+								<EditCompany company={singleCompany} />
+							</Row>
+							<Row>
 							<CompanyImages />
+							</Row>
 						</Container>
 					)}
 				</Col>
 				<Col className="col-md-6 col-lg-6 col-12">
 					<Container>
-						<h1>Prewiew video</h1>
+						<h1>{t("Prewiewvideo")}</h1>
 						<YoutubeEmbed videoUrl={singleCompany.videoUrl} />
 					</Container>
 					<Container>
-						<h1>Image galery</h1>
+						<h1>{t("Image galery")}</h1>
 						<CompanyPhotos companyId={id} />
 					</Container>
 				</Col>
@@ -121,7 +124,7 @@ export default function Company() {
 				<Tabs className="justify-content-center">
 					<Tab
 						eventKey="description"
-						title="Description"
+						title={t("Description")}
 						className="text-center"
 					>
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
@@ -130,12 +133,12 @@ export default function Company() {
 					</Tab>
 					<Tab
 						eventKey="benefits"
-						title="Benefits"
+						title={t("Benefits")}
 						className="justify-content-center"
 					>
-						<Benefits/>
+						<Benefits />
 					</Tab>
-					<Tab eventKey="news" title="News">
+					<Tab eventKey="news" title={t("News")}>
 						news
 					</Tab>
 				</Tabs>

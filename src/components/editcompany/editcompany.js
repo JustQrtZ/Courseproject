@@ -61,17 +61,17 @@ export default function EditCompany(company) {
 	return (
 		<>
 			<Button variant="primary" onClick={handleShow}>
-				Edit company
+				{t("Editcompany")}
 			</Button>
 
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Edit company</Modal.Title>
+					<Modal.Title>{t("Editcompany")}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 				<Form>
 						 <Form.Group>
-							<Form.Label>Company Title</Form.Label>
+							<Form.Label>{t("Company title")}</Form.Label>
 							<Form.Control
 								type="text"
 								placeholder={t("Enter company title")}
@@ -89,37 +89,37 @@ export default function EditCompany(company) {
 							/>
 						</Form.Group>
 						<Form.Group controlId="exampleForm.ControlSelect1">
-							<Form.Label>Company theme</Form.Label>
-							<Form.Control as="select" onChange={onChange("title")}>
-								<option>Education</option>
-								<option>Technology</option>
-								<option>Electronics</option>
+							<Form.Label>{t("Company theme")}</Form.Label>
+							<Form.Control as="select" onChange={onChange("theme")}>
+								<option>{t("Education")}</option>
+								<option>{t("Technology")}</option>
+								<option>{t("Electronics")}</option>
 							</Form.Control>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Required amount</Form.Label>
 							<Form.Control
 								type="number"
-								placeholder={t("Enter the required amount")}
+								placeholder={t("Entertherequiredamount")}
 								value={state.requiredAmount}
 								onChange={onChange("requiredAmount")}
 							/>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label>End company date</Form.Label>
+							<Form.Label>{t("Endcompanydate")}</Form.Label>
 							<Form.Control
 								type="date"
-								placeholder={t("End company date")}
+								placeholder={t("Endcompanydate")}
 								value={state.endCompanyDate}
 								onChange={onChange("endCompanyDate")}
 							/>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label>Company tags</Form.Label>
+							<Form.Label>{t("Company tags")}</Form.Label>
 							<Tags target="company" />
 						</Form.Group>
 						<Form.Group>
-							<Form.Label>Company videoUrl</Form.Label>
+							<Form.Label>{t("Company videoUrl")}</Form.Label>
 							<Form.Control
 								type="text"
 								placeholder={t("Enter videoUrl")}
@@ -128,13 +128,13 @@ export default function EditCompany(company) {
 							/>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label>Company main photo</Form.Label>
+							<Form.Label>{t("Companymainphoto")}</Form.Label>
 							<Dropzone
 								getUploadParams={getUploadParams}
 								onChangeStatus={handleChangeStatus}
 								onSubmit={handleSubmit}
 								maxFiles={1}
-								inputContent="Drop 1 Files"
+								inputContent={t("Drop1Files")}
 								inputWithFilesContent={(files) => `${1 - files.length} more`}
 								accept="image/*"
 								styles={{
@@ -151,10 +151,10 @@ export default function EditCompany(company) {
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
-						Close
+						{t("Close")}
 					</Button>
 					<Button variant="primary" onClick={editCompanyClick}>
-						Save Changes
+						{t("Save Changes")}
 					</Button>
 				</Modal.Footer>
 			</Modal>

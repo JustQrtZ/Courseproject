@@ -12,6 +12,8 @@ import {
 	makeadmin,
 	makeuser
 } from "../../redux/users/usersthunk";
+import { useTranslation } from "react-i18next";
+
 
 const columns = [
 	{ field: "id", headerName: "ID", width: 150 },
@@ -29,6 +31,8 @@ export default function Admin() {
 	useEffect(() => {
 		dispatch(getAllUsers());
 	}, [dispatch]);
+
+	const {t} = useTranslation();
 
 	useEffect(() => {
 		if (data === null || data === undefined) {
@@ -62,7 +66,7 @@ export default function Admin() {
 		<S.Container>
 			<ButtonGroup aria-label="Basic example">
 				<Button variant="secondary" onClick={deleteClick}>
-					Delete
+					{t("Delete")}
 				</Button>
 				<Button variant="secondary" onClick={blockClick}>
 					<Lock />
@@ -71,10 +75,10 @@ export default function Admin() {
 					<Unlock />
 				</Button>
 				<Button variant="secondary" onClick={makeAdminClick}>
-					Make Admin
+					{t("Make Admin")}
 				</Button>
 				<Button variant="secondary" onClick={makeUserClick}>
-					Make User
+					{t("Make User")}
 				</Button>
 			</ButtonGroup>
 
