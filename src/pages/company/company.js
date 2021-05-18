@@ -111,7 +111,7 @@ export default function Company() {
 					{(user.role === "Admin" || user.id === singleCompany.owner) && (
 						<Container>
 							<Row>
-								<EditCompany company={singleCompany} />
+								<EditCompany company={singleCompany}/>
 							</Row>
 							<Row>
 								{/* <CompanyImages /> */}

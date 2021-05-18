@@ -30,6 +30,7 @@ export default function EditCompany(company) {
 		endCompanyDate: Dayjs(company.company.endCompanyDate).format("YYYY-MM-DD"),
 		сollectedNow: company.company.сollectedNow,
 		videoUrl: company.company.videoUrl,
+		tags: company.company.tags
 	});
 
 	const onChange = (field) => (event) => {
@@ -116,7 +117,7 @@ export default function EditCompany(company) {
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>{t("Company tags")}</Form.Label>
-							<Tags target={"company"}/>
+							<Tags target={"company"} tagsValue={state.tags}/>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>{t("Company videoUrl")}</Form.Label>

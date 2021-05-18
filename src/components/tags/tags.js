@@ -15,7 +15,7 @@ const baseTagifySettings = {
 	},
 };
 
-export default function TagsCompopent(target) {
+export default function TagsCompopent(target, tagsValue) {
 	const dispatch = useDispatch();
 	const [tagifySettings, setTagifySettings] = useState([]);
 	const [tagifyProps, setTagifyProps] = useState({});
@@ -27,11 +27,12 @@ export default function TagsCompopent(target) {
 		setTagifyProps((lastProps) => ({
 			...lastProps,
 			whitelist: tags.tags,
+      value: target.tagsValue
 		}));
 		setTagifySettings((lastSettings) => ({
 			...lastSettings,
 		}));
-	}, [dispatch, tags.tags]);
+	}, [dispatch, tags.tags,target.tagsValue]);
 
 	const settings = {
 		...baseTagifySettings,
@@ -62,7 +63,7 @@ export default function TagsCompopent(target) {
 	return (
 		<Tags
 			settings={settings}
-			defaultValue="a,b,c"
+      defaultValue="test"
 			autoFocus={true}
 			{...tagifyProps}
 			onChange={onChange}

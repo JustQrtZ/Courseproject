@@ -139,12 +139,10 @@ export const editCompany = (company, tags) => {
 				image: company.mainPhotoUrl,
 			},
 		}).then(({ data }) => {
-			console.log(company.mainPhotoUrl);
 			dispach({
 				type: actions.uploadImageSuccess,
 				payload: data.image.url,
 			});
-			console.log(company.endCompanyDate)
 			request(
 				{
 					url: EDIT_COMPANY,

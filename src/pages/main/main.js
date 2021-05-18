@@ -29,7 +29,7 @@ export default function Main() {
 
 	return (
 		<Container className="container-fluid">
-			<Tags target={"main"}/>
+			<Tags target={"main"} tagsValue={""}/>
 			<Row className="d-flex flex-wrap">
 				{data.map((item) => (
 					<Col
