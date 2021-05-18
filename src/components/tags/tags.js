@@ -40,7 +40,7 @@ export default function TagsCompopent(target) {
 
 	const onChange = useCallback(
 		(e) => {
-			if (target === "main") {
+			if (target.target === "main") {
 				if (e.detail.value !== "") {
 					dispatch({
 						type: actions.companiesFilter,

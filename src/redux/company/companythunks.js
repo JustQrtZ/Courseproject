@@ -144,6 +144,7 @@ export const editCompany = (company, tags) => {
 				type: actions.uploadImageSuccess,
 				payload: data.image.url,
 			});
+			console.log(company.endCompanyDate)
 			request(
 				{
 					url: EDIT_COMPANY,

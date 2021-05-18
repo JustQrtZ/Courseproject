@@ -116,7 +116,7 @@ export default function EditCompany(company) {
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>{t("Company tags")}</Form.Label>
-							<Tags target="company" />
+							<Tags target={"company"}/>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>{t("Company videoUrl")}</Form.Label>

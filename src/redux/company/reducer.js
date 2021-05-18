@@ -101,7 +101,7 @@ const Company = (state = initialstate, action) => {
 					title: action.payload.company.title,
 					theme: action.payload.company.theme,
 					requiredAmount: action.payload.company.requiredAmount,
-					EndCompanyDate: action.payload.company.endCompanyDate,
+					endCompanyDate: action.payload.company.endCompanyDate,
 					description: action.payload.company.description,
 					tags: action.payload.tags,
 					сollectedNow: action.payload.company.сollectedNow,
