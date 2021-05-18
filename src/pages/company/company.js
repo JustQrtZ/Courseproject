@@ -143,7 +143,7 @@ export default function Company() {
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
 							{singleCompany.description}
 						</ReactMarkdown>
-						{localStorage.getItem("accessToken") !== null && (
+						{(localStorage.getItem("accessToken") !== null || localStorage.getItem("accessToken") === undefined) && (
 							<ReactStars
 								size={60}
 								isHalf={false}

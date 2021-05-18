@@ -64,7 +64,7 @@ export default function TagsCompopent(target, tagsValue) {
 		<Tags
 			settings={settings}
       defaultValue="test"
-			autoFocus={true}
+			autoFocus={false}
 			{...tagifyProps}
 			onChange={onChange}
 			onEditInput={() => console.log("onEditInput")}
