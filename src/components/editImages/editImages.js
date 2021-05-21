@@ -73,12 +73,12 @@ export default function EditCompanyImages({
 	}, [files]);
 
 	console.log(files,"files")
-	const thumbs = files.map((file) => (
-		<S.Thumb key={file.id}>
-			<S.ThumbInner key={file.id}>
-				<S.Img key={file.blob} src={file.blob} alt="Ты накосячил" />
-				<S.RemoveButton onClick={(e) => removeFile(file, e)}>
-					<TrashFill />
+	const thumbs = files.map((file,i) => (
+		<S.Thumb key={i}>
+			<S.ThumbInner key={i}>
+				<S.Img key={file.id} src={file.blob} alt="Ты накосячил" />
+				<S.RemoveButton key={file.blob} onClick={(e) => removeFile(file, e)}>
+					<TrashFill key={i} />
 				</S.RemoveButton>
 			</S.ThumbInner>
 		</S.Thumb>

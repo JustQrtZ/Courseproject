@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Container } from "../login/styles";
+import { Container, Row,Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import {
 	getUserBenefits,
 	getUserCompanies,
 	getUserProfile,
 } from "../../redux/profile/profilethunks";
-import UserInfo from "../../components/userInfo/userinfo"
-import UserBenefits from "../../components/userbenefits/userbenefits"
+import UserInfo from "../../components/userInfo/userinfo";
+import UserBenefits from "../../components/userbenefits/userbenefits";
 
 const Profile = () => {
 	const { t } = useTranslation();
@@ -22,12 +22,16 @@ const Profile = () => {
 
 	return (
 		<Container>
-      <Container>{t("Profile")}</Container>
+			<Container>{t("Profile")}</Container>
 			<Container>
-				<UserInfo/>
+				<UserInfo />
 			</Container>
 			<Container>
-      <UserBenefits/>
+				<Row>
+					<Col>
+						<UserBenefits />
+					</Col>
+				</Row>
 			</Container>
 		</Container>
 	);
