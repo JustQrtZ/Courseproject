@@ -10,6 +10,7 @@ import {
 	Col,
 	Tabs,
 	Tab,
+	Spinner,
 } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +24,7 @@ import Dayjs from "dayjs";
 import CompanyPhotos from "../../components/companyimagegalery/companyimagegalery";
 import YoutubeEmbed from "../../components/youtubevideoforcompany/YoutubeEmbed";
 import EditCompany from "../../components/editcompany/editcompany";
-// import CompanyImages from "../../components/editCompanyImages/editCompanyImages";
+import CompanyImages from "../../components/editCompanyImages/editCompanyImages";
 import Benefits from "../../components/Benefits/benefits";
 import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
 
@@ -45,7 +46,13 @@ export default function Company() {
 	);
 
 	if (loading) {
-		return null;
+		return (
+			<Container className="position-absolute">
+				<Spinner animation="border" role="status">
+					<span className="sr-only"/>
+				</Spinner>
+			</Container>
+		);
 	}
 
 	return (
@@ -100,8 +107,8 @@ export default function Company() {
 							<Col>Tags: </Col>
 							{singleCompany.tags.length !== 0 &&
 								singleCompany.tags.map((i) => (
-									<Col className="pl-0 pr-0 ml-1" ket={i}>
-										<Badge key={i} variant="secondary">
+									<Col className="pl-0 pr-0 ml-1" key={i}>
+										<Badge key={i.value} variant="secondary">
 											{i}
 										</Badge>
 									</Col>
@@ -111,10 +118,10 @@ export default function Company() {
 					{(user.role === "Admin" || user.id === singleCompany.owner) && (
 						<Container>
 							<Row>
-								<EditCompany company={singleCompany}/>
+								<EditCompany company={singleCompany} />
 							</Row>
 							<Row>
-								{/* <CompanyImages /> */}
+								<CompanyImages />
 							</Row>
 							<Row>
 								<CreateCompanyBenefit />
@@ -129,7 +136,7 @@ export default function Company() {
 					</Container>
 					<Container>
 						<h1>{t("Image galery")}</h1>
-						<CompanyPhotos companyId={id} />
+						<CompanyPhotos images={singleCompany.photos} />
 					</Container>
 				</Col>
 			</Row>
@@ -143,7 +150,8 @@ export default function Company() {
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
 							{singleCompany.description}
 						</ReactMarkdown>
-						{(localStorage.getItem("accessToken") !== null || localStorage.getItem("accessToken") === undefined) && (
+						{(localStorage.getItem("accessToken") !== null ||
+							localStorage.getItem("accessToken") === undefined) && (
 							<ReactStars
 								size={60}
 								isHalf={false}

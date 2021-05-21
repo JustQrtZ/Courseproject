@@ -24,6 +24,9 @@ export default function TagsCompopent(target, tagsValue) {
 
 	useEffect(() => {
 		dispatch(getAllTags());
+	}, [dispatch])
+
+	useEffect(() => {
 		setTagifyProps((lastProps) => ({
 			...lastProps,
 			whitelist: tags.tags,

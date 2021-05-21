@@ -1,81 +1,109 @@
-import React, { useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {} from "../../redux/company/companythunks";
-import { Modal, Button, Form } from "react-bootstrap";
-import Dropzone from "react-dropzone-uploader";
+import { Form, Button } from "react-bootstrap";
 import "react-dropzone-uploader/dist/styles.css";
 import imageToBase64 from "image-to-base64/browser";
+import { Modal } from "../Modal/modal";
+import { useDropzone } from "react-dropzone";
+import * as S from "./style";
+import { actions } from "../../redux/company/consts";
 
-export default function EditCompanyImages() {
+export default function EditCompanyImages({ imageCount, target, title }) {
 	const [show, setShow] = useState(false);
-	const handleClose = () => setShow(false);
 	const dispatch = useDispatch();
-	const handleShow = () => setShow(true);
-	const getUploadParams = ({ meta }) => {
-		return { url: "https://httpbin.org/post" };
-	};
+	const handleShow = () => setShow((state) => !state);
+	const [files, setFiles] = useState([]);
+	const [base64Files, setBase64Files] = useState([]);
+	const companyPhotos = useSelector(
+		(state) => state.companies.singleCompany.photos
+	);
 
-	// const [state, setState] = useState({
-	// 	images: [],
-	// });
+	useEffect(() => {
+		setFiles(companyPhotos);
+	}, [companyPhotos]);
 
-	const handleChangeStatus = ({ meta }, status) => {
-		console.log(status, meta);
-	};
+	const handleSubmit = useCallback(async () => {
+		for (const image of files) {
+			const response = await imageToBase64(image.blob);
+			const netData = base64Files;
+			setBase64Files(netData.push(response));
+		}
+		dispatch({
+			type: actions.editCompanyImageGalety,
+			payload: base64Files,
+		});
+		console.log(base64Files);
+		handleShow();
+	}, [dispatch, files, base64Files]);
 
-	// const company = useSelector((state) => state.companies.singleCompany);
-	const handleSubmit = useCallback(
-		(files, allFiles) => {
-			console.log(files);
-			files.forEach((image) => {
-				imageToBase64(image.meta.previewUrl).then((response) => {
-					dispatch()
+	const onDrop = useCallback((acceptedFiles) => {
+		console.log(acceptedFiles);
+		setFiles(
+			acceptedFiles.map((file) => {
+				return Object.assign(file, {
+					preview: URL.createObjectURL(file),
+					blob: URL.createObjectURL(file),
 				});
 			})
-				allFiles.forEach((f) => f.remove());
-				setShow(false);
+		);
+	}, []);
+
+	useEffect(
+		() => () => {
+			// Make sure to revoke the data uris to avoid memory leaks
+			files.forEach((file) => URL.revokeObjectURL(file.preview));
 		},
-		[dispatch]
+		[files]
 	);
+
+	const thumbs = files.map((file) => (
+		<S.Thumb key={file.name}>
+			<S.ThumbInner>
+				<S.Img
+					key={file.preview ?? file.photoUrl}
+					src={file.preview ?? file.photoUrl}
+					alt="Ты накосячил"
+				/>
+			</S.ThumbInner>
+		</S.Thumb>
+	));
+
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+		onDrop,
+		accept: "image/*",
+		maxFiles: 1,
+	});
 
 	return (
 		<>
 			<Button variant="primary" onClick={handleShow}>
 				Edit company MainImage
 			</Button>
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Edit company</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form>
-						<Form.Group>
-							<Form.Label>Company image</Form.Label>
-							<Dropzone
-								getUploadParams={getUploadParams}
-								onChangeStatus={handleChangeStatus}
-								onSubmit={handleSubmit}
-								maxFiles={2}
-								inputContent="Drop 2 Files"
-								inputWithFilesContent={(files) => `${2 - files.length} more`}
-								accept="image/*"
-								styles={{
-									dropzoneReject: {
-										borderColor: "red",
-										backgroundColor: "#DAA",
-									},
-									inputLabel: (files, extra) =>
-										extra.reject ? { color: "red" } : {},
-								}}
-							/>
-						</Form.Group>
-					</Form>
-					<Modal.Footer>
-						<Button variant="secondary" onClick={handleClose}>
-							Close
-						</Button>
-					</Modal.Footer>
-				</Modal.Body>
+			<Modal
+				visible={show}
+				handleVisible={handleShow}
+				saveChanges={handleSubmit}
+				title={"Edit"}
+			>
+				<Form>
+					<Form.Group>
+						<Form.Label>Company image</Form.Label>
+						<S.DropZone {...getRootProps({ className: "dropzone" })}>
+							<input {...getInputProps()} />
+							{isDragActive ? (
+								<S.DropzoneText>
+									Drop onli one the files here ...
+								</S.DropzoneText>
+							) : (
+								<S.DropzoneText>
+									Drag 'n' drop one {title} here, or click to select file
+								</S.DropzoneText>
+							)}
+						</S.DropZone>
+						<S.ThumbsContainer>{thumbs}</S.ThumbsContainer>
+					</Form.Group>
+				</Form>
 			</Modal>
 		</>
 	);

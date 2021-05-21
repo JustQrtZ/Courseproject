@@ -126,51 +126,39 @@ export const uloadPhoto = (photo, companyId) => {
 	};
 };
 
-export const editCompany = (company, tags) => {
+export const editCompany = (company, editedCompany) => {
 	return (dispach) => {
 		dispach({
 			type: actions.editCompanyRequest,
 		});
-		ajax({
-			type: "POST",
-			url: "https://api.imgbb.com/1/upload",
-			data: {
-				key: "1a9908a71a7b2fd666e90eaf49a403e5",
-				image: company.mainPhotoUrl,
-			},
-		}).then(({ data }) => {
-			dispach({
-				type: actions.uploadImageSuccess,
-				payload: data.image.url,
-			});
-			request(
-				{
-					url: EDIT_COMPANY,
-					method: "PATCH",
-					data: {
-						CompanyId: company.id,
-						title: company.title,
-						theme: company.theme,
-						Tags: tags,
-						description: company.description,
-						requiredAmount: company.requiredAmount,
-						mainPhotoUrl: data.image.url,
-						EndCompanyDate: company.endCompanyDate,
-						videoUrl: company.videoUrl,
-					},
+		request(
+			{
+				url: EDIT_COMPANY,
+				method: "PATCH",
+				data: {
+					CompanyId: company.id,
+					title: company.title,
+					theme: company.theme,
+					Tags: editedCompany.tags,
+					description: company.description,
+					requiredAmount: company.requiredAmount,
+					mainPhotoUrl: editedCompany.mainPhotoUrl,
+					EndCompanyDate: company.endCompanyDate,
+					videoUrl: company.videoUrl,
+					Photos: editedCompany.companyPhotos,
 				},
-				false
-			)
-				.then(() => {
-					dispach({
-						type: actions.editCompanySuccess,
-						payload: { company, tags },
-					});
-				})
-				.catch(() => {
-					dispach({ type: actions.editCompanyFail });
+			},
+			false
+		)
+			.then((data) => {
+				dispach({
+					type: actions.editCompanySuccess,
+					payload: data,
 				});
-		});
+			})
+			.catch(() => {
+				dispach({ type: actions.editCompanyFail });
+			});
 	};
 };
 

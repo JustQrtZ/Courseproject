@@ -3,11 +3,10 @@ import { actions } from "./consts";
 const initialstate = {
 	data: [],
 	allData: [],
-	singleCompany: {},
-	companyPhotos: [],
+	singleCompany: {companyPhotos:[]},
 	loading: true,
 	Videoloading: true,
-	editedCompany: {tags: [] },
+	editedCompany: {tags: [], companyPhotos:[]},
 };
 
 const Company = (state = initialstate, action) => {
@@ -59,13 +58,19 @@ const Company = (state = initialstate, action) => {
 		case actions.getImageForCompanySuccess:
 			return {
 				...state,
-				companyPhotos: action.payload,
+				singleCompany:{
+					...state.singleCompany,
+					companyPhotos: action.payload 
+				}
 			};
 
 		case actions.getImageForCompanyFail:
 			return {
 				...state,
-				companyPhotos: [],
+				singleCompany:{
+					...state.singleCompany,
+					companyPhotos: ["https://blog.vverh.digital/wp-content/uploads/2020/06/oblojka-404.png"] 
+				},
 				error: action.payload,
 			};
 
@@ -91,24 +96,14 @@ const Company = (state = initialstate, action) => {
 		case actions.editCompanyRequest:
 			return {
 				...state,
+				loading: true
 			};
 
 		case actions.editCompanySuccess:
 			return {
 				...state,
-				singleCompany: {
-					...state.singleCompany,
-					title: action.payload.company.title,
-					theme: action.payload.company.theme,
-					requiredAmount: action.payload.company.requiredAmount,
-					endCompanyDate: action.payload.company.endCompanyDate,
-					description: action.payload.company.description,
-					tags: action.payload.tags,
-					сollectedNow: action.payload.company.сollectedNow,
-					сompletionPercentage: action.payload.company.сompletionPercentage,
-					rating: action.payload.company.rating,
-					videoUrl: action.payload.company.videoUrl,
-				},
+				singleCompany: action.payload.data[0],
+				loading:false
 			};
 		case actions.editCompanyFail:
 			return {
@@ -182,6 +177,10 @@ const Company = (state = initialstate, action) => {
 		case actions.addCompanyImageSuccess:
 			return {
 				...state,
+				singleCompany: {
+					...state.singleCompany,
+					videoUrl: action.payload,
+				},
 				companyPhotos:{
 					companyPhotos:[...state.companyPhotos,action.payload]
 				}
@@ -202,6 +201,22 @@ const Company = (state = initialstate, action) => {
 				singleCompany:{
 					...state.singleCompany,
 					rating: action.payload
+				}
+			}
+		case actions.editCompanyImageGalety:
+			return{
+				...state,
+				editedCompany: {
+					...state.editedCompany,
+					companyPhotos: action.payload,
+				},
+			}
+		case actions.editCompanyMainImage:
+			return{
+				...state,
+				editedCompany:{
+					...state.editedCompany,
+					mainPhotoUrl: action.payload
 				}
 			}
 		default:

@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { editCompany } from "../../redux/company/companythunks";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
-import Dropzone from "react-dropzone-uploader";
 import "react-dropzone-uploader/dist/styles.css";
-import imageToBase64 from "image-to-base64/browser";
 import Dayjs from "dayjs";
 import Tags from "../tags/tags";
+import EditCompanyImages from "../editImages/editImages"
 
 export default function EditCompany(company) {
 	const [show, setShow] = useState(false);
@@ -15,10 +14,6 @@ export default function EditCompany(company) {
 	const dispatch = useDispatch();
 	const handleShow = () => setShow(true);
 	const { t } = useTranslation();
-
-	const getUploadParams = ({ meta }) => {
-		return { url: "https://httpbin.org/post" };
-	};
 
 	const [state, setState] = useState({
 		id: company.company.id,
@@ -30,34 +25,21 @@ export default function EditCompany(company) {
 		endCompanyDate: Dayjs(company.company.endCompanyDate).format("YYYY-MM-DD"),
 		сollectedNow: company.company.сollectedNow,
 		videoUrl: company.company.videoUrl,
-		tags: company.company.tags
+		tags: company.company.tags,
+		photos: company.company.photos
 	});
 
 	const onChange = (field) => (event) => {
 		setState((state) => ({ ...state, [field]: event.target.value }));
 	};
 
-	const handleChangeStatus = ({ meta }, status) => {
-		console.log(status, meta);
-	};
-
 	const editedCompany = useSelector((state) => state.companies.editedCompany);
 
-	const handleSubmit = useCallback((files,allFiles) => {
-		const photo = files[0].meta.previewUrl;
-		imageToBase64(photo)
-			.then((response) => {
-				console.log(response);
-				setState((state)=>({...state, mainPhotoUrl: response}))
-			})
-		allFiles.forEach((f) => f.remove());
-	}, []);
-
-	const editCompanyClick = useCallback(() => {
-		console.log(state)
-		dispatch(editCompany(state, editedCompany.tags));
-		setShow(false);
-	}, [dispatch, state, editedCompany.tags]);
+	const editCompanyClick = useCallback(async () => {
+		console.log(state, "state")
+		dispatch(editCompany(state, editedCompany));
+		//setShow(false);
+	}, [dispatch, state, editedCompany]);
 
 	return (
 		<>
@@ -128,7 +110,10 @@ export default function EditCompany(company) {
 								onChange={onChange("videoUrl")}
 							/>
 						</Form.Group>
-						<Form.Group>
+						<EditCompanyImages imageCount={1} target={"mainPhoto"} title={"mainPhoto"} companyPhotos={[{id: 1, blob: state.mainPhotoUrl}]}/>
+						<EditCompanyImages imageCount={10} target={"companyPhoto"} title={"image gallety"} companyPhotos={state.photos.map((file)=>({id: file.id,blob: file.photoUrl}))}/>
+
+						{/* <Form.Group>
 							<Form.Label>{t("Companymainphoto")}</Form.Label>
 							<Dropzone
 								getUploadParams={getUploadParams}
@@ -147,7 +132,7 @@ export default function EditCompany(company) {
 										extra.reject ? { color: "red" } : {},
 								}}
 							/>
-						</Form.Group>
+						</Form.Group> */}
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
