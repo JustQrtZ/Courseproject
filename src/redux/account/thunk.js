@@ -21,6 +21,7 @@ export const login = (userData) => {
 				data: { email: userData.email, password: userData.password },
 			},
 			false
+
 		)
 			.then(({ data }) => {
 				dispach({
@@ -36,11 +37,10 @@ export const login = (userData) => {
 				localStorage.setItem("refreshToken", data.refreshToken);
 				localStorage.setItem("lng", data.language);
 			})
-			.catch(() => {
+			.catch((error) => {
 				dispach({
 					type: actions.loginFail,
-					payload:
-						"there is no user with this combination of mail and password",
+					payload: error.response.data.error,
 				});
 			});
 	};
@@ -73,11 +73,10 @@ export const loginGoogle = (tokenId) => {
 				localStorage.setItem("refreshToken", data.refreshToken);
 				localStorage.setItem("lng", data.language);
 			})
-			.catch(() => {
+			.catch((error) => {
 				dispach({
 					type: actions.loginFail,
-					pauload:
-						"there is no user with this combination of mail and password",
+					pauload: error.response.data.error,
 				});
 			});
 	};
@@ -110,11 +109,10 @@ export const loginFacebook = (token) => {
 				localStorage.setItem("refreshToken", data.refreshToken);
 				localStorage.setItem("lng", data.language);
 			})
-			.catch(() => {
+			.catch((error) => {
 				dispach({
 					type: actions.loginFail,
-					pauload:
-						"Login error",
+					pauload: error.response.data.error,
 				});
 			});
 	};
@@ -170,16 +168,19 @@ export const getLogInUserFromAccessToken = () => {
 };
 
 export const registration = (user) => {
-
 	return (dispach) => {
 		dispach({
 			type: actions.authRequest,
-		})
+		});
 		request(
 			{
 				url: REGISTER,
 				method: "POST",
-				data: { email: user.email, username: user.username, password: user.password },
+				data: {
+					email: user.email,
+					username: user.username,
+					password: user.password,
+				},
 			},
 			false
 		)

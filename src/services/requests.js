@@ -20,28 +20,24 @@ export const request = (params, refresh = true) => {
 		headers: {
 			authorization,
 		},
-	})
-		.then((data) => {
-			if (refresh) {
-				if (accessToken != null && refreshToken != null) {
-					request({
-						url: REFRESHTOKEN,
-						method: "POST",
-						data: { accessToken, refreshToken },
+	}).then((data) => {
+		if (refresh) {
+			if (accessToken != null && refreshToken != null) {
+				request({
+					url: REFRESHTOKEN,
+					method: "POST",
+					data: { accessToken, refreshToken },
+				})
+					.then(({ data }) => {
+						localStorage.setItem("accessToken", data.accessToken);
+						localStorage.setItem("refreshToken", data.refreshToken);
 					})
-						.then(({ data }) => {
-							localStorage.setItem("accessToken", data.accessToken);
-							localStorage.setItem("refreshToken", data.refreshToken);
-						})
-						.catch(() => {
-							history.replace(path.login);
-							dispatch({ type: actions.logout });
-						});
-				}
+					.catch(() => {
+						history.replace(path.login);
+						dispatch({ type: actions.logout });
+					});
 			}
-			return data;
-		})
-		.catch((data) => {
-			console.log(data);
-		});
+		}
+		return data;
+	});
 };
