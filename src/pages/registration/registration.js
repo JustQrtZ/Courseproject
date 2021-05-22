@@ -3,15 +3,12 @@ import * as S from "./styles";
 import { Button, Form } from "react-bootstrap";
 import { path } from "../../routers/path";
 import { Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { registration } from "../../redux/account/thunk";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Register() {
 	const dispatch = useDispatch();
-
-
 	const [state, setState] = useState({ email: "", username: "", password: "" });
 	const onChange = (field) => (event) => {
 		setState((state) => ({ ...state, [field]: event.target.value }));
@@ -20,7 +17,7 @@ export default function Register() {
 	const { error, loading, isLogIn } = useSelector((state) => state.account);
 
 	const submitRegistration = useCallback(
-		 (e) => {
+		(e) => {
 			e.preventDefault();
 			dispatch(registration(state));
 		},
@@ -32,6 +29,9 @@ export default function Register() {
 			setTimeout(() => {
 				window.location.href = "../";
 			}, 1000);
+		}
+		if (error !== "" && loading === false && isLogIn === false) {
+			alert(error);
 		}
 	}, [error, loading, isLogIn]);
 
@@ -68,17 +68,13 @@ export default function Register() {
 						onChange={onChange("password")}
 					/>
 				</Form.Group>
-				<Button
-					variant="outline-primary"
-					type="submit"
-					className="w-100"
-				>
+				<Button variant="outline-primary" type="submit" className="w-100">
 					{t("Submit")}
 				</Button>
 				<Nav className="p-3">
 					{t("U have an account?")}
 					{"\xA0"}
-					<Nav.Link className="p-0" as={Link} to={path.login}>
+					<Nav.Link className="p-0" href={path.login}>
 						{t("Login")}
 					</Nav.Link>
 				</Nav>

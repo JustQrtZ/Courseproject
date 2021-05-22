@@ -15,6 +15,7 @@ export default (state = initialstate, action) => {
 			return {
 				...state,
 				loading: true,
+				error: ""
 			};
 
 		case actions.signup:

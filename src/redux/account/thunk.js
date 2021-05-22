@@ -114,7 +114,7 @@ export const loginFacebook = (token) => {
 				dispach({
 					type: actions.loginFail,
 					pauload:
-						"there is no user with this combination of mail and password",
+						"Login error",
 				});
 			});
 	};
@@ -200,7 +200,7 @@ export const registration = (user) => {
 			.catch((data) => {
 				dispach({
 					type: actions.loginFail,
-					payload: data,
+					payload: "Registration error",
 				});
 			});
 	};
