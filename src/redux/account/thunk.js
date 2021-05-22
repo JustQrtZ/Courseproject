@@ -9,13 +9,16 @@ import {
 } from "../../const/api";
 import { request } from "../../services/requests";
 
-export const login = (email, password) => {
+export const login = (userData) => {
 	return (dispach) => {
+		dispach({
+			type: actions.authRequest,
+		});
 		request(
 			{
 				url: LOGIN,
 				method: "POST",
-				data: { email, password },
+				data: { email: userData.email, password: userData.password },
 			},
 			false
 		)
@@ -33,14 +36,21 @@ export const login = (email, password) => {
 				localStorage.setItem("refreshToken", data.refreshToken);
 				localStorage.setItem("lng", data.language);
 			})
-			.catch(({ ex }) => {
-				console.log(ex);
+			.catch(() => {
+				dispach({
+					type: actions.loginFail,
+					payload:
+						"there is no user with this combination of mail and password",
+				});
 			});
 	};
 };
 
 export const loginGoogle = (tokenId) => {
 	return (dispach) => {
+		dispach({
+			type: actions.authRequest,
+		});
 		request(
 			{
 				url: LOGIN_GOOGLE,
@@ -63,14 +73,21 @@ export const loginGoogle = (tokenId) => {
 				localStorage.setItem("refreshToken", data.refreshToken);
 				localStorage.setItem("lng", data.language);
 			})
-			.catch(({ ex }) => {
-				console.log(ex);
+			.catch(() => {
+				dispach({
+					type: actions.loginFail,
+					pauload:
+						"there is no user with this combination of mail and password",
+				});
 			});
 	};
 };
 
 export const loginFacebook = (token) => {
 	return (dispach) => {
+		dispach({
+			type: actions.authRequest,
+		});
 		request(
 			{
 				url: LOGIN_FACEBOOK,
@@ -93,8 +110,12 @@ export const loginFacebook = (token) => {
 				localStorage.setItem("refreshToken", data.refreshToken);
 				localStorage.setItem("lng", data.language);
 			})
-			.catch(({ ex }) => {
-				console.log(ex);
+			.catch(() => {
+				dispach({
+					type: actions.loginFail,
+					pauload:
+						"there is no user with this combination of mail and password",
+				});
 			});
 	};
 };
@@ -148,28 +169,39 @@ export const getLogInUserFromAccessToken = () => {
 	};
 };
 
-export const registration = (Email, Username, password) => {
+export const registration = (user) => {
+
 	return (dispach) => {
+		dispach({
+			type: actions.authRequest,
+		})
 		request(
 			{
 				url: REGISTER,
 				method: "POST",
-				data: { Email, Username, password },
+				data: { email: user.email, username: user.username, password: user.password },
 			},
 			false
-		).then(({ data }) => {
-			dispach({
-				type: actions.login,
-				payload: {
-					id: data.id,
-					username: data.username,
-					role: data.role,
-					designTheme: data.designTheme,
-				},
+		)
+			.then(({ data }) => {
+				dispach({
+					type: actions.login,
+					payload: {
+						id: data.id,
+						username: data.username,
+						role: data.role,
+						designTheme: data.designTheme,
+					},
+				});
+				localStorage.setItem("accessToken", data.accessToken);
+				localStorage.setItem("refreshToken", data.refreshToken);
+				localStorage.setItem("lng", data.language);
+			})
+			.catch((data) => {
+				dispach({
+					type: actions.loginFail,
+					payload: data,
+				});
 			});
-			localStorage.setItem("accessToken", data.accessToken);
-			localStorage.setItem("refreshToken", data.refreshToken);
-			localStorage.setItem("lng", data.language);
-		});
 	};
 };

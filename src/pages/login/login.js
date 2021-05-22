@@ -1,21 +1,23 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback,useEffect } from "react";
 import * as S from "./styles";
 import { Button, Form } from "react-bootstrap";
 import { path } from "../../routers/path";
 import { Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login, loginGoogle,loginFacebook } from "../../redux/account/thunk";
 import { useTranslation } from "react-i18next";
 import { OldSocialLogin as SocialLogin } from "react-social-login";
 
-const Login = ({ submitLogin }) => {
+export default function Login(){
 	const dispatch = useDispatch();
 
 	const [state, setState] = useState({ email: "", password: "" });
 	const onChange = (field) => (event) => {
 		setState((state) => ({ ...state, [field]: event.target.value }));
 	};
+
+	const {error, loading, isLogIn} = useSelector((state) => state.account)
 
 	const submitGoogleLogin = useCallback(
 		(responce) => {
@@ -32,6 +34,22 @@ const Login = ({ submitLogin }) => {
 		},
 		[dispatch]
 	);
+
+	const submitLogin = useCallback(async (e) => {
+			e.preventDefault()
+			dispatch(login(state));		
+		},
+		[dispatch,state]
+	);
+
+	useEffect(()=>{
+		if(error==="" && loading===false && isLogIn===true)
+			{
+				setTimeout(() => {
+					window.location.href = '../'
+				}, 1000);
+			}
+	},[error,loading,isLogIn])
 
 	const { t } = useTranslation();
 
@@ -60,7 +78,7 @@ const Login = ({ submitLogin }) => {
 				<Button
 					variant="outline-primary"
 					className="w-100"
-					onClick={() => submitLogin(state.email, state.password)}
+					onClick={(e) => submitLogin(e)}
 				>
 					{t("Submit")}
 				</Button>
@@ -92,9 +110,3 @@ const Login = ({ submitLogin }) => {
 		</S.Container>
 	);
 };
-
-const mapDispatchToProps = {
-	submitLogin: login,
-};
-
-export default connect(null, mapDispatchToProps)(Login);

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import * as S from "./styles";
 import { Button, Form } from "react-bootstrap";
 import { path } from "../../routers/path";
@@ -6,16 +6,36 @@ import { Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { registration } from "../../redux/account/thunk";
-import { connect } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+
+export default function Register() {
+	const dispatch = useDispatch();
 
 
-const Register = ({ submitRegistration }) => {
 	const [state, setState] = useState({ email: "", username: "", password: "" });
 	const onChange = (field) => (event) => {
 		setState((state) => ({ ...state, [field]: event.target.value }));
 	};
 
-	const {t} = useTranslation();
+	const { error, loading, isLogIn } = useSelector((state) => state.account);
+
+	const submitRegistration = useCallback(
+		async (e) => {
+			e.preventDefault();
+			dispatch(registration(state));
+		},
+		[dispatch, state]
+	);
+
+	useEffect(() => {
+		if (error === "" && loading === false && isLogIn === true) {
+			setTimeout(() => {
+				window.location.href = "../";
+			}, 1000);
+		}
+	}, [error, loading, isLogIn]);
+
+	const { t } = useTranslation();
 
 	return (
 		<S.Container>
@@ -50,8 +70,8 @@ const Register = ({ submitRegistration }) => {
 				</Form.Group>
 				<Button
 					variant="outline-primary"
-					onClick={() =>
-						submitRegistration(state.email, state.username, state.password)
+					onClick={(e) =>
+						submitRegistration(e)
 					}
 					className="w-100"
 				>
@@ -67,9 +87,4 @@ const Register = ({ submitRegistration }) => {
 			</Form>
 		</S.Container>
 	);
-};
-
-const mapDispatchToProps = {
-	submitRegistration: registration,
-};
-export default connect(null, mapDispatchToProps)(Register);
+}
