@@ -4,7 +4,7 @@ import "./style.css"
 
 export default function CompanyPhotos({ images }) {
 	return (
-		<Carousel className="" style={{height:450}}> 
+		<Carousel style={{height:550}}> 
 			{images.map((i) => {
 				return (
 					<Carousel.Item key={i.id} className="h-100">
