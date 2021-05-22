@@ -35,7 +35,7 @@ export default function Login(){
 		[dispatch]
 	);
 
-	const submitLogin = useCallback(async (e) => {
+	const submitLogin = useCallback((e) => {
 			e.preventDefault()
 			dispatch(login(state));		
 		},
@@ -55,7 +55,7 @@ export default function Login(){
 
 	return (
 		<S.Container>
-			<Form>
+			<Form onSubmit={(e) => submitLogin(e)}>
 				<S.Text>{t("Login")}</S.Text>
 				<Form.Group>
 					<Form.Label>{t("Email")}</Form.Label>
@@ -78,7 +78,7 @@ export default function Login(){
 				<Button
 					variant="outline-primary"
 					className="w-100"
-					onClick={(e) => submitLogin(e)}
+					type="submit"
 				>
 					{t("Submit")}
 				</Button>

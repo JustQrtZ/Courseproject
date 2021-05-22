@@ -20,7 +20,7 @@ export default function Register() {
 	const { error, loading, isLogIn } = useSelector((state) => state.account);
 
 	const submitRegistration = useCallback(
-		async (e) => {
+		 (e) => {
 			e.preventDefault();
 			dispatch(registration(state));
 		},
@@ -39,9 +39,9 @@ export default function Register() {
 
 	return (
 		<S.Container>
-			<Form>
+			<Form onSubmit={(e) => submitRegistration(e)}>
 				<S.Text>{t("Signup")}</S.Text>
-				<Form.Group>
+				<Form.Group controlId="formBasicEmail">
 					<Form.Label>{t("Email")}</Form.Label>
 					<Form.Control
 						type="email"
@@ -70,9 +70,7 @@ export default function Register() {
 				</Form.Group>
 				<Button
 					variant="outline-primary"
-					onClick={(e) =>
-						submitRegistration(e)
-					}
+					type="submit"
 					className="w-100"
 				>
 					{t("Submit")}
