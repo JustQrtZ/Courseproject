@@ -24,17 +24,17 @@ export default (state = initialstate, action) => {
 
 		case actions.createPaymentRequest:
 			return {
-				state,
+				...state,
 			};
 
 		case actions.createPaymentSuccess:
 			return {
-				state,
+				...state,
 			};
 
 		case actions.createPaymentFail:
 			return {
-				state,
+				...state,
 			};
 		case actions.createBenefitRequest:
 			return {

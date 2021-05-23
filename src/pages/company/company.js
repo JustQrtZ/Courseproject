@@ -115,7 +115,7 @@ export default function Company() {
 								))}
 						</Row>
 					</Container>
-					{(user.role === "Admin" || user.id === singleCompany.owner) && (
+					{(user.role === "Admin" || user.id === singleCompany.owner) && user.isLogIn === true && (
 						<Container>
 							<Row>
 								<EditCompany company={singleCompany} />
@@ -150,8 +150,7 @@ export default function Company() {
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
 							{singleCompany.description}
 						</ReactMarkdown>
-						{(localStorage.getItem("accessToken") !== null ||
-							localStorage.getItem("accessToken") === undefined) && (
+						{user.isLogIn === true && (
 							<ReactStars
 								size={60}
 								isHalf={false}
