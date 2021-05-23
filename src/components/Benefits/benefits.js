@@ -9,6 +9,8 @@ export default function CompanyBenefits() {
 	const dispatch = useDispatch();
 	const { singleCompany } = useSelector((state) => state.companies);
 	const { benefits } = useSelector((state) => state.benefits);
+	const {isLogIn} = useSelector((state) => state.account)
+
 	const { t } = useTranslation();
 	useEffect(() => {
 		dispatch(getCompanyBenefits(singleCompany.id));
@@ -45,7 +47,7 @@ export default function CompanyBenefits() {
 											{" : "}
 											{item.cost}
 										</Container>
-										{localStorage.getItem("accessToken") !== null && 
+										{isLogIn === true && 
 												<Button onClick={() => CompanyBenefitsClick(item.id)}>
 													{t("Support")}
 												</Button>
