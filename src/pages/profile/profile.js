@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Container, Row,Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import {
 	getUserBenefits,
@@ -27,11 +27,7 @@ const Profile = () => {
 				<UserInfo />
 			</Container>
 			<Container>
-				<Row>
-					<Col>
-						<UserBenefits />
-					</Col>
-				</Row>
+				<UserBenefits />
 			</Container>
 		</Container>
 	);
