@@ -1,34 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Container } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import {
-	getUserBenefits,
-	getUserCompanies,
-	getUserProfile,
-} from "../../redux/profile/profilethunks";
+import { Container, Row, Col } from "react-bootstrap";
 import UserInfo from "../../components/userInfo/userinfo";
 import UserBenefits from "../../components/userbenefits/userbenefits";
+import UserCompanies from "../../components/userCompanies/userCompanies";
 
 const Profile = () => {
 	const { t } = useTranslation();
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		dispatch(getUserBenefits());
-		dispatch(getUserCompanies());
-		dispatch(getUserProfile());
-	}, [dispatch]);
 
 	return (
 		<Container>
 			<Container>{t("Profile")}</Container>
-			<Container>
+			<Row>
 				<UserInfo />
-			</Container>
-			<Container>
-				<UserBenefits />
-			</Container>
+				<Col>
+					<UserBenefits />
+				</Col>
+				<Col>
+					<UserCompanies />
+				</Col>
+			</Row>
 		</Container>
 	);
 };

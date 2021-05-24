@@ -4,9 +4,18 @@ const initialstate = {
 	data: [],
 	allData: [],
 	singleCompany: { companyPhotos: [] },
+	singleCompanyRating: {
+		userRating: 0,
+		ratingLoad: true,
+	},
 	loading: true,
 	Videoloading: true,
-	editedCompany: { tags: [], companyPhotos: [],loadingi:false, mainPhotoUrl:"" },
+	editedCompany: {
+		tags: [],
+		companyPhotos: [],
+		loadingi: false,
+		mainPhotoUrl: "",
+	},
 };
 
 const Company = (state = initialstate, action) => {
@@ -50,51 +59,6 @@ const Company = (state = initialstate, action) => {
 				error: action.payload,
 			};
 
-		case actions.getImageForCompanyRequest:
-			return {
-				...state,
-			};
-
-		case actions.getImageForCompanySuccess:
-			return {
-				...state,
-				singleCompany: {
-					...state.singleCompany,
-					companyPhotos: action.payload,
-				},
-			};
-
-		case actions.getImageForCompanyFail:
-			return {
-				...state,
-				singleCompany: {
-					...state.singleCompany,
-					companyPhotos: [
-						"https://blog.vverh.digital/wp-content/uploads/2020/06/oblojka-404.png",
-					],
-				},
-				error: action.payload,
-			};
-
-		case actions.uploadImageRequest:
-			return {
-				...state,
-			};
-
-		case actions.uploadImageSuccess:
-			return {
-				...state,
-				singleCompany: {
-					...state.singleCompany,
-					mainPhotoUrl: action.payload,
-				},
-			};
-		case actions.uploadImageFail:
-			return {
-				...state,
-				error: action.payload,
-			};
-
 		case actions.editCompanyRequest:
 			return {
 				...state,
@@ -108,25 +72,6 @@ const Company = (state = initialstate, action) => {
 				loading: false,
 			};
 		case actions.editCompanyFail:
-			return {
-				...state,
-				error: action.payload,
-			};
-
-		case actions.getCompanyVideoRequest:
-			return {
-				...state,
-				Videoloading: true,
-			};
-
-		case actions.getCompanyVideoSuccess:
-			return {
-				...state,
-				videoUrl: action.payload,
-				Videoloading: false,
-			};
-
-		case actions.getCompanyVideoFail:
 			return {
 				...state,
 				error: action.payload,
@@ -151,46 +96,6 @@ const Company = (state = initialstate, action) => {
 					...state.editedCompany,
 					tags: action.payload,
 				},
-			};
-
-		case actions.editCompanyVideoRequest:
-			return {
-				...state,
-			};
-
-		case actions.editCompanyVideoSuccess:
-			return {
-				...state,
-				singleCompany: {
-					...state.singleCompany,
-					videoUrl: action.payload,
-				},
-			};
-		case actions.editCompanyVideoFail:
-			return {
-				...state,
-				error: action.payload,
-			};
-
-		case actions.addCompanyImageRequst:
-			return {
-				...state,
-			};
-		case actions.addCompanyImageSuccess:
-			return {
-				...state,
-				singleCompany: {
-					...state.singleCompany,
-					videoUrl: action.payload,
-				},
-				companyPhotos: {
-					companyPhotos: [...state.companyPhotos, action.payload],
-				},
-			};
-		case actions.addCompanyImageFail:
-			return {
-				...state,
-				error: action.payload,
 			};
 
 		case actions.createRatingCompanyRequest:
@@ -232,11 +137,28 @@ const Company = (state = initialstate, action) => {
 		case actions.editCompanyImageSuccess:
 			return {
 				...state,
-				editedCompany:{
+				editedCompany: {
 					...state.editedCompany,
-					loadingi: false
-				}
-			}
+					loadingi: false,
+				},
+			};
+		case actions.getUserCompanyRatingRequest:
+			return {
+				...state,
+				singleCompanyRating: {
+					ratingLoad: true,
+				},
+			};
+		case actions.getUserCompanyRatingSuccess:
+			return {
+				...state,
+				singleCompanyRating: {
+					userRating: action.payload,
+					ratingLoad: false,
+				},
+			};
+		case actions.getUserCompanyRatingFail:
+			return { ...state };
 		default:
 			return state;
 	}

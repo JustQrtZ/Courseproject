@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCompanyBenefits } from "../../redux/benefits/benefitsthunks";
 import { Row, Container, Col, Button } from "react-bootstrap";
 import { createPayment } from "../../redux/benefits/benefitsthunks";
+import "./style.css"
 
 export default function CompanyBenefits() {
 	const dispatch = useDispatch();

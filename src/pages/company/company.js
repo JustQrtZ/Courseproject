@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
 	getSingleCompany,
 	createCompanyRating,
+	getUserCompanyRating,
 } from "../../redux/company/companythunks";
 import { useTranslation } from "react-i18next";
 import ReactStars from "react-rating-stars-component";
@@ -32,11 +33,17 @@ export default function Company() {
 	const user = useSelector((state) => state.account);
 	let { id } = useParams();
 	const dispatch = useDispatch();
-	const { singleCompany, loading } = useSelector((state) => state.companies);
+	const { singleCompany, loading, singleCompanyRating } = useSelector(
+		(state) => state.companies
+	);
+
 	const { t } = useTranslation();
 	useEffect(() => {
 		dispatch(getSingleCompany(id));
-	}, [dispatch, id]);
+		if (user.isLogIn === true) {
+			dispatch(getUserCompanyRating(id));
+		}
+	}, [dispatch, id, user.isLogIn]);
 
 	const RatingStartClick = useCallback(
 		(item) => {
@@ -45,11 +52,12 @@ export default function Company() {
 		[dispatch, singleCompany.id]
 	);
 
+	console.log(singleCompanyRating.userRating);
 	if (loading) {
 		return (
 			<Container className="position-absolute">
 				<Spinner animation="border" role="status">
-					<span className="sr-only"/>
+					<span className="sr-only" />
 				</Spinner>
 			</Container>
 		);
@@ -115,19 +123,20 @@ export default function Company() {
 								))}
 						</Row>
 					</Container>
-					{(user.role === "Admin" || user.id === singleCompany.owner) && user.isLogIn === true && (
-						<Container>
-							<Row>
-								<EditCompany company={singleCompany} />
-							</Row>
-							<Row>
-								<CompanyImages />
-							</Row>
-							<Row>
-								<CreateCompanyBenefit />
-							</Row>
-						</Container>
-					)}
+					{(user.role === "Admin" || user.id === singleCompany.owner) &&
+						user.isLogIn === true && (
+							<Container>
+								<Row>
+									<EditCompany company={singleCompany} />
+								</Row>
+								<Row>
+									<CompanyImages />
+								</Row>
+								<Row>
+									<CreateCompanyBenefit />
+								</Row>
+							</Container>
+						)}
 				</Col>
 				<Col className="col-md-6 col-lg-6 col-12">
 					<Container>
@@ -150,16 +159,18 @@ export default function Company() {
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
 							{singleCompany.description}
 						</ReactMarkdown>
-						{user.isLogIn === true && (
-							<ReactStars
-								size={60}
-								isHalf={false}
-								activeColor={"red"}
-								value={0}
-								onChange={RatingStartClick}
-								classNames="d-flex justify-content-center w-100"
-							/>
-						)}
+						{user.isLogIn === true &&
+							singleCompanyRating.ratingLoad ===
+								false&&(
+									<ReactStars
+										size={60}
+										isHalf={false}
+										activeColor={"red"}
+										value={singleCompanyRating.userRating}
+										onChange={RatingStartClick}
+										classNames="d-flex justify-content-center w-100"
+									/>
+								)}
 					</Tab>
 					<Tab
 						eventKey="benefits"

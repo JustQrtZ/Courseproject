@@ -39,7 +39,7 @@ export default (state = initialstate, action) => {
 			return {
 				...state,
 				userCompanies: action.payload,
-				isLogIn: false,
+				isLogIn: false
 			};
 
 		case actions.getUserCompaniesFail:
