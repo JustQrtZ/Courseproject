@@ -31,7 +31,7 @@ export default function CompanyBenefits() {
 					? benefits.map((item) => {
 							return (
 								<Row key={item.id}>
-									<Col key={item.id}>
+									<Col key={item.id} className="thing">
 										<Container key={item.id}>
 											{t("Benefit id")}
 											{" : "}
