@@ -3,10 +3,10 @@ import { actions } from "./consts";
 const initialstate = {
 	data: [],
 	allData: [],
-	singleCompany: {companyPhotos:[]},
+	singleCompany: { companyPhotos: [] },
 	loading: true,
 	Videoloading: true,
-	editedCompany: {tags: [], companyPhotos:[]},
+	editedCompany: { tags: [], companyPhotos: [],loadingi:false, mainPhotoUrl:"" },
 };
 
 const Company = (state = initialstate, action) => {
@@ -58,18 +58,20 @@ const Company = (state = initialstate, action) => {
 		case actions.getImageForCompanySuccess:
 			return {
 				...state,
-				singleCompany:{
+				singleCompany: {
 					...state.singleCompany,
-					companyPhotos: action.payload 
-				}
+					companyPhotos: action.payload,
+				},
 			};
 
 		case actions.getImageForCompanyFail:
 			return {
 				...state,
-				singleCompany:{
+				singleCompany: {
 					...state.singleCompany,
-					companyPhotos: ["https://blog.vverh.digital/wp-content/uploads/2020/06/oblojka-404.png"] 
+					companyPhotos: [
+						"https://blog.vverh.digital/wp-content/uploads/2020/06/oblojka-404.png",
+					],
 				},
 				error: action.payload,
 			};
@@ -96,14 +98,14 @@ const Company = (state = initialstate, action) => {
 		case actions.editCompanyRequest:
 			return {
 				...state,
-				loading: true
+				loading: true,
 			};
 
 		case actions.editCompanySuccess:
 			return {
 				...state,
 				singleCompany: action.payload.data[0],
-				loading:false
+				loading: false,
 			};
 		case actions.editCompanyFail:
 			return {
@@ -172,8 +174,8 @@ const Company = (state = initialstate, action) => {
 
 		case actions.addCompanyImageRequst:
 			return {
-				...state
-			}
+				...state,
+			};
 		case actions.addCompanyImageSuccess:
 			return {
 				...state,
@@ -181,42 +183,58 @@ const Company = (state = initialstate, action) => {
 					...state.singleCompany,
 					videoUrl: action.payload,
 				},
-				companyPhotos:{
-					companyPhotos:[...state.companyPhotos,action.payload]
-				}
-			}
+				companyPhotos: {
+					companyPhotos: [...state.companyPhotos, action.payload],
+				},
+			};
 		case actions.addCompanyImageFail:
 			return {
 				...state,
-				error: action.payload
-			}
-		
+				error: action.payload,
+			};
+
 		case actions.createRatingCompanyRequest:
 			return {
-				...state
-			}
+				...state,
+			};
 		case actions.createRatingCompanySuccess:
 			return {
 				...state,
-				singleCompany:{
+				singleCompany: {
 					...state.singleCompany,
-					rating: action.payload
-				}
-			}
+					rating: action.payload,
+				},
+			};
 		case actions.editCompanyImageGalety:
-			return{
+			return {
 				...state,
 				editedCompany: {
 					...state.editedCompany,
 					companyPhotos: action.payload,
 				},
-			}
+			};
 		case actions.editCompanyMainImage:
-			return{
+			return {
+				...state,
+				editedCompany: {
+					...state.editedCompany,
+					mainPhotoUrl: action.payload,
+				},
+			};
+		case actions.editCompanyImageRequest:
+			return {
+				...state,
+				editedCompany: {
+					...state.editedCompany,
+					loadingi: true,
+				},
+			};
+		case actions.editCompanyImageSuccess:
+			return {
 				...state,
 				editedCompany:{
 					...state.editedCompany,
-					mainPhotoUrl: action.payload
+					loadingi: false
 				}
 			}
 		default:

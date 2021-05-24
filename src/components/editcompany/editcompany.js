@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editCompany } from "../../redux/company/companythunks";
 import { Modal, Button, Form } from "react-bootstrap";
@@ -6,9 +6,11 @@ import { useTranslation } from "react-i18next";
 import "react-dropzone-uploader/dist/styles.css";
 import Dayjs from "dayjs";
 import Tags from "../tags/tags";
-import EditCompanyImages from "../editImages/editImages"
+import { EditCompanyImages } from "../editImages/editImages";
 
 export default function EditCompany(company) {
+	const mainPhotoChild = useRef();
+	const imageGaleyChild = useRef();
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const dispatch = useDispatch();
@@ -26,7 +28,7 @@ export default function EditCompany(company) {
 		сollectedNow: company.company.сollectedNow,
 		videoUrl: company.company.videoUrl,
 		tags: company.company.tags,
-		photos: company.company.photos
+		photos: company.company.photos,
 	});
 
 	const onChange = (field) => (event) => {
@@ -36,9 +38,12 @@ export default function EditCompany(company) {
 	const editedCompany = useSelector((state) => state.companies.editedCompany);
 
 	const editCompanyClick = useCallback(async () => {
-		console.log(state, "state")
-		dispatch(editCompany(state, editedCompany));
-		//setShow(false);
+		const mainPhoto = await mainPhotoChild.current.handleSubmit();
+		const ImageGalery = await imageGaleyChild.current.handleSubmit();
+		console.log(ImageGalery)
+		dispatch(editCompany(state, editedCompany, mainPhoto, ImageGalery));
+
+		setShow(false);
 	}, [dispatch, state, editedCompany]);
 
 	return (
@@ -52,8 +57,8 @@ export default function EditCompany(company) {
 					<Modal.Title>{t("Editcompany")}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-				<Form>
-						 <Form.Group>
+					<Form>
+						<Form.Group>
 							<Form.Label>{t("Company title")}</Form.Label>
 							<Form.Control
 								type="text"
@@ -99,7 +104,7 @@ export default function EditCompany(company) {
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>{t("Company tags")}</Form.Label>
-							<Tags target={"company"} tagsValue={state.tags}/>
+							<Tags target={"company"} tagsValue={state.tags} />
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>{t("Company videoUrl")}</Form.Label>
@@ -110,8 +115,23 @@ export default function EditCompany(company) {
 								onChange={onChange("videoUrl")}
 							/>
 						</Form.Group>
-						<EditCompanyImages imageCount={1} target={"mainPhoto"} title={"mainPhoto"} companyPhotos={[{id: 1, blob: state.mainPhotoUrl}]}/>
-						<EditCompanyImages imageCount={10} target={"companyPhoto"} title={"image gallety"} companyPhotos={state.photos.map((file)=>({id: file.id,blob: file.photoUrl}))}/>
+						<EditCompanyImages
+							imageCount={1}
+							target={"mainPhoto"}
+							title={"mainPhoto"}
+							companyPhotos={[{ id: 1, blob: state.mainPhotoUrl }]}
+							ref={mainPhotoChild}
+						/>
+						<EditCompanyImages
+							imageCount={10}
+							target={"companyPhoto"}
+							title={"image gallety"}
+							companyPhotos={state.photos.map((file) => ({
+								id: file.id,
+								blob: file.photoUrl,
+							}))}
+							ref={imageGaleyChild}
+						/>
 
 						{/* <Form.Group>
 							<Form.Label>{t("Companymainphoto")}</Form.Label>

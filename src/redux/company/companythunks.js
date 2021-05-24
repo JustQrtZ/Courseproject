@@ -126,8 +126,9 @@ export const uloadPhoto = (photo, companyId) => {
 	};
 };
 
-export const editCompany = (company, editedCompany) => {
+export const editCompany = (company, editedCompany, mainPhoto, imageGalery) => {
 	return (dispach) => {
+
 		dispach({
 			type: actions.editCompanyRequest,
 		});
@@ -142,10 +143,10 @@ export const editCompany = (company, editedCompany) => {
 					Tags: editedCompany.tags,
 					description: company.description,
 					requiredAmount: company.requiredAmount,
-					mainPhotoUrl: editedCompany.mainPhotoUrl,
+					mainPhotoUrl: mainPhoto[0],
 					EndCompanyDate: company.endCompanyDate,
 					videoUrl: company.videoUrl,
-					Photos: editedCompany.companyPhotos,
+					Photos: imageGalery,
 				},
 			},
 			false

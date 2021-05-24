@@ -28,6 +28,8 @@ export const actions = {
   createRatingCompanyRequest: "createRatingCompanyRequest",
   createRatingCompanySuccess: "createRatingCompanySuccess",
   createRatingCompanyFail: "createRatingCompanyFail",
+  editCompanyImageRequest: "editCompanyImageRequest",
   editCompanyImageGalety: "editCompanyImageGalety",
-  editCompanyMainImage: "editCompanyMainImage"
+  editCompanyMainImage: "editCompanyMainImage",
+  editCompanyImageSuccess: "editCompanyImageSuccess"
 };
