@@ -6,7 +6,7 @@ const initialstate = {
 	singleCompany: { companyPhotos: [] },
 	singleCompanyRating: {
 		userRating: 0,
-		ratingLoad: true,
+		ratingLoad: false,
 	},
 	loading: true,
 	Videoloading: true,
