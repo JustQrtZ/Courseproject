@@ -53,7 +53,7 @@ export default function Company() {
 	);
 
 	console.log(singleCompanyRating.userRating);
-	if (loading) {
+	if (loading || singleCompanyRating.ratingLoad) {
 		return (
 			<Container className="position-absolute">
 				<Spinner animation="border" role="status">
@@ -159,9 +159,7 @@ export default function Company() {
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
 							{singleCompany.description}
 						</ReactMarkdown>
-						{user.isLogIn === true &&
-							singleCompanyRating.ratingLoad ===
-								false&&(
+						{user.isLogIn === true &&(
 									<ReactStars
 										size={60}
 										isHalf={false}
