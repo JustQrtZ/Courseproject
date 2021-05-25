@@ -23,11 +23,11 @@ import { useTranslation } from "react-i18next";
 import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
 import CompanyPhotos from "../../components/companyimagegalery/companyimagegalery";
-import YoutubeEmbed from "../../components/youtubevideoforcompany/YoutubeEmbed";
 import EditCompany from "../../components/editcompany/editcompany";
 import CompanyImages from "../../components/editCompanyImages/editCompanyImages";
 import Benefits from "../../components/Benefits/benefits";
 import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
+import "./style.css";
 
 export default function Company() {
 	const user = useSelector((state) => state.account);
@@ -66,12 +66,13 @@ export default function Company() {
 	return (
 		<Container className="mt-5 mb-5">
 			<Row>
-				<Col className="col-md-6 col-lg-6 col-12">
-					<Image
-						src={singleCompany.mainPhotoUrl}
-						className="mh-50"
-						style={{ maxHeight: 350, maxWidth: 250 }}
-					/>
+				<Col className="col-md-9 col-lg-9 col-12">
+					<Container className="text-center">
+						<CompanyPhotos images={singleCompany.photos} videoUrl={singleCompany.videoUrl}/>
+					</Container>
+				</Col>
+				<Col className="col-md-3 col-lg-3 col-12">
+					<Image src={singleCompany.mainPhotoUrl} style={{height:350, width:250}} />
 					<Container>
 						{t("Company name")}
 						{" : "}
@@ -138,16 +139,6 @@ export default function Company() {
 							</Container>
 						)}
 				</Col>
-				<Col className="col-md-6 col-lg-6 col-12">
-					<Container>
-						<h1>{t("Prewiewvideo")}</h1>
-						<YoutubeEmbed videoUrl={singleCompany.videoUrl} />
-					</Container>
-					<Container>
-						<h1>{t("Image galery")}</h1>
-						<CompanyPhotos images={singleCompany.photos} />
-					</Container>
-				</Col>
 			</Row>
 			<Row className="flex-column mt-lg-4 mt-2 mt-md-3">
 				<Tabs className="justify-content-center">
@@ -159,16 +150,16 @@ export default function Company() {
 						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
 							{singleCompany.description}
 						</ReactMarkdown>
-						{user.isLogIn === true &&(
-									<ReactStars
-										size={60}
-										isHalf={false}
-										activeColor={"red"}
-										value={singleCompanyRating.userRating}
-										onChange={RatingStartClick}
-										classNames="d-flex justify-content-center w-100"
-									/>
-								)}
+						{user.isLogIn === true && (
+							<ReactStars
+								size={60}
+								isHalf={false}
+								activeColor={"red"}
+								value={singleCompanyRating.userRating}
+								onChange={RatingStartClick}
+								classNames="d-flex justify-content-center w-100"
+							/>
+						)}
 					</Tab>
 					<Tab
 						eventKey="benefits"

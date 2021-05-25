@@ -44,6 +44,7 @@ export default (state = initialstate, action) => {
 
 		case actions.getUserCompaniesFail:
 			return {
+				...state,
 				isLogIn: false,
 			};
 		case actions.getUserBenefitsRequest:
