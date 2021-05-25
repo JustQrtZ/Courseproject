@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCompanyBenefits } from "../../redux/benefits/benefitsthunks";
 import { Row, Container, Col, Button } from "react-bootstrap";
 import { createPayment } from "../../redux/benefits/benefitsthunks";
-import "./style.css"
+import "./style.css";
 
 export default function CompanyBenefits() {
 	const dispatch = useDispatch();
 	const { singleCompany } = useSelector((state) => state.companies);
 	const { benefits } = useSelector((state) => state.benefits);
-	const {isLogIn} = useSelector((state) => state.account)
+	const { isLogIn } = useSelector((state) => state.account);
 
 	const { t } = useTranslation();
 	useEffect(() => {
@@ -27,34 +27,33 @@ export default function CompanyBenefits() {
 
 	return (
 		<Container>
-			<Row>
+			<Row className="justify-content-center">
 				{benefits !== undefined
 					? benefits.map((item) => {
 							return (
-								<Row key={item.id}>
-									<Col key={item.id} className="thing">
-										<Container key={item.id}>
-											{t("Benefit id")}
-											{" : "}
-											{item.id}
-										</Container>
-										<Container key={item.name}>
+								<Col key={item.id} className="thing col-lg-5 col-md-5 col-sm-12 col-12 d-flex align-items-stretch my-3 px-1 mx-2">
+									<Col>
+										<Row key={item.name}>
 											{t("Benefit name")}
 											{" : "}
 											{item.name}
-										</Container>
-										<Container key={item.cost}>
+										</Row>
+										<Row key={item.cost}>
 											{t("Cost")}
 											{" : "}
 											{item.cost}
-										</Container>
-										{isLogIn === true && 
-												<Button onClick={() => CompanyBenefitsClick(item.id)}>
-													{t("Support")}
-												</Button>
-											}
+										</Row>
 									</Col>
-								</Row>
+
+									{isLogIn === true && (
+										<Col>
+											<Button className="w-100 h-100"
+											onClick={() => CompanyBenefitsClick(item.id)}>
+												{t("Support")}
+											</Button>
+										</Col>
+									)}
+								</Col>
 							);
 					  })
 					: "Doesn't have benefits"}

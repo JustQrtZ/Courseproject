@@ -4,7 +4,6 @@ import gfm from "remark-gfm";
 import {
 	Container,
 	Row,
-	Image,
 	ProgressBar,
 	Badge,
 	Col,
@@ -52,7 +51,6 @@ export default function Company() {
 		[dispatch, singleCompany.id]
 	);
 
-	console.log(singleCompanyRating.userRating);
 	if (loading || singleCompanyRating.ratingLoad) {
 		return (
 			<Container className="position-absolute">
@@ -65,53 +63,54 @@ export default function Company() {
 
 	return (
 		<Container className="mt-5 mb-5">
-			<Row>
-				<Col className="col-md-9 col-lg-9 col-12">
-					<Container className="text-center">
-						<CompanyPhotos images={singleCompany.photos} videoUrl={singleCompany.videoUrl}/>
+			<Row className="justify-content-between">
+				<Col className="col-md-7 col-lg-7 col-12 px-0">
+					<Container className="text-center px-0">
+						<CompanyPhotos
+							images={singleCompany.photos}
+							videoUrl={singleCompany.videoUrl}
+						/>
 					</Container>
 				</Col>
-				<Col className="col-md-3 col-lg-3 col-12">
-					<Image src={singleCompany.mainPhotoUrl} style={{height:350, width:250}} />
-					<Container>
-						{t("Company name")}
-						{" : "}
-						{singleCompany.title}
-					</Container>
-					<Container>
+				<Col className="col-md-4 col-lg-4 col-12">
+					{/* <Image src={singleCompany.mainPhotoUrl} style={{height:350, width:250}} /> */}
+					<Row>
+						<h1>{singleCompany.title}</h1>
+					</Row>
+					<Row>
 						{t("Company theme")}
 						{" : "}
 						{t(singleCompany.theme)}
-					</Container>
-					<Container>
+					</Row>
+					<Row>
 						{t("Need tocollect")}
 						{" : "}
 						{singleCompany.requiredAmount}
-					</Container>
-					<Container>
+					</Row>
+					<Row>
 						{t("Company endDate")}
 						{" : "}
 						{Dayjs(singleCompany.endCompanyDate).format("DD/MM/YYYY")}
-					</Container>
-					<Container>
+					</Row>
+					<Row>
 						{t("Collected")}
 						{" : "}
 						{singleCompany.сollectedNow}$
-					</Container>
+					</Row>
 					<ProgressBar
 						animated
 						now={singleCompany.сompletionPercentage}
-						className="w-50"
+						className="row w-100"
 					/>
-					<Container>
+					<Row>
 						<ReactStars
 							count={5}
 							edit={false}
 							value={singleCompany.rating}
 							size={25}
 						/>
-					</Container>
-					<Container className="d-flex justify-content-start bd-highlight mb-3">
+					</Row>
+					<Row className="d-flex justify-content-start bd-highlight">
 						<Row>
 							<Col>Tags: </Col>
 							{singleCompany.tags.length !== 0 &&
@@ -123,10 +122,10 @@ export default function Company() {
 									</Col>
 								))}
 						</Row>
-					</Container>
+					</Row>
 					{(user.role === "Admin" || user.id === singleCompany.owner) &&
 						user.isLogIn === true && (
-							<Container>
+							<>
 								<Row>
 									<EditCompany company={singleCompany} />
 								</Row>
@@ -136,42 +135,44 @@ export default function Company() {
 								<Row>
 									<CreateCompanyBenefit />
 								</Row>
-							</Container>
+							</>
 						)}
 				</Col>
 			</Row>
-			<Row className="flex-column mt-lg-4 mt-2 mt-md-3">
-				<Tabs className="justify-content-center">
-					<Tab
-						eventKey="description"
-						title={t("Description")}
-						className="text-center"
-					>
-						<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
-							{singleCompany.description}
-						</ReactMarkdown>
-						{user.isLogIn === true && (
-							<ReactStars
-								size={60}
-								isHalf={false}
-								activeColor={"red"}
-								value={singleCompanyRating.userRating}
-								onChange={RatingStartClick}
-								classNames="d-flex justify-content-center w-100"
-							/>
-						)}
-					</Tab>
-					<Tab
-						eventKey="benefits"
-						title={t("Benefits")}
-						className="justify-content-center"
-					>
-						<Benefits />
-					</Tab>
-					<Tab eventKey="news" title={t("News")}>
-						news
-					</Tab>
-				</Tabs>
+			<Row>
+				<Col>
+					<Tabs className="justify-content-center">
+						<Tab
+							eventKey="description"
+							title={t("Description")}
+							className="text-center"
+						>
+							<ReactMarkdown remarkPlugins={[[gfm, { singleTilde: false }]]}>
+								{singleCompany.description}
+							</ReactMarkdown>
+							{user.isLogIn === true && (
+								<ReactStars
+									size={60}
+									isHalf={false}
+									activeColor={"red"}
+									value={singleCompanyRating.userRating}
+									onChange={RatingStartClick}
+									classNames="d-flex justify-content-center w-100"
+								/>
+							)}
+						</Tab>
+						<Tab
+							eventKey="benefits"
+							title={t("Benefits")}
+							className="justify-content-center"
+						>
+							<Benefits />
+						</Tab>
+						<Tab eventKey="news" title={t("News")}>
+							news
+						</Tab>
+					</Tabs>
+				</Col>
 			</Row>
 		</Container>
 	);

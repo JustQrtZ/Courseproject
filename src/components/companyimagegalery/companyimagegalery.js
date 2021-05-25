@@ -45,7 +45,7 @@ export default function CompanyPhotos({ images, videoUrl }) {
 	};
 
 	return (
-		<Carousel renderItem={customRenderItem} renderThumbs={customRenderThumb}>
+		<Carousel showArrows={false} renderItem={customRenderItem} renderThumbs={customRenderThumb}>
 			<YoutubeSlide
 				key="youtube-1"
 				url={"https://www.youtube.com/embed/" + videoUrl.substring(17).trim()}
