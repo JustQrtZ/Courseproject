@@ -22,7 +22,7 @@ export default function EditCompany({company, target, title}) {
 		id: company?.id ?? null,
 		title: company?.title ?? "",
 		description: company?.description ?? "",
-		mainPhotoUrl: company?.mainPhotoUrl ?? "",
+		mainPhotoUrl: company?.mainPhotoUrl ?? "Education",
 		theme: company?.theme ?? "",
 		requiredAmount: company?.requiredAmount ?? "",
 		endCompanyDate:
@@ -55,7 +55,7 @@ export default function EditCompany({company, target, title}) {
 
 	return (
 		<>
-			<Button variant="primary" onClick={handleShow}>
+			<Button variant="primary" onClick={handleShow} className="w-100">
 				{t(title)}
 			</Button>
 

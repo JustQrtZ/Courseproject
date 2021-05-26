@@ -26,7 +26,6 @@ export default function CompanyBenefits() {
 	}, [dispatch]);
 
 	return (
-		<Container className="container-fluid">
 			<Row className="d-flex flex-wrap">
 				{profile.userCompanies !== undefined
 					? profile.userCompanies.map((item) => {
@@ -93,6 +92,5 @@ export default function CompanyBenefits() {
 					  })
 					: "Doesn't have benefits"}
 			</Row>
-		</Container>
 	);
 }
