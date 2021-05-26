@@ -12,10 +12,8 @@ import {
 	ProgressBar,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
 import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
-import gfm from "remark-gfm";
 
 export default function CompanyBenefits() {
 	const dispatch = useDispatch();
@@ -50,12 +48,6 @@ export default function CompanyBenefits() {
 											</Card.Header>
 											<Card.Body className="mb-0 w-100">
 												<Card.Title className="w-100">{item.title}</Card.Title>
-												<ReactMarkdown
-													remarkPlugins={[[gfm, { singleTilde: false }]]}
-													className="my-0 px-0"
-												>
-													{item.description}
-												</ReactMarkdown>
 												{item.tags.map((i) => (
 													<Badge key={i} variant="secondary" className="mr-1">
 														{i}

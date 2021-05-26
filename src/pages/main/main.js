@@ -14,8 +14,6 @@ import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import gfm from "remark-gfm";
 import Tags from "../../components/tags/tags"
 
 export default function Main() {
@@ -50,12 +48,6 @@ export default function Main() {
 								<Card.Header className="w-100">{t(item.theme)}</Card.Header>
 								<Card.Body className="mb-0 w-100">
 									<Card.Title className="w-100">{item.title}</Card.Title>
-									<ReactMarkdown
-										remarkPlugins={[[gfm, { singleTilde: false }]]}
-										className="my-0 px-0"
-									>
-										{item.description}
-									</ReactMarkdown>
 									{item.tags.map((i) => (
 										<Badge key={i} variant="secondary" className="mr-1">
 											{i}
