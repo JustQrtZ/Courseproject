@@ -11,13 +11,6 @@ const Profile = () => {
 	const {isLogIn} = useSelector((state) => state.account)
 	const { t } = useTranslation();
 
-	useEffect(()=>{
-		if(isLogIn===false)
-		{
-			window.location.href = "../";
-		}
-	})
-
 	return (
 		<Container>
 			<h3>{t("Profile")}</h3>
