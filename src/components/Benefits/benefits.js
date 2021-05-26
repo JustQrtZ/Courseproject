@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCompanyBenefits } from "../../redux/benefits/benefitsthunks";
 import { Row, Container, Col, Button } from "react-bootstrap";
 import { createPayment } from "../../redux/benefits/benefitsthunks";
-import EditBenefit from "../CreateCompanyBenefit/createCompanyBenefit"
+import EditBenefit from "../CreateCompanyBenefit/createCompanyBenefit";
 import "./style.css";
 
 export default function CompanyBenefits() {
@@ -12,6 +12,7 @@ export default function CompanyBenefits() {
 	const { singleCompany } = useSelector((state) => state.companies);
 	const { benefits } = useSelector((state) => state.benefits);
 	const { isLogIn } = useSelector((state) => state.account);
+	const user = useSelector((state) => state.account);
 
 	const { t } = useTranslation();
 	useEffect(() => {
@@ -32,10 +33,13 @@ export default function CompanyBenefits() {
 				{benefits !== undefined
 					? benefits.map((item) => {
 							return (
-								<Col key={item.id} className="thing col-lg-5 col-md-5 col-sm-12 col-12 d-flex align-items-stretch my-3 px-1 mx-2">
+								<Col
+									key={item.id}
+									className="thing col-lg-5 col-md-5 col-sm-12 col-12 d-flex align-items-stretch my-3 px-1 mx-2"
+								>
 									<Col>
 										<Row key={item.name}>
-											{t("Benefit name")}
+											{t("Name")}
 											{" : "}
 											{item.name}
 										</Row>
@@ -47,15 +51,25 @@ export default function CompanyBenefits() {
 									</Col>
 									{isLogIn === true && (
 										<Col>
-											<Button className="w-100 h-100"
-											onClick={() => CompanyBenefitsClick(item.id)}>
+											<Button
+												className="w-100 h-100"
+												onClick={() => CompanyBenefitsClick(item.id)}
+											>
 												{t("Support")}
 											</Button>
 										</Col>
 									)}
-									<Col>
-										<EditBenefit target="editBenefit" benefit={item} company={singleCompany} title="Edit benefit"/>
-									</Col>
+									{(user.role === "Admin" || user.id === singleCompany.owner) &&
+										user.isLogIn === true && (
+											<Col>
+												<EditBenefit
+													target="editBenefit"
+													benefit={item}
+													company={singleCompany}
+													title="Edit benefit"
+												/>
+											</Col>
+										)}
 								</Col>
 							);
 					  })
