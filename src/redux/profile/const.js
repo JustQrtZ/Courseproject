@@ -10,5 +10,8 @@ export const actions = {
 	getUserBenefitsFail: "getUserBenefitsFail",
 	changeLanguageRequest: "changeLanguageRequest",
 	changeLanguageSuccess: "changeLanguageSuccess",
-	changeLanguageFail: "changeLanguageFail"
+	changeLanguageFail: "changeLanguageFail",
+	createCompanyRequest: "createCompanyRequest",
+  createCompanySuccess: "createCompanySuccess",
+  createCompanyFail: "createCompanyFail",
 };

@@ -33,11 +33,6 @@ export default function UserInfo() {
 	return (
 		<Container>
 			<Row>
-				{t("User id")}
-				{" : "}
-				{profileInfo.id}
-			</Row>
-			<Row>
 				{t("Username")}
 				{" : "}
 				{profileInfo.username}

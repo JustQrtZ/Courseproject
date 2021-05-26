@@ -5,6 +5,7 @@ import {
 	GET_USER_PROFILE,
 	GET_USER_COMPANIES,
 	CHANGE_LANGUAGE,
+	CREATE_COMPANY,
 } from "../../const/api";
 
 export const getUserProfile = () => {
@@ -101,6 +102,42 @@ export const changeLanguage = (lng) => {
 			})
 			.catch(() => {
 				dispach({ type: actions.changeLanguageFail });
+			});
+	};
+};
+
+export const createCompany = (company, editedCompany, mainPhoto, imageGalery) => {
+	return (dispach) => {
+
+		dispach({
+			type: actions.createCompanyRequest,
+		});
+		request(
+			{
+				url: CREATE_COMPANY,
+				method: "POST",
+				data: {
+					title: company.title,
+					theme: company.theme,
+					Tags: editedCompany.tags,
+					description: company.description,
+					requiredAmount: company.requiredAmount,
+					mainPhotoUrl: mainPhoto[0],
+					EndCompanyDate: company.endCompanyDate,
+					videoUrl: company.videoUrl,
+					Photos: imageGalery,
+				},
+			},
+			false
+		)
+			.then((data) => {
+				dispach({
+					type: actions.createCompanySuccess,
+					payload: data,
+				});
+			})
+			.catch(() => {
+				dispach({ type: actions.createCompanyFail });
 			});
 	};
 };

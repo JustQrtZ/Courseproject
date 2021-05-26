@@ -23,7 +23,6 @@ import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
 import CompanyPhotos from "../../components/companyimagegalery/companyimagegalery";
 import EditCompany from "../../components/editcompany/editcompany";
-import CompanyImages from "../../components/editCompanyImages/editCompanyImages";
 import Benefits from "../../components/Benefits/benefits";
 import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
 import "./style.css";
@@ -127,10 +126,7 @@ export default function Company() {
 						user.isLogIn === true && (
 							<>
 								<Row>
-									<EditCompany company={singleCompany} />
-								</Row>
-								<Row>
-									<CompanyImages />
+									<EditCompany company={singleCompany} title="Edit company"/>
 								</Row>
 								<Row>
 									<CreateCompanyBenefit />
@@ -151,14 +147,17 @@ export default function Company() {
 								{singleCompany.description}
 							</ReactMarkdown>
 							{user.isLogIn === true && (
-								<ReactStars
-									size={60}
-									isHalf={false}
-									activeColor={"red"}
-									value={singleCompanyRating.userRating}
-									onChange={RatingStartClick}
-									classNames="d-flex justify-content-center w-100"
-								/>
+								<>
+									<h2>You can rate the company:</h2>
+									<ReactStars
+										size={60}
+										isHalf={false}
+										activeColor={"red"}
+										value={singleCompanyRating.userRating}
+										onChange={RatingStartClick}
+										classNames="d-flex justify-content-center w-100"
+									/>
+								</>
 							)}
 						</Tab>
 						<Tab

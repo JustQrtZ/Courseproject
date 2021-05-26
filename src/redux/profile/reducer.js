@@ -83,6 +83,26 @@ export default (state = initialstate, action) => {
 				isLogIn: false,
 			};
 
+		case actions.createCompanyRequest:
+			{
+				return {
+					...state
+				}
+			}
+		
+		case actions.createCompanySuccess:
+			{
+				return{
+					...state,
+					userCompanies: action.payload.data
+				}
+			}
+		case actions.createCompanyFail:
+			{
+				return{
+					...state
+				}
+			}
 		default:
 			return state;
 	}

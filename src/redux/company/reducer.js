@@ -158,7 +158,13 @@ const Company = (state = initialstate, action) => {
 				},
 			};
 		case actions.getUserCompanyRatingFail:
-			return { ...state };
+			return {
+				...state,
+				singleCompanyRating: {
+					userRating: 0,
+					loading: false,
+				},
+			};
 		default:
 			return state;
 	}

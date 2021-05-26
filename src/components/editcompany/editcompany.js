@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editCompany } from "../../redux/company/companythunks";
+import { createCompany } from "../../redux/profile/profilethunks"
 import { Modal, Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import "react-dropzone-uploader/dist/styles.css";
@@ -8,7 +9,7 @@ import Dayjs from "dayjs";
 import Tags from "../tags/tags";
 import { EditCompanyImages } from "../editImages/editImages";
 
-export default function EditCompany(company) {
+export default function EditCompany({company, target, title}) {
 	const mainPhotoChild = useRef();
 	const imageGaleyChild = useRef();
 	const [show, setShow] = useState(false);
@@ -18,19 +19,21 @@ export default function EditCompany(company) {
 	const { t } = useTranslation();
 
 	const [state, setState] = useState({
-		id: company.company.id,
-		title: company.company.title,
-		description: company.company.description,
-		mainPhotoUrl: company.company.mainPhotoUrl,
-		theme: company.company.theme,
-		requiredAmount: company.company.requiredAmount,
-		endCompanyDate: Dayjs(company.company.endCompanyDate).format("YYYY-MM-DD"),
-		сollectedNow: company.company.сollectedNow,
-		videoUrl: company.company.videoUrl,
-		tags: company.company.tags,
-		photos: company.company.photos,
+		id: company?.id ?? null,
+		title: company?.title ?? "",
+		description: company?.description ?? "",
+		mainPhotoUrl: company?.mainPhotoUrl ?? "",
+		theme: company?.theme ?? "",
+		requiredAmount: company?.requiredAmount ?? "",
+		endCompanyDate:
+			Dayjs(company?.endCompanyDate).format("YYYY-MM-DD") ?? null,
+		сollectedNow: company?.сollectedNow ?? "",
+		videoUrl: company?.videoUrl ?? "",
+		tags: company?.tags ?? [],
+		photos: company?.photos ?? [],
 	});
 
+	console.log(state);
 	const onChange = (field) => (event) => {
 		setState((state) => ({ ...state, [field]: event.target.value }));
 	};
@@ -40,21 +43,25 @@ export default function EditCompany(company) {
 	const editCompanyClick = useCallback(async () => {
 		const mainPhoto = await mainPhotoChild.current.handleSubmit();
 		const ImageGalery = await imageGaleyChild.current.handleSubmit();
-		console.log(ImageGalery)
-		dispatch(editCompany(state, editedCompany, mainPhoto, ImageGalery));
+
+		if (target === "createCompany") {
+			dispatch(createCompany(state, editedCompany, mainPhoto, ImageGalery))
+		} else {
+			dispatch(editCompany(state, editedCompany, mainPhoto, ImageGalery));
+		}
 
 		setShow(false);
-	}, [dispatch, state, editedCompany]);
+	}, [dispatch, state, editedCompany, target]);
 
 	return (
 		<>
 			<Button variant="primary" onClick={handleShow}>
-				{t("Editcompany")}
+				{t(title)}
 			</Button>
 
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>{t("Editcompany")}</Modal.Title>
+					<Modal.Title>{t(title)}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Form>
@@ -68,7 +75,7 @@ export default function EditCompany(company) {
 							/>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label>Company description</Form.Label>
+							<Form.Label>{t("Company description")}</Form.Label>
 							<Form.Control
 								type="text"
 								placeholder={t("Enter description")}
@@ -85,7 +92,7 @@ export default function EditCompany(company) {
 							</Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label>Required amount</Form.Label>
+							<Form.Label>{t("Required amount")}</Form.Label>
 							<Form.Control
 								type="number"
 								placeholder={t("Entertherequiredamount")}
@@ -119,7 +126,7 @@ export default function EditCompany(company) {
 							imageCount={1}
 							target={"mainPhoto"}
 							title={"mainPhoto"}
-							companyPhotos={[{ id: 1, blob: state.mainPhotoUrl }]}
+							companyPhotos={target!=="createCompany"?[{ id: 1, blob: state.mainPhotoUrl }]:[]}
 							ref={mainPhotoChild}
 						/>
 						<EditCompanyImages
@@ -132,27 +139,6 @@ export default function EditCompany(company) {
 							}))}
 							ref={imageGaleyChild}
 						/>
-
-						{/* <Form.Group>
-							<Form.Label>{t("Companymainphoto")}</Form.Label>
-							<Dropzone
-								getUploadParams={getUploadParams}
-								onChangeStatus={handleChangeStatus}
-								onSubmit={handleSubmit}
-								maxFiles={1}
-								inputContent={t("Drop1Files")}
-								inputWithFilesContent={(files) => `${1 - files.length} more`}
-								accept="image/*"
-								styles={{
-									dropzoneReject: {
-										borderColor: "red",
-										backgroundColor: "#DAA",
-									},
-									inputLabel: (files, extra) =>
-										extra.reject ? { color: "red" } : {},
-								}}
-							/>
-						</Form.Group> */}
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
