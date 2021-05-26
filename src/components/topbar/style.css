@@ -1,0 +1,9 @@
+.switchLangBtn {
+  margin-left: 5px !important;
+}
+@media (max-width: 991px) {
+  .switchLangBtn {
+    width: 100% !important;
+    margin-left: 0px !important;
+  }
+}

@@ -11,4 +11,8 @@ export const actions = {
 	editBenefitRequest: "editBenefitRequest",
 	editBenefitSuccess: "editBenefitSuccess",
 	editBenefitFail: "editBenefitFail",
+	deleteBenefitRequest: "deleteBenefitRequest",
+	deleteBenefitSuccess: "deleteBenefitSuccess",
+	deleteBenefitFail: "deleteBenefitFail",
+
 };

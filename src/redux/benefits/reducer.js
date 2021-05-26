@@ -2,6 +2,7 @@ import { actions } from "./const";
 
 const initialstate = {
 	benefits: [],
+	error: "",
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -14,6 +15,7 @@ export default (state = initialstate, action) => {
 
 		case actions.getAllCompanyBenefitsSuccess:
 			return {
+				...state,
 				benefits: action.payload,
 			};
 
@@ -60,8 +62,31 @@ export default (state = initialstate, action) => {
 		case actions.editBenefitFail: {
 			return {
 				...state,
+				error: action.payload.data,
 			};
 		}
+
+		case actions.deleteBenefitRequest: {
+			return {
+				...state,
+				error: "",
+			};
+		}
+
+		case actions.deleteBenefitSuccess: {
+			return {
+				...state,
+				benefits: state.benefits.filter(i => action.payload !== i.id),
+			}
+		}
+		
+		case actions.deleteBenefitFail: {
+			return {
+				...state,
+				error: action.payload
+			}
+		}
+
 		default:
 			return state;
 	}

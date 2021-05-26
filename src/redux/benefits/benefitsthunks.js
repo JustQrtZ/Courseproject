@@ -5,6 +5,7 @@ import {
 	CREATE_PAYMENT,
 	CREATE_BENEFIT,
 	EDIT_BENEFIT,
+	DELETE_BENEFIT,
 } from "../../const/api";
 
 export const getCompanyBenefits = (companyid) => {
@@ -115,6 +116,38 @@ export const editBenefit = (benefit) => {
 			})
 			.catch(() => {
 				dispach({ type: actions.editBenefitFail });
+			});
+	};
+};
+
+export const deleteBenefit = (benefit, company) => {
+	return (dispach) => {
+		console.log(benefit);
+		dispach({
+			type: actions.deleteBenefitRequest,
+		});
+		request(
+			{
+				url: DELETE_BENEFIT,
+				method: "POST",
+				data: {
+					id: benefit,
+					CrowdfundingCompany: company,
+				},
+			},
+			false
+		)
+			.then(() => {
+				dispach({
+					type: actions.deleteBenefitSuccess,
+					payload: benefit,
+				});
+			})
+			.catch((data) => {
+				dispach({
+					type: actions.deleteBenefitFail,
+					payload: data.response.data.error,
+				});
 			});
 	};
 };

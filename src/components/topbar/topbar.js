@@ -3,6 +3,7 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { path } from "../../routers/path";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import "./style.css"
 
 const Topbar = () => {
 	const { t, i18n } = useTranslation();

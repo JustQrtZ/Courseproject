@@ -3,14 +3,14 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { getCompanyBenefits } from "../../redux/benefits/benefitsthunks";
 import { Row, Container, Col, Button } from "react-bootstrap";
-import { createPayment } from "../../redux/benefits/benefitsthunks";
+import { createPayment, deleteBenefit } from "../../redux/benefits/benefitsthunks";
 import EditBenefit from "../CreateCompanyBenefit/createCompanyBenefit";
 import "./style.css";
 
 export default function CompanyBenefits() {
 	const dispatch = useDispatch();
 	const { singleCompany } = useSelector((state) => state.companies);
-	const { benefits } = useSelector((state) => state.benefits);
+	const { benefits, error } = useSelector((state) => state.benefits);
 	const { isLogIn } = useSelector((state) => state.account);
 	const user = useSelector((state) => state.account);
 
@@ -26,6 +26,18 @@ export default function CompanyBenefits() {
 		},
 		[dispatch, singleCompany.id]
 	);
+
+	const DeleteBenefitClick = useCallback((item)=>
+	{
+		dispatch(deleteBenefit(item.id, singleCompany.id));
+	},[dispatch,singleCompany.id])
+
+	useEffect(()=>{
+		if(error!=="")
+		{
+			alert(error)
+		}
+	})
 
 	return (
 		<Container>
@@ -61,14 +73,21 @@ export default function CompanyBenefits() {
 									)}
 									{(user.role === "Admin" || user.id === singleCompany.owner) &&
 										user.isLogIn === true && (
-											<Col>
-												<EditBenefit
-													target="editBenefit"
-													benefit={item}
-													company={singleCompany}
-													title="Edit benefit"
-												/>
-											</Col>
+											<>
+												<Col>
+													<Row>
+														<EditBenefit
+															target="editBenefit"
+															benefit={item}
+															company={singleCompany}
+															title="Edit benefit"
+														/>
+													</Row>
+													<Row>
+														<Button className="w-100 h-100 mt-1" onClick={() => DeleteBenefitClick(item)}>Delete</Button>
+													</Row>
+												</Col>
+											</>
 										)}
 								</Col>
 							);

@@ -31,6 +31,7 @@ export default function CreateCompanyBenefit({ target, benefit, company, title }
 		setShow(false);
 	}, [dispatch, state, target]);
 
+
 	return (
 		<>
 			<Button variant="primary" onClick={handleShow} className="w-100 h-100">
