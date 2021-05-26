@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Container, Row, Col } from "react-bootstrap";
-import {useSelector} from "react-redux"
 import UserInfo from "../../components/userInfo/userinfo";
 import UserBenefits from "../../components/userbenefits/userbenefits";
 import UserCompanies from "../../components/userCompanies/userCompanies";
