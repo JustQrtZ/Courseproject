@@ -4,6 +4,7 @@ import {
 	GET_ALL_COMPANY_BENEFITS,
 	CREATE_PAYMENT,
 	CREATE_BENEFIT,
+	EDIT_BENEFIT,
 } from "../../const/api";
 
 export const getCompanyBenefits = (companyid) => {
@@ -84,6 +85,36 @@ export const createBenefit = (name, cost, company) => {
 			})
 			.catch(() => {
 				dispach({ type: actions.createPaymentFail });
+			});
+	};
+};
+
+export const editBenefit = (benefit) => {
+	return (dispach) => {
+		dispach({
+			type: actions.editBenefitRequest,
+		});
+		request(
+			{
+				url: EDIT_BENEFIT,
+				method: "PATCH",
+				data: {
+					Id: benefit.id,
+					Cost: benefit.Cost,
+					Name: benefit.Name,
+					CrowdfundingCompany: benefit.Company,
+				},
+			},
+			false
+		)
+			.then((data) => {
+				dispach({
+					type: actions.editBenefitSuccess,
+					payload: data,
+				});
+			})
+			.catch(() => {
+				dispach({ type: actions.editBenefitFail });
 			});
 	};
 };

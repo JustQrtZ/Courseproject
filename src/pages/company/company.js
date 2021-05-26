@@ -21,7 +21,7 @@ import {
 import { useTranslation } from "react-i18next";
 import ReactStars from "react-rating-stars-component";
 import Dayjs from "dayjs";
-import CompanyPhotos from "../../components/companyimagegalery/companyimagegalery";
+import CompanyGalery from "../../components/companyGalery/companyGalery";
 import EditCompany from "../../components/editcompany/editcompany";
 import Benefits from "../../components/Benefits/benefits";
 import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
@@ -65,7 +65,7 @@ export default function Company() {
 			<Row className="justify-content-between">
 				<Col className="col-md-7 col-lg-7 col-12 px-0">
 					<Container className="text-center px-0">
-						<CompanyPhotos
+						<CompanyGalery
 							images={singleCompany.photos}
 							videoUrl={singleCompany.videoUrl}
 						/>
@@ -129,7 +129,7 @@ export default function Company() {
 									<EditCompany company={singleCompany} title="Edit company"/>
 								</Row>
 								<Row>
-									<CreateCompanyBenefit />
+									<CreateCompanyBenefit company={singleCompany} title="Create benefit"/>
 								</Row>
 							</>
 						)}

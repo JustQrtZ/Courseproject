@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editCompany } from "../../redux/company/companythunks";
-import { createCompany } from "../../redux/profile/profilethunks"
+import { createCompany } from "../../redux/profile/profilethunks";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import "react-dropzone-uploader/dist/styles.css";
@@ -9,7 +9,7 @@ import Dayjs from "dayjs";
 import Tags from "../tags/tags";
 import { EditCompanyImages } from "../editImages/editImages";
 
-export default function EditCompany({company, target, title}) {
+export default function EditCompany({ company, target, title }) {
 	const mainPhotoChild = useRef();
 	const imageGaleyChild = useRef();
 	const [show, setShow] = useState(false);
@@ -25,8 +25,7 @@ export default function EditCompany({company, target, title}) {
 		mainPhotoUrl: company?.mainPhotoUrl ?? "Education",
 		theme: company?.theme ?? "",
 		requiredAmount: company?.requiredAmount ?? "",
-		endCompanyDate:
-			Dayjs(company?.endCompanyDate).format("YYYY-MM-DD") ?? null,
+		endCompanyDate: Dayjs(company?.endCompanyDate).format("YYYY-MM-DD") ?? null,
 		сollectedNow: company?.сollectedNow ?? "",
 		videoUrl: company?.videoUrl ?? "",
 		tags: company?.tags ?? [],
@@ -45,7 +44,7 @@ export default function EditCompany({company, target, title}) {
 		const ImageGalery = await imageGaleyChild.current.handleSubmit();
 
 		if (target === "createCompany") {
-			dispatch(createCompany(state, editedCompany, mainPhoto, ImageGalery))
+			dispatch(createCompany(state, editedCompany, mainPhoto, ImageGalery));
 		} else {
 			dispatch(editCompany(state, editedCompany, mainPhoto, ImageGalery));
 		}
@@ -126,7 +125,11 @@ export default function EditCompany({company, target, title}) {
 							imageCount={1}
 							target={"mainPhoto"}
 							title={"mainPhoto"}
-							companyPhotos={target!=="createCompany"?[{ id: 1, blob: state.mainPhotoUrl }]:[]}
+							companyPhotos={
+								target !== "createCompany"
+									? [{ id: 1, blob: state.mainPhotoUrl }]
+									: []
+							}
 							ref={mainPhotoChild}
 						/>
 						<EditCompanyImages

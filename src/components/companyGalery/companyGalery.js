@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import ReactPlayer from "react-player";
 
-export default function CompanyPhotos({ images, videoUrl }) {
+export default function companyGalery({ images, videoUrl }) {
 	const YoutubeSlide = ({ url }) => (
 		<ReactPlayer width="100%" url={url} playing={false} />
 	);

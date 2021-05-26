@@ -1,16 +1,21 @@
 import React, { useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { createBenefit } from "../../redux/benefits/benefitsthunks";
+import { useDispatch } from "react-redux";
+import { createBenefit, editBenefit } from "../../redux/benefits/benefitsthunks";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 
-export default function CreateCompanyBenefit() {
+export default function CreateCompanyBenefit({ target, benefit, company, title }) {
 	const dispatch = useDispatch();
-	const [state, setState] = useState({ Name: "", Cost: "" });
+	const [state, setState] = useState({
+		id: benefit?.id ?? "",
+		Name: benefit?.name ?? "",
+		Cost: benefit?.cost ?? "",
+		Company: company?.id ?? ""
+	});
+
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
 	const { t } = useTranslation();
-	const { singleCompany } = useSelector((state) => state.companies);
 	const handleShow = () => setShow(true);
 
 	const onChange = (field) => (event) => {
@@ -18,14 +23,18 @@ export default function CreateCompanyBenefit() {
 	};
 
 	const CompanyBenefitsClick = useCallback(() => {
-		dispatch(createBenefit(state.Name,state.Cost,singleCompany.id));
+		if (target === "editBenefit") {
+			dispatch(editBenefit(state))
+		} else {
+			dispatch(createBenefit(state.Name, state.Cost, state.Company));
+		}
 		setShow(false);
-	}, [dispatch, state, singleCompany.id]);
+	}, [dispatch, state, target]);
 
 	return (
 		<>
-			<Button variant="primary" onClick={handleShow}>
-				{t("Addcompanybenefit")}
+			<Button variant="primary" onClick={handleShow} className="w-100 h-100">
+				{t(title)}
 			</Button>
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>

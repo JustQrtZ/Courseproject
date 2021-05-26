@@ -8,4 +8,7 @@ export const actions = {
 	createBenefitRequest: "createBenefitRequest",
 	createBenefitSuccess: "createBenefitSuccess",
 	createBenefitFail: "createBenefitFail",
+	editBenefitRequest: "editBenefitRequest",
+	editBenefitSuccess: "editBenefitSuccess",
+	editBenefitFail: "editBenefitFail",
 };

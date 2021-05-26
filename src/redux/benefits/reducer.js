@@ -45,6 +45,23 @@ export default (state = initialstate, action) => {
 				benefits: [...state.benefits, action.payload],
 			};
 
+		case actions.editBenefitRequest: {
+			return {
+				...state,
+			};
+		}
+
+		case actions.editBenefitSuccess: {
+			return {
+				...state,
+				benefits: action.payload.data,
+			};
+		}
+		case actions.editBenefitFail: {
+			return {
+				...state,
+			};
+		}
 		default:
 			return state;
 	}

@@ -19,6 +19,7 @@ const Topbar = () => {
 	const LogOut = () => {
 		localStorage.clear();
 		window.location.reload();
+		window.location.href = "../";
 	};
 
 	const isLogin = useSelector((state) => state.account.isLogIn);

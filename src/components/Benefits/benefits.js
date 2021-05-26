@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCompanyBenefits } from "../../redux/benefits/benefitsthunks";
 import { Row, Container, Col, Button } from "react-bootstrap";
 import { createPayment } from "../../redux/benefits/benefitsthunks";
+import EditBenefit from "../CreateCompanyBenefit/createCompanyBenefit"
 import "./style.css";
 
 export default function CompanyBenefits() {
@@ -44,7 +45,6 @@ export default function CompanyBenefits() {
 											{item.cost}
 										</Row>
 									</Col>
-
 									{isLogIn === true && (
 										<Col>
 											<Button className="w-100 h-100"
@@ -53,6 +53,9 @@ export default function CompanyBenefits() {
 											</Button>
 										</Col>
 									)}
+									<Col>
+										<EditBenefit target="editBenefit" benefit={item} company={singleCompany} title="Edit benefit"/>
+									</Col>
 								</Col>
 							);
 					  })

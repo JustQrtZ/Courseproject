@@ -27,5 +27,6 @@ export const EDIT_COMPANY_MAIN_IMAGE = `company/editCompanyMainImage`;
 export const GET_ALL_COMPANY_BENEFITS = `CompanyBenefits/getBenefits`;
 export const CREATE_PAYMENT = `company/createPayment`;
 export const CREATE_BENEFIT = `CompanyBenefits/createBenefitForCompany`
+export const EDIT_BENEFIT = `CompanyBenefits/editCompanyBenefit`
 export const SET_COMPANY_RATING = `company/createRatingCompany`
 export const GET_USER_COMPANY_RATING = `company/getUserCompanyRating`
