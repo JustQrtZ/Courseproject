@@ -8,7 +8,6 @@ import UserCompanies from "../../components/userCompanies/userCompanies";
 import CreateCompany from "../../components/editcompany/editcompany";
 
 const Profile = () => {
-	const {isLogIn} = useSelector((state) => state.account)
 	const { t } = useTranslation();
 
 	return (
