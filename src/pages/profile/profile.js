@@ -11,9 +11,10 @@ const Profile = () => {
 
 	return (
 		<Container>
-			<h3>{t("Profile")}</h3>
 			<Row>
-				<UserInfo />
+				<Container>
+					<UserInfo />
+				</Container>
 				<Col>
 					<UserBenefits />
 				</Col>

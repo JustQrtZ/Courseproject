@@ -25,6 +25,7 @@ import CompanyGalery from "../../components/companyGalery/companyGalery";
 import EditCompany from "../../components/editcompany/editcompany";
 import Benefits from "../../components/Benefits/benefits";
 import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
+import {Comments} from "../../components/comments/comments"
 import "./style.css";
 
 export default function Company() {
@@ -169,6 +170,9 @@ export default function Company() {
 						</Tab>
 						<Tab eventKey="news" title={t("News")}>
 							news
+						</Tab>
+						<Tab eventKey="comments" title={t("Comments")}>
+							<Comments token = {localStorage.getItem("accessToken")} companyId={singleCompany.id}/>
 						</Tab>
 					</Tabs>
 				</Col>
