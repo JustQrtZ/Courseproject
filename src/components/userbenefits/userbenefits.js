@@ -20,7 +20,7 @@ export default function UserBenefits() {
 			{userBenefits.benefits !== undefined
 				? userBenefits.benefits.map((item) => {
 						return (
-							<Container className="thing my-2 ml-0">
+							<Container className="thing my-2 ml-0 w-100">
 								<Col key={item.id}>
 									<Row>
 										{t("Benefit name")}

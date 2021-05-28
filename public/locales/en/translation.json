@@ -63,5 +63,6 @@
   "Companybenefitname": "Company benefit name",
   "Entercompanybenefitname": "Enter company benefit name",
   "Companybenefitcost": "Company benefit cost",
-  "Entercompanybenefitcost": "Enter company benefit cost"
+  "Entercompanybenefitcost": "Enter company benefit cost",
+	"Comments": "Comments"
 }

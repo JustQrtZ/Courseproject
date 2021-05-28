@@ -63,5 +63,6 @@
   "Companybenefitname": "Название бенефита компании",
   "Entercompanybenefitname": "Введите название для бенефита",
   "Companybenefitcost": "Стоимость бенефита компании",
-  "Entercompanybenefitcost": "Введите стоимость бенефита компании"
+  "Entercompanybenefitcost": "Введите стоимость бенефита компании",
+  "Comments": "Комментарии"
 }

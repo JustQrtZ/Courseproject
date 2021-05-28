@@ -22,7 +22,7 @@ export default function companyGalery({ images, videoUrl }) {
 		const arr1 = children.map((item) => {
 			if (item.key === "youtube-1") {
 				const videoId = getVideoId(item.props.url);
-				return <img src={getVideoThumb(videoId)} alt="ti nakosyachol" />;
+				return <img src={getVideoThumb(videoId)} alt="ti nakosyachol" key="youtube-1-t" />;
 			}
 			return null;
 		});
