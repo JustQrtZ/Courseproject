@@ -16,7 +16,7 @@ export default function UserBenefits() {
 
 	return (
 		<>
-			<h1>Ваши бенефиты</h1>
+			<h1>{t("Your benefits")}</h1>
 			{userBenefits.benefits !== undefined
 				? userBenefits.benefits.map((item) => {
 						return (
@@ -36,7 +36,8 @@ export default function UserBenefits() {
 							</Container>
 						);
 				  })
-				: "Doesn't have benefits"}
+				: t("Doesn't have benefits")
+				}
 		</>
 	);
 }

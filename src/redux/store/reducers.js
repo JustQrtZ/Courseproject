@@ -5,6 +5,7 @@ import companies from "../company/reducer"
 import profile from "../profile/reducer"
 import tags from "../tags/reducer"
 import benefits from "../benefits/reducer"
+import news from "../news/reducer"
 
 export  const reducers = combineReducers({
 	account,
@@ -12,5 +13,6 @@ export  const reducers = combineReducers({
   companies,
   profile,
   tags,
-  benefits
+  benefits,
+  news
 });

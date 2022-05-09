@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 
 export default function companyGalery({ images, videoUrl }) {
 	const YoutubeSlide = ({ url }) => (
-		<ReactPlayer width="100%" url={url} playing={false} />
+		<ReactPlayer width="100%" url={url} playing={false} key="0"/>
 	);
 
 	const getVideoThumb = (videoId) =>
@@ -19,13 +19,13 @@ export default function companyGalery({ images, videoUrl }) {
 		url.substr("https://www.youtube.com/embed/".length, url.length);
 
 	const customRenderThumb = (children) => {
-		const arr1 = children.map((item) => {
-			if (item.key === "youtube-1") {
-				const videoId = getVideoId(item.props.url);
-				return <img src={getVideoThumb(videoId)} alt="ti nakosyachol" key="youtube-1-t" />;
-			}
-			return null;
-		});
+			const arr1 = children.map((item) => {
+				if (item.key === "youtube-1") {
+					const videoId = getVideoId(item.props.url);
+					return <img src={getVideoThumb(videoId)} alt="ti nakosyachol" key="youtube-1-t" />;
+				}
+				return null;
+			});
 
 		const arr2 = children[1].map((item) => {
 			return (
@@ -52,7 +52,7 @@ export default function companyGalery({ images, videoUrl }) {
 			/>
 			{images.map((i) => {
 				return (
-					<div key={i.id} className="h-100">
+					<div key={i.id.toString()} className="h-100">
 						<img
 							src={i.photoUrl}
 							alt="ti nakosyachol"

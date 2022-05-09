@@ -22,7 +22,7 @@ export const request = (params, refresh = true) => {
 		},
 	}).then((data) => {
 		if (refresh) {
-			if (accessToken != null && refreshToken != null) {
+			if (accessToken && refreshToken) {
 				request({
 					url: REFRESHTOKEN,
 					method: "POST",

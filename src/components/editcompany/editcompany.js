@@ -94,7 +94,7 @@ export default function EditCompany({ company, target, title }) {
 							<Form.Label>{t("Required amount")}</Form.Label>
 							<Form.Control
 								type="number"
-								placeholder={t("Entertherequiredamount")}
+								placeholder={t("Enterrequiredamount")}
 								value={state.requiredAmount}
 								onChange={onChange("requiredAmount")}
 							/>

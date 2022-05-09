@@ -20,7 +20,7 @@ const Profile = () => {
 				</Col>
 				<Col>
 					<h1>{t("Your companies")}</h1>
-					<CreateCompany target="createCompany" title="Create company" />
+					<CreateCompany target="createCompany" title={t("Create company")} />
 					<UserCompanies />
 				</Col>
 			</Row>

@@ -17,11 +17,9 @@ export const Comments = ({ token, companyId }) => {
 	});
 
 	useEffect(() => {
-		console.log(state.accessToken);
 		if (state.accessToken !== "") {
-			console.log("TUK");
 			const connect = new HubConnectionBuilder()
-				.withUrl("https://webapp-210513212326.azurewebsites.net/comments", {
+				.withUrl('wss://localhost:5001/comments', {
 					skipNegotiation: true,
 					accessTokenFactory: () => state.accessToken,
 					transport: HttpTransportType.WebSockets,
@@ -31,7 +29,7 @@ export const Comments = ({ token, companyId }) => {
 			setConnection(connect);
 		} else {
 			const connect = new HubConnectionBuilder()
-				.withUrl("https://webapp-210513212326.azurewebsites.net/comments", {
+				.withUrl('wss://localhost:5001/comments', {
 					skipNegotiation: true,
 					transport: HttpTransportType.WebSockets,
 				})
@@ -46,6 +44,7 @@ export const Comments = ({ token, companyId }) => {
 			connection.start().then(() => {
 				connection.invoke("JoinGroup", companyId);
 				connection.on("allComments", (data) => {
+					console.log({data});
 					setState((state) => ({ ...state, comments: data }));
 				});
 				connection.on("addCommentSuccess", (data) => {
@@ -68,23 +67,50 @@ export const Comments = ({ token, companyId }) => {
 
 	const sendMessageClick = useCallback(() => {
 		connection.invoke("CreateComment", {
-			User: user.id,
+			UserId: user.id,
 			Content: state.message,
-			Company: companyId,
+			CrowdfundingCompanyId: companyId,
 		});
 	}, [companyId, state.message, user.id, connection]);
 
 	const likeOrDislikeClick = useCallback(
 		(isLike, comment) => {
 			connection.invoke("CreateLikeOrDislike", {
-				User: user.id,
-				Comment: comment,
+				UserId: user.id,
+				CommentId: comment,
 				LikeOrDislike: isLike,
-				Company: companyId,
+				CompanyId: companyId,
 			});
 		},
 		[companyId, user.id, connection]
 	);
+
+	if (state.comments.length === 0) {
+		return (
+			<>
+				<Container className="text-center">
+					<h1>No comments to display</h1>
+				</Container>
+				{user.isLogIn && (
+					<Container className="col-lg-10 col-md-10 col-sm-10 col-12 mt-4">
+						<Form.Control
+							type="text"
+							placeholder="Enter message"
+							value={state.message}
+							onChange={onChange("message")}
+						/>
+						<Button
+							variant="outline-primary"
+							className="w-100"
+							onClick={sendMessageClick}
+						>
+							{t("Submit")}
+						</Button>
+					</Container>
+				)}
+			</>
+		);
+	}
 
 	return (
 		<>
@@ -122,7 +148,7 @@ export const Comments = ({ token, companyId }) => {
 								key={item.creationDate}
 								className="d-flex justify-content-end"
 							>
-								<p>Creation date:</p> {item.creationDate}
+								<p>Created:</p> {new Date(item.creationDate).toLocaleTimeString()}
 							</Col>
 						</Row>
 					</Container>

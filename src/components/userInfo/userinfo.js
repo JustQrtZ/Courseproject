@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../../redux/profile/profilethunks";
 import { Row, Container, Button, Jumbotron } from "react-bootstrap";
 import { changeLanguage } from "../../redux/profile/profilethunks";
-// import _ from 'lodash';
 
 export default function UserInfo() {
 	const dispatch = useDispatch();

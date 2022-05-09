@@ -26,6 +26,8 @@ import EditCompany from "../../components/editcompany/editcompany";
 import Benefits from "../../components/Benefits/benefits";
 import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
 import {Comments} from "../../components/comments/comments"
+import News from "../../components/News/news"
+
 import "./style.css";
 
 export default function Company() {
@@ -169,7 +171,7 @@ export default function Company() {
 							<Benefits />
 						</Tab>
 						<Tab eventKey="news" title={t("News")}>
-							news
+							<News companyId={singleCompany.id}/>
 						</Tab>
 						<Tab eventKey="comments" title={t("Comments")}>
 							<Comments token = {localStorage.getItem("accessToken")} companyId={singleCompany.id}/>
