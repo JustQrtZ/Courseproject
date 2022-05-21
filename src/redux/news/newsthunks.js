@@ -12,7 +12,7 @@ export const getAllNews = (companyId) => {
 			{
 				url: GET_ALL_NEWS,
 				method: "GET",
-        params: companyId
+        		params: companyId
 			},
 			false
 		) 

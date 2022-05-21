@@ -4,7 +4,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import UserInfo from "../../components/userInfo/userinfo";
 import UserBenefits from "../../components/userbenefits/userbenefits";
 import UserCompanies from "../../components/userCompanies/userCompanies";
-import CreateCompany from "../../components/editcompany/editcompany";
 
 const Profile = () => {
 	const { t } = useTranslation();
@@ -13,14 +12,13 @@ const Profile = () => {
 		<Container>
 			<Row>
 				<Container>
-					<UserInfo />
+					<UserInfo/>
 				</Container>
 				<Col>
 					<UserBenefits />
 				</Col>
 				<Col>
 					<h1>{t("Your companies")}</h1>
-					<CreateCompany target="createCompany" title={t("Create company")} />
 					<UserCompanies />
 				</Col>
 			</Row>

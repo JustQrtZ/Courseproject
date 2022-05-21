@@ -7,9 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { login, loginGoogle, loginFacebook } from "../../redux/account/thunk";
 import { useTranslation } from "react-i18next";
 import { OldSocialLogin as SocialLogin } from "react-social-login";
+import { useToasts } from 'react-toast-notifications';
 
 export default function Login() {
 	const dispatch = useDispatch();
+	const { addToast, removeAllToasts } = useToasts()
 
 	const [state, setState] = useState({ email: "", password: "" });
 	const onChange = (field) => (event) => {
@@ -50,9 +52,13 @@ export default function Login() {
 		}
 		if(error !== "" && loading === false && isLogIn === false)
 		{
-			alert(error)
+			removeAllToasts();
+			addToast(error, {
+				placement: "top-center",
+				appearance: "error",
+			});
 		}
-	}, [error, loading, isLogIn]);
+	}, [error, loading, isLogIn, addToast, removeAllToasts]);
 
 	const { t } = useTranslation();
 

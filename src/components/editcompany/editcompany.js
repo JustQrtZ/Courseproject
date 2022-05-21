@@ -8,6 +8,7 @@ import "react-dropzone-uploader/dist/styles.css";
 import Dayjs from "dayjs";
 import Tags from "../tags/tags";
 import { EditCompanyImages } from "../editImages/editImages";
+import { Link } from 'react-router-dom'
 
 export default function EditCompany({ company, target, title }) {
 	const mainPhotoChild = useRef();
@@ -26,7 +27,7 @@ export default function EditCompany({ company, target, title }) {
 		theme: company?.theme ?? "",
 		requiredAmount: company?.requiredAmount ?? "",
 		endCompanyDate: Dayjs(company?.endCompanyDate).format("YYYY-MM-DD") ?? null,
-		сollectedNow: company?.сollectedNow ?? "",
+		collectedNow: company?.collectedNow ?? "",
 		videoUrl: company?.videoUrl ?? "",
 		tags: company?.tags ?? [],
 		photos: company?.photos ?? [],
@@ -120,11 +121,14 @@ export default function EditCompany({ company, target, title }) {
 								value={state.videoUrl}
 								onChange={onChange("videoUrl")}
 							/>
+							<Link to={{ pathname: "https://support.google.com/youtube/answer/57741?hl=en&co=GENIE/" }} target="_blank">
+								<Button variant="info" className="col-lg-12" style={{marginTop: 5}}>Click here to see video link pattern</Button>
+							</Link>
 						</Form.Group>
 						<EditCompanyImages
 							imageCount={1}
 							target={"mainPhoto"}
-							title={"mainPhoto"}
+							title={t("Main photo")}
 							companyPhotos={
 								target !== "createCompany"
 									? [{ id: 1, blob: state.mainPhotoUrl }]
@@ -135,7 +139,7 @@ export default function EditCompany({ company, target, title }) {
 						<EditCompanyImages
 							imageCount={10}
 							target={"companyPhoto"}
-							title={"image gallety"}
+							title={t("Image gallety")}
 							companyPhotos={state.photos.map((file) => ({
 								id: file.id,
 								blob: file.photoUrl,

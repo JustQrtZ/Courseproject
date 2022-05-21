@@ -63,14 +63,14 @@ export default function Main() {
 								</Card.Body>
 								<Container className="d-flex mb-0 justify-content-between px-1">
 									<Card.Text className="mb-0 px-1">
-										${item.сollectedNow} {t("USD raised")}
+										${item.collectedNow} {t("USD raised")}
 									</Card.Text>
 									<Card.Text className="mb-0 px-1">
 										{item.сompletionPercentage}%
 									</Card.Text>
 								</Container>
 								<ProgressBar
-									now={item.сompletionPercentage}
+									now={item.completionPercentage}
 									className="w-100"
 								/>
 								<Card.Footer className="w-100">

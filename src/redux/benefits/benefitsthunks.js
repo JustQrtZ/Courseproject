@@ -73,7 +73,7 @@ export const createBenefit = (name, cost, company) => {
 				data: {
 					Cost: cost,
 					Name: name,
-					CrowdfundingCompany: company,
+					CrowdfundingCompanyId: company,
 				},
 			},
 			false

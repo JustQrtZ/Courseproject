@@ -75,7 +75,7 @@ export const EditCompanyImages = forwardRef(
 
 		return (
 			<Form.Group>
-				<Form.Label>Company image</Form.Label>
+				<Form.Label>{title}</Form.Label>
 				<S.DropZone {...getRootProps({ className: "dropzone" })}>
 					<input {...getInputProps()} />
 					{isDragActive ? (

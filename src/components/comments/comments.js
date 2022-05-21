@@ -4,6 +4,7 @@ import { Row, Container, Col, Form, Button } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { HandThumbsUp, HandThumbsDown } from "react-bootstrap-icons";
+import Moment from 'react-moment';
 import "./style.css";
 
 export const Comments = ({ token, companyId }) => {
@@ -148,7 +149,7 @@ export const Comments = ({ token, companyId }) => {
 								key={item.creationDate}
 								className="d-flex justify-content-end"
 							>
-								<p>Created:</p> {new Date(item.creationDate).toLocaleTimeString()}
+								<Moment fromNow>{item.creationDate}</Moment>
 							</Col>
 						</Row>
 					</Container>

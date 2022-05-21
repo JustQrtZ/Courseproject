@@ -105,7 +105,7 @@ export const createCompanyRating = (rating, company) => {
 			{
 				url: SET_COMPANY_RATING,
 				method: "POST",
-				data: { CrowdfundingCompany: company, Rating: rating },
+				data: { CrowdfundingCompanyId: company, Rating: rating },
 			},
 			false
 		)

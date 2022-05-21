@@ -75,7 +75,6 @@ export default function Company() {
 					</Container>
 				</Col>
 				<Col className="col-md-4 col-lg-4 col-12">
-					{/* <Image src={singleCompany.mainPhotoUrl} style={{height:350, width:250}} /> */}
 					<Row>
 						<h1>{singleCompany.title}</h1>
 					</Row>

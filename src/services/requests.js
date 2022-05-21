@@ -9,35 +9,46 @@ const axiosInstance = axios.create({
 	baseURL: REACT_APP_MAIN_API_URL,
 });
 
-export const request = (params, refresh = true) => {
+const TOKEN_EXPIRED = [401];
+
+export const request = async (params, refresh = true) => {
 	const { dispatch } = getStore();
 	const accessToken = localStorage.getItem("accessToken");
 	const refreshToken = localStorage.getItem("refreshToken");
 	const authorization = accessToken ? `Bearer ${accessToken}` : "";
 
-	return axiosInstance({
-		...params,
-		headers: {
-			authorization,
-		},
-	}).then((data) => {
-		if (refresh) {
-			if (accessToken && refreshToken) {
-				request({
+	try {
+		return await axiosInstance({
+			...params,
+			headers: {
+				authorization,
+			},
+		})
+
+	} catch (error) {
+		if (TOKEN_EXPIRED.includes(error?.response?.status)) {
+			try {
+				const { data } = await axiosInstance({
+					method: 'POST',
 					url: REFRESHTOKEN,
-					method: "POST",
 					data: { accessToken, refreshToken },
 				})
-					.then(({ data }) => {
-						localStorage.setItem("accessToken", data.accessToken);
-						localStorage.setItem("refreshToken", data.refreshToken);
-					})
-					.catch(() => {
-						history.replace(path.login);
-						dispatch({ type: actions.logout });
-					});
+	
+				localStorage.setItem("accessToken", data?.accessToken);
+				localStorage.setItem("refreshToken", data?.refreshToken);
+
+				return await request({
+					...params,
+					headers: {
+						authorization,
+					},
+				})
+			} catch (e) {
+				history.replace(path.login);
+				dispatch({ type: actions.logout });
 			}
 		}
-		return data;
-	});
+
+		throw error;
+	}
 };

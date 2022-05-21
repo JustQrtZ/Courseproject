@@ -2,8 +2,10 @@ import React, { useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../../redux/profile/profilethunks";
-import { Row, Container, Button, Jumbotron } from "react-bootstrap";
+import { Button, Col, Card } from "react-bootstrap";
 import { changeLanguage } from "../../redux/profile/profilethunks";
+import CreateCompany from "../../components/editcompany/editcompany";
+import moment from 'moment';
 
 export default function UserInfo() {
 	const dispatch = useDispatch();
@@ -30,37 +32,41 @@ export default function UserInfo() {
 	}, [i18n, dispatch]);
 
 	return (
-		<Jumbotron >
-			<Container>
-				<h3>{t("Profile")}</h3>
-				<Row>
+		<Col>
+			<Card className="my-2">
+				<Card.Header>
 					{t("Username")}
 					{" : "}
 					{profileInfo.username}
-				</Row>
-				<Row>
-					{t("Email")}
-					{" : "}
-					{profileInfo.email}
-				</Row>
-				<Row>
-					{t("Language")}
-					{" : "}
-					<Button variant="outline-secondary" onClick={handleSwitchLanguage}>
-						{i18n.language}
-					</Button>
-				</Row>
-				<Row>
-					{t("Design theme")}
-					{" : "}
-					{profileInfo.designTheme}
-				</Row>
-				<Row>
-					{t("Lasttimelogin")}
-					{" : "}
-					{profileInfo.lastLoginDate}
-				</Row>
-			</Container>
-		</Jumbotron>
+				</Card.Header>
+				<Card.Body className="text-left">
+					<Card.Text>
+						{t("Email")}
+						{" : "}
+						{profileInfo.email}
+					</Card.Text>
+					<Card.Text>
+						{t("Language")}
+						{" : "}
+						<Button variant="outline-secondary" onClick={handleSwitchLanguage}>
+							{i18n.language}
+						</Button>
+					</Card.Text>
+					<Card.Text>
+						{t("Design theme")}
+						{" : "}
+						{profileInfo.designTheme}
+					</Card.Text>
+					<Card.Text>
+						{t("Lasttimelogin")}
+						{" : "}
+						{moment(profileInfo.lastLoginDate).format('LLL')}
+					</Card.Text>
+				</Card.Body>
+				<Card.Footer>
+					<CreateCompany target="createCompany" title={t("Create company")} />
+				</Card.Footer>
+			</Card>
+		</Col>
 	);
 }

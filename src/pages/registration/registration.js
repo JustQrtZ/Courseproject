@@ -6,10 +6,12 @@ import { Nav } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { registration } from "../../redux/account/thunk";
 import { useDispatch, useSelector } from "react-redux";
+import { useToasts } from 'react-toast-notifications';
 
 export default function Register() {
 	const dispatch = useDispatch();
 	const [state, setState] = useState({ email: "", username: "", password: "" });
+	const { addToast, removeAllToasts } = useToasts()
 	const onChange = (field) => (event) => {
 		setState((state) => ({ ...state, [field]: event.target.value }));
 	};
@@ -31,9 +33,13 @@ export default function Register() {
 			}, 1000);
 		}
 		if (error !== "" && loading === false && isLogIn === false) {
-			alert(error);
+			removeAllToasts();
+			addToast(error, {
+				placement: "top-center",
+				appearance: "error",
+			});
 		}
-	}, [error, loading, isLogIn]);
+	}, [error, loading, isLogIn, addToast, removeAllToasts]);
 
 	const { t } = useTranslation();
 
