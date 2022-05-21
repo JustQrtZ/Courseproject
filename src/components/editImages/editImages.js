@@ -39,7 +39,6 @@ export const EditCompanyImages = forwardRef(
 		}),[files]);
 
 		const onDrop = useCallback((acceptedFiles) => {
-			console.log(acceptedFiles, "acceptedFiles");
 			setFiles(
 				acceptedFiles.map((file) =>
 					Object.assign(file, {
@@ -55,7 +54,6 @@ export const EditCompanyImages = forwardRef(
 			files.forEach((file) => URL.revokeObjectURL(file.preview));
 		}, [files]);
 
-		console.log(files, "files");
 		const thumbs = files.map((file, i) => (
 			<S.Thumb key={i}>
 				<S.ThumbInner key={i}>
@@ -87,14 +85,6 @@ export const EditCompanyImages = forwardRef(
 					)}
 				</S.DropZone>
 				<S.ThumbsContainer>{thumbs}</S.ThumbsContainer>
-				{/* <Button
-				className={"w-100"}
-				onClick={(e) => {
-					handleSubmit(e);
-				}}
-			>
-				Submit
-			</Button> */}
 			</Form.Group>
 		);
 	}

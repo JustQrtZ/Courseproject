@@ -66,7 +66,7 @@ export default function Main() {
 										${item.collectedNow} {t("USD raised")}
 									</Card.Text>
 									<Card.Text className="mb-0 px-1">
-										{item.сompletionPercentage}%
+										{item.completionPercentage}%
 									</Card.Text>
 								</Container>
 								<ProgressBar

@@ -33,10 +33,10 @@ export default function EditCompany({ company, target, title }) {
 		photos: company?.photos ?? [],
 	});
 
-	console.log(state);
 	const onChange = (field) => (event) => {
 		setState((state) => ({ ...state, [field]: event.target.value }));
 	};
+
 
 	const editedCompany = useSelector((state) => state.companies.editedCompany);
 
@@ -47,6 +47,7 @@ export default function EditCompany({ company, target, title }) {
 		if (target === "createCompany") {
 			dispatch(createCompany(state, editedCompany, mainPhoto, ImageGalery));
 		} else {
+			console.log(state)
 			dispatch(editCompany(state, editedCompany, mainPhoto, ImageGalery));
 		}
 

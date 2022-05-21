@@ -137,14 +137,12 @@ export const getUserCompanyRating = (companyId) => {
 			false
 		)
 			.then(({ data }) => {
-				console.log(data)
 				dispach({
 					type: actions.getUserCompanyRatingSuccess,
 					payload: data,
 				});
 			})
 			.catch((data) => {
-				console.log(data);
 				dispach({ type: actions.getUserCompanyRatingFail });
 			});
 	};

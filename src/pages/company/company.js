@@ -96,11 +96,11 @@ export default function Company() {
 					<Row>
 						{t("Collected")}
 						{" : "}
-						{singleCompany.сollectedNow}$
+						{singleCompany.collectedNow}$
 					</Row>
 					<ProgressBar
 						animated
-						now={singleCompany.сompletionPercentage}
+						now={singleCompany.completionPercentage}
 						className="row w-100"
 					/>
 					<Row>
