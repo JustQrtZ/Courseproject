@@ -5,7 +5,7 @@ import { getUserProfile } from "../../redux/profile/profilethunks";
 import { Button, Col, Card } from "react-bootstrap";
 import { changeLanguage } from "../../redux/profile/profilethunks";
 import CreateCompany from "../../components/editcompany/editcompany";
-import moment from 'moment';
+import Moment from 'react-moment';
 
 export default function UserInfo() {
 	const dispatch = useDispatch();
@@ -30,6 +30,7 @@ export default function UserInfo() {
 	const changeLanguageClick = useCallback(() => {
 		dispatch(changeLanguage(i18n.language));
 	}, [i18n, dispatch]);
+
 
 	return (
 		<Col>
@@ -60,7 +61,7 @@ export default function UserInfo() {
 					<Card.Text>
 						{t("Lasttimelogin")}
 						{" : "}
-						{moment(profileInfo.lastLoginDate).format('LLL')}
+						<Moment fromNow utc local format='LLL'>{profileInfo.lastLoginDate}</Moment>
 					</Card.Text>
 				</Card.Body>
 				<Card.Footer>

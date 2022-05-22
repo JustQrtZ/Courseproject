@@ -149,7 +149,7 @@ export const Comments = ({ token, companyId }) => {
 								key={item.creationDate}
 								className="d-flex justify-content-end"
 							>
-								<Moment fromNow>{item.creationDate}</Moment>
+								<Moment fromNow utc local>{item.creationDate}</Moment>
 							</Col>
 						</Row>
 					</Container>
