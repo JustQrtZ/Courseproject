@@ -1,4 +1,4 @@
-export const REACT_APP_MAIN_API_URL = `https://localhost:5001/api/`;
+export const REACT_APP_MAIN_API_URL = `https://crowdfundingback.azurewebsites.net/api/`;
 export const LOGIN = `auth/login`;
 export const LOGIN_GOOGLE = `auth/google`;
 export const LOGIN_FACEBOOK = `auth/facebook`;

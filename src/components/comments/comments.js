@@ -20,7 +20,7 @@ export const Comments = ({ token, companyId }) => {
 	useEffect(() => {
 		if (state.accessToken !== "") {
 			const connect = new HubConnectionBuilder()
-				.withUrl('wss://localhost:5001/comments', {
+				.withUrl('wss://crowdfundingback.azurewebsites.net/comments', {
 					skipNegotiation: true,
 					accessTokenFactory: () => state.accessToken,
 					transport: HttpTransportType.WebSockets,
@@ -30,7 +30,7 @@ export const Comments = ({ token, companyId }) => {
 			setConnection(connect);
 		} else {
 			const connect = new HubConnectionBuilder()
-				.withUrl('wss://localhost:5001/comments', {
+				.withUrl('wss://crowdfundingback.azurewebsites.net/comments', {
 					skipNegotiation: true,
 					transport: HttpTransportType.WebSockets,
 				})
