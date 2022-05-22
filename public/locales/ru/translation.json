@@ -14,7 +14,7 @@
   "USD raised": "USD собрано",
   "Username":"Имя пользователя",
   "Profile":"Профиль",
-  "Adminka": "Админка",
+  "Administration": "Администрирование",
   "Logout": "Выйти",
   "User id": "Id пользователя",
   "Language": "Язык",
@@ -70,5 +70,7 @@
   "Doesn't have benefits": "Нету бенефитов",
   "Create company": "Создать компанию",
   "Enterrequiredamount": "Введите необходимую сумму",
-  "ThereAreNoNewsToDisplay": "Нет новостей для отображения"
+  "ThereAreNoNewsToDisplay": "Нет новостей для отображения",
+  "Delete company": "Удалить компанию",
+  "DeleteCompanyWarningMessage": "Если вы дулаить эту компанию, то это удалит все связанные c ней сущности"
 }

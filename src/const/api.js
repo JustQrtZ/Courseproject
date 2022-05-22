@@ -34,3 +34,4 @@ export const GET_ALL_NEWS = `companynews/getAllCompanyNews`;
 export const EDIT_NEWS = `companynews/editNews`;
 export const CREATE_NEWS = `companynews/createNews`;
 export const DELETE_NEWS = `companynews/deleteNews`;
+export const DELETE_COMPANY = `company/DeleteCompany`;

@@ -19,4 +19,7 @@ export const actions = {
   getUserCompanyRatingRequest: "getUserCompanyRatingRequest",
   getUserCompanyRatingSuccess: "getUserCompanyRatingSuccess",
   getUserCompanyRatingFail: "getUserCompanyRatingFail",
+  deleteCompanyRequest: "deleteCompanyRequest",
+  deleteCompanySuccess: "deleteCompanySuccess",
+  deleteCompanyFail: "deleteCompanyFail",
 };

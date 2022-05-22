@@ -14,7 +14,7 @@
 	"USD raised": "USD raised",
 	"Username": "Username",
 	"Profile": "Profile",
-	"Adminka": "Adminka",
+	"Administration": "Administration",
 	"Logout": "Logout",
 	"User id": "User id",
 	"Language": "Language",
@@ -55,7 +55,6 @@
 	"Make Admin": "Make Admin",
 	"Delete": "Delete",
 	"Support": "Support",
-	"Технологии": "Technology",
 	"Образование": "Education",
 	"Электроника": "Electronics",
 	"Addcompanybenefit": "Add company benefit",
@@ -70,5 +69,7 @@
 	"Your companies": "Your companies",
 	"Create company": "Create company",
 	"Enterrequiredamount": "Enter required amount",
-	"ThereAreNoNewsToDisplay": "There are no news to display"
+	"ThereAreNoNewsToDisplay": "There are no news to display",
+	"Delete company": "Delete company",
+	"DeleteCompanyWarningMessage": "If you delete company this also deleted all releted entityes"
 }

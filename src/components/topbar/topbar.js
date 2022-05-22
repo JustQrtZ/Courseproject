@@ -44,7 +44,7 @@ const Topbar = () => {
 				{isLogin && Role === "Admin" && (
 					<Nav>
 						<Nav.Link eventKey="link-1" href={path.admin}>
-							{t("Adminka")}
+							{t("Administration")}
 						</Nav.Link>
 					</Nav>
 				)}

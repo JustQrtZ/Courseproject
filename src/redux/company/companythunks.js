@@ -5,7 +5,8 @@ import {
 	GET_SINGLE_COMPANY,
 	EDIT_COMPANY,
 	SET_COMPANY_RATING,
-	GET_USER_COMPANY_RATING
+	GET_USER_COMPANY_RATING,
+	DELETE_COMPANY
 } from "../../const/api";
 import { request } from "../../services/requests";
 
@@ -144,6 +145,32 @@ export const getUserCompanyRating = (companyId) => {
 			})
 			.catch((data) => {
 				dispach({ type: actions.getUserCompanyRatingFail });
+			});
+	};
+};
+
+export const deleteCompany = (companyId) => {
+	return (dispach) => {
+		dispach({
+			type: actions.deleteCompanyRequest,
+		});
+		request(
+			{
+				url: DELETE_COMPANY,
+				method: "POST",
+				data: { companyId },
+			},
+			false
+		)
+			.then(() => {
+				dispach({
+					type: actions.deleteCompanySuccess,
+				});
+			})
+			.catch(() => {
+				dispach({
+					type: actions.deleteCompanyFail,
+				});
 			});
 	};
 };

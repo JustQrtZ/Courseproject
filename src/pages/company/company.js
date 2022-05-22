@@ -27,8 +27,9 @@ import Benefits from "../../components/Benefits/benefits";
 import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
 import {Comments} from "../../components/comments/comments"
 import News from "../../components/News/news"
-
+import DeleteCompany from "../../components/DeleteCompany/deleteCompany";
 import "./style.css";
+
 
 export default function Company() {
 	const user = useSelector((state) => state.account);
@@ -132,6 +133,9 @@ export default function Company() {
 								</Row>
 								<Row>
 									<CreateCompanyBenefit company={singleCompany} title="Create benefit"/>
+								</Row>
+								<Row>
+									<DeleteCompany title="Delete company"/>
 								</Row>
 							</>
 						)}

@@ -123,7 +123,7 @@ export default function EditCompany({ company, target, title }) {
 								onChange={onChange("videoUrl")}
 							/>
 							<Link to={{ pathname: "https://support.google.com/youtube/answer/57741?hl=en&co=GENIE/" }} target="_blank">
-								<Button variant="info" className="col-lg-12" style={{marginTop: 5}}>Click here to see video link pattern</Button>
+								<Button variant="link" className="col-lg-12" style={{marginTop: 5}}>Click here to see video link pattern</Button>
 							</Link>
 						</Form.Group>
 						<EditCompanyImages
