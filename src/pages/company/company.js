@@ -135,7 +135,7 @@ export default function Company() {
 									<CreateCompanyBenefit company={singleCompany} title="Create benefit"/>
 								</Row>
 								<Row>
-									<DeleteCompany title="Delete company"/>
+									<DeleteCompany company={singleCompany} title="Delete company"/>
 								</Row>
 							</>
 						)}

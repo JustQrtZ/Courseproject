@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export default function DeleteCompany({ company, title }) {
 	const dispatch = useDispatch();
-	
+	console.log({company})
 	const [state] = useState({
 		CompanyId: company?.id
 	});
@@ -17,9 +17,12 @@ export default function DeleteCompany({ company, title }) {
 	const { t } = useTranslation();
 
 	const DeleteCompanyClick = useCallback(() => {
+		console.log(state.CompanyId)
 		dispatch(deleteCompany(state.CompanyId));
-		setShow(false);
-		window.location = window.location.origin;
+		setTimeout(() => {
+			setShow(false);
+			window.location.href = window.location.origin;
+		}, 3000);	
 	}, [dispatch, state.CompanyId]);
 
 
