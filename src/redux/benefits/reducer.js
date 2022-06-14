@@ -44,7 +44,8 @@ export default (state = initialstate, action) => {
 			};
 		case actions.createBenefitSuccess:
 			return {
-				benefits: [...state.benefits, action.payload],
+				benefits: [...state.benefits, action.payload.data],
+				error: "",
 			};
 
 		case actions.editBenefitRequest: {
@@ -55,7 +56,7 @@ export default (state = initialstate, action) => {
 
 		case actions.editBenefitSuccess: {
 			return {
-				...state,
+				error: "",
 				benefits: action.payload.data,
 			};
 		}

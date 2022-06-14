@@ -64,7 +64,7 @@ export const createPayment = (benefitId, companyId) => {
 export const createBenefit = (name, cost, company) => {
 	return (dispach) => {
 		dispach({
-			type: actions.createPaymentRequest,
+			type: actions.createBenefitRequest,
 		});
 		request(
 			{
@@ -80,12 +80,12 @@ export const createBenefit = (name, cost, company) => {
 		)
 			.then((data) => {
 				dispach({
-					type: actions.createPaymentSuccess,
+					type: actions.createBenefitSuccess,
 					payload: data,
 				});
 			})
 			.catch(() => {
-				dispach({ type: actions.createPaymentFail });
+				dispach({ type: actions.createBenefitFail });
 			});
 	};
 };

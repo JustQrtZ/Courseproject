@@ -15,8 +15,8 @@ export default function CreateCompanyBenefit({ target, benefit, company, title }
 
 	const [show, setShow] = useState(false);
 	const handleClose = () => setShow(false);
-	const { t } = useTranslation();
 	const handleShow = () => setShow(true);
+	const { t } = useTranslation();
 
 	const onChange = (field) => (event) => {
 		setState((state) => ({ ...state, [field]: event.target.value }));

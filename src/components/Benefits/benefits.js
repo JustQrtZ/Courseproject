@@ -48,10 +48,12 @@ export default function CompanyBenefits() {
 		}
 	}, [error, addToast, removeAllToasts])
 
+	console.log({benefits})
+
 	return (
 		<Container>
 			<Row className="justify-content-center">
-				{benefits !== undefined
+				{benefits.length !== 0
 					? benefits.map((item) => {
 						return (
 							<Col
