@@ -103,7 +103,7 @@ export const editBenefit = (benefit) => {
 					Id: benefit.id,
 					Cost: benefit.Cost,
 					Name: benefit.Name,
-					CrowdfundingCompany: benefit.Company,
+					CrowdfundingCompanyId: benefit.Company,
 				},
 			},
 			false
@@ -132,7 +132,7 @@ export const deleteBenefit = (benefit, company) => {
 				method: "POST",
 				data: {
 					id: benefit,
-					CrowdfundingCompany: company,
+					CrowdfundingCompanyId: company,
 				},
 			},
 			false
