@@ -25,7 +25,7 @@ import CompanyGalery from "../../components/companyGalery/companyGalery";
 import EditCompany from "../../components/editcompany/editcompany";
 import Benefits from "../../components/Benefits/benefits";
 import CreateCompanyBenefit from "../../components/CreateCompanyBenefit/createCompanyBenefit";
-import {Comments} from "../../components/comments/comments"
+import { Comments } from "../../components/comments/comments"
 import News from "../../components/News/news"
 import DeleteCompany from "../../components/DeleteCompany/deleteCompany";
 import "./style.css";
@@ -56,10 +56,8 @@ export default function Company() {
 
 	if (loading || singleCompanyRating.ratingLoad) {
 		return (
-			<Container className="position-absolute">
-				<Spinner animation="border" role="status">
-					<span className="sr-only" />
-				</Spinner>
+			<Container className="d-flex align-items-center justify-content-center align-middle" style={{ height: '80vh' }}>
+				<Spinner animation="grow" style={{ minHeight: 150, minWidth: 150 }}/>
 			</Container>
 		);
 	}
@@ -129,13 +127,13 @@ export default function Company() {
 						user.isLogIn === true && (
 							<>
 								<Row>
-									<EditCompany company={singleCompany} title="Edit company"/>
+									<EditCompany company={singleCompany} title="Edit company" />
 								</Row>
 								<Row>
-									<CreateCompanyBenefit company={singleCompany} title="Create benefit"/>
+									<CreateCompanyBenefit company={singleCompany} title="Create benefit" />
 								</Row>
 								<Row>
-									<DeleteCompany company={singleCompany} title="Delete company"/>
+									<DeleteCompany company={singleCompany} title="Delete company" />
 								</Row>
 							</>
 						)}
@@ -174,10 +172,10 @@ export default function Company() {
 							<Benefits />
 						</Tab>
 						<Tab eventKey="news" title={t("News")}>
-							<News companyId={singleCompany.id}/>
+							<News companyId={singleCompany.id} />
 						</Tab>
 						<Tab eventKey="comments" title={t("Comments")}>
-							<Comments token = {localStorage.getItem("accessToken")} companyId={singleCompany.id}/>
+							<Comments token={localStorage.getItem("accessToken")} companyId={singleCompany.id} />
 						</Tab>
 					</Tabs>
 				</Col>
