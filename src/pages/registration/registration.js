@@ -37,6 +37,7 @@ export default function Register() {
 			addToast(error, {
 				placement: "top-center",
 				appearance: "error",
+				autoDismiss: true,
 			});
 		}
 	}, [error, loading, isLogIn, addToast, removeAllToasts]);

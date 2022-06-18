@@ -15,8 +15,8 @@ export default function CompanyBenefits() {
 	const { isLogIn } = useSelector((state) => state.account);
 	const user = useSelector((state) => state.account);
 	const { addToast, removeAllToasts } = useToasts()
-
 	const { t } = useTranslation();
+
 	useEffect(() => {
 		dispatch(getCompanyBenefits(singleCompany.id));
 	}, [dispatch, singleCompany.id]);
@@ -43,63 +43,55 @@ export default function CompanyBenefits() {
 			addToast(error, {
 				placement: "top-center",
 				appearance: "error",
+				autoDismiss: true,
 			}
 			)
 		}
 	}, [error, addToast, removeAllToasts])
 
-	console.log({benefits})
-
 	return (
 		<Container>
 			<Row className="justify-content-center">
 				{benefits.length !== 0
-					? benefits.map((item) => {
+					? benefits.map((benefit) => {
 						return (
 							<Col
-								key={item.id}
+								key={benefit.id}
 								className="thing col-lg-5 col-md-5 col-sm-12 col-12 d-flex align-items-stretch my-3 px-1 mx-2"
 							>
 								<Col>
-									<Row key={item.name}>
+									<Row key={benefit.name}>
 										{t("Name")}
 										{" : "}
-										{item.name}
+										{benefit.name}
 									</Row>
-									<Row key={item.cost}>
+									<Row key={benefit.cost}>
 										{t("Cost")}
 										{" : "}
-										{item.cost}
+										{benefit.cost}
 									</Row>
 								</Col>
 								{isLogIn === true && (
 									<Col>
 										<Button
-											className="w-100 h-100"
-											onClick={() => CompanyBenefitsClick(item.id)}
+											className="w-100"
+											onClick={() => CompanyBenefitsClick(benefit.id)}
 										>
 											{t("Support")}
 										</Button>
+										{(user.role === "Admin" || user.id === singleCompany.owner) && (
+											<>
+												<EditBenefit
+													target="editBenefit"
+													benefit={benefit}
+													company={singleCompany}
+													title="Edit benefit"
+												/>
+												<Button className="w-100" onClick={() => DeleteBenefitClick(benefit)}>Delete</Button>
+											</>
+										)}
 									</Col>
 								)}
-								{(user.role === "Admin" || user.id === singleCompany.owner) &&
-									user.isLogIn === true && (
-										<>
-											<Col>
-												<Row>
-													<EditBenefit
-														target="editBenefit"
-														benefit={item}
-														company={singleCompany}
-														title="Edit benefit"
-													/>
-												</Row>
-												<Row>
-													<Button className="w-100 h-100 mt-1" onClick={() => DeleteBenefitClick(item)}>Delete</Button>
-												</Row>
-											</Col>
-										</>
-									)}
 							</Col>
 						);
 					})

@@ -56,6 +56,7 @@ export default function Login() {
 			addToast(error, {
 				placement: "top-center",
 				appearance: "error",
+				autoDismiss: true,
 			});
 		}
 	}, [error, loading, isLogIn, addToast, removeAllToasts]);

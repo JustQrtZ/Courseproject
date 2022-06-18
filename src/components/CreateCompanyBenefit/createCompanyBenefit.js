@@ -34,7 +34,7 @@ export default function CreateCompanyBenefit({ target, benefit, company, title }
 
 	return (
 		<>
-			<Button variant="primary" onClick={handleShow} className="w-100 h-100">
+			<Button variant="primary" onClick={handleShow} className="w-100">
 				{t(title)}
 			</Button>
 			<Modal show={show} onHide={handleClose}>
